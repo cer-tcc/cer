@@ -1,0 +1,81 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="cer-criarparticipante">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+            }
+
+            paper-material {
+                background-color: white;
+                margin: 24px;
+                padding: 16px;
+            }
+        </style>
+
+        <paper-material elevation="1" class="fit layout vertical">
+            <h2>Cadastro de Participante</h2>
+            <paper-input label="Nome Completo"></paper-input>
+            <paper-input label="R.A."></paper-input>
+            <paper-input label="Data de Nascimento" type="date"></paper-input>
+            <paper-input label="NIS do Participante"></paper-input>
+            <br><label>Sexo</label>
+            <paper-radio-group>
+                <paper-radio-button name="female">Feminino</paper-radio-button>
+                <paper-radio-button name="male">Masculino</paper-radio-button>
+            </paper-radio-group>
+            <paper-input label="RG do Participante"></paper-input>
+            <paper-input label="Escola"></paper-input>
+            <paper-input label="Período Escolar"></paper-input>
+            <paper-input label="Endereço"></paper-input>
+            <paper-input label="Telefone"></paper-input>
+            <paper-input label="Celular"></paper-input>
+            <paper-input label="Status"></paper-input>
+            <paper-input label="Nome do Responsável"></paper-input>
+            <paper-input label="RG do Responsável"></paper-input>
+            <paper-input label="CPF do Responsável"></paper-input>
+            <paper-input label="Profissão do Responsável"></paper-input>
+            <paper-input label="Local de Trabalho do Responsável"></paper-input>
+            <paper-input label="Grau de instrução do Responsável"></paper-input>
+            <paper-input label="Estado Cívil do Responsável"></paper-input>
+            <paper-input label="Responsável Pela Guarda do Participante"></paper-input>
+            <paper-input label="E-mail do Responsável" type="email"></paper-input>
+            <paper-input label="A criança mora com quem?"></paper-input>
+
+            <paper-input label="Tem irmãos?"></paper-input>
+            <paper-input label="Idade?"></paper-input>
+            <paper-input label="Quantos?"></paper-input>
+
+            <paper-input label="Possui alguma deficiência?"></paper-input>
+            <paper-input label="Fez ou faz algum tratamento? Qual"></paper-input>
+            <paper-input label="Tem alergia? Quais?"></paper-input>
+            <paper-input label="Possui alguma outra restrição?"></paper-input>
+
+            <div class="buttons">
+                <br><br>
+                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
+                <paper-button raised dialog-confirm>Cancelar</paper-button>
+            </div>
+        </paper-material>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-criarparticipante',
+            properties: {
+                _users: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>

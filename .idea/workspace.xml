@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/cer-app.html" description="            iron-pages {&#10;                position:..." line="59" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="6da97e92-320d-4d30-8188-b5eb368de210" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/users.json" afterPath="$PROJECT_DIR$/data/users.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cer-usuarios.html" afterPath="$PROJECT_DIR$/src/cer-usuarios.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cer-app.html" afterPath="$PROJECT_DIR$/src/cer-app.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cer-eventos.html" afterPath="$PROJECT_DIR$/src/cer-eventos.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cer-funcionarios.html" afterPath="$PROJECT_DIR$/src/cer-funcionarios.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/cer-voluntarios.html" afterPath="$PROJECT_DIR$/src/cer-voluntarios.html" />
     </list>
     <ignored path="cer-web.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,21 +30,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="users.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/data/users.json">
+      <file leaf-file-name="cer-app.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cer-app.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+            <state relative-caret-position="198">
+              <caret line="112" column="42" selection-start-line="112" selection-start-column="42" selection-end-line="112" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cer-usuarios.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cer-usuarios.html">
+      <file leaf-file-name="cer-criarfuncionario.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cer-criarfuncionario.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+            <state relative-caret-position="358">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cer-criarfornecedor.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cer-criarfornecedor.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cer-criarparticipante.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cer-criarparticipante.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="891">
+              <caret line="57" column="61" selection-start-line="57" selection-start-column="61" selection-end-line="57" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cer-criarevento.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cer-criarevento.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-283">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cer-fornecedores.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cer-fornecedores.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="366">
+              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -49,8 +95,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="tsconfig.json" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -70,18 +116,25 @@
         <option value="$PROJECT_DIR$/src/my-view1.html" />
         <option value="$PROJECT_DIR$/src/my-view404.html" />
         <option value="$PROJECT_DIR$/data/eventos.json" />
-        <option value="$PROJECT_DIR$/src/cer-eventos.html" />
-        <option value="$PROJECT_DIR$/src/cer-app.html" />
-        <option value="$PROJECT_DIR$/src/cer-participantes.html" />
         <option value="$PROJECT_DIR$/data/participantes.json" />
         <option value="$PROJECT_DIR$/data/funcionarios.json" />
-        <option value="$PROJECT_DIR$/src/cer-funcionarios.html" />
-        <option value="$PROJECT_DIR$/src/cer-voluntarios.html" />
         <option value="$PROJECT_DIR$/data/voluntarios.json" />
-        <option value="$PROJECT_DIR$/src/cer-fornecedores.html" />
         <option value="$PROJECT_DIR$/data/fornecedores.json" />
-        <option value="$PROJECT_DIR$/src/cer-usuarios.html" />
         <option value="$PROJECT_DIR$/data/users.json" />
+        <option value="$PROJECT_DIR$/src/cer-login.html" />
+        <option value="$PROJECT_DIR$/src/cer-eventos.html" />
+        <option value="$PROJECT_DIR$/src/cer-criarParticipante.html" />
+        <option value="$PROJECT_DIR$/src/cer-criarEvento.html" />
+        <option value="$PROJECT_DIR$/src/cer-participantes.html" />
+        <option value="$PROJECT_DIR$/src/cer-usuarios.html" />
+        <option value="$PROJECT_DIR$/src/cer-voluntarios.html" />
+        <option value="$PROJECT_DIR$/src/cer-fornecedores.html" />
+        <option value="$PROJECT_DIR$/src/cer-criarevento.html" />
+        <option value="$PROJECT_DIR$/src/cer-funcionarios.html" />
+        <option value="$PROJECT_DIR$/src/cer-criarfuncionario.html" />
+        <option value="$PROJECT_DIR$/src/cer-criarfornecedor.html" />
+        <option value="$PROJECT_DIR$/src/cer-app.html" />
+        <option value="$PROJECT_DIR$/src/cer-criarparticipante.html" />
       </list>
     </option>
   </component>
@@ -185,8 +238,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Patricia Pereira\Documents\GitHub\cer-web\data" />
       <recent name="C:\Users\Patricia Pereira\Documents\GitHub\cer-web\src" />
+      <recent name="C:\Users\Patricia Pereira\Documents\GitHub\cer-web\data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Patricia Pereira\Documents\GitHub\cer-web\src" />
@@ -263,25 +316,25 @@
       <workItem from="1475958469769" duration="4931000" />
       <workItem from="1475964115715" duration="7561000" />
       <workItem from="1475985928506" duration="2067000" />
-      <workItem from="1476018489128" duration="15520000" />
+      <workItem from="1476018489128" duration="25070000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30079000" />
+    <option name="totallyTimeSpent" value="39629000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22416534" sideWeight="0.80810237" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22257552" sideWeight="0.80810237" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1982906" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22416534" sideWeight="0.19189766" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22257552" sideWeight="0.19189766" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -455,14 +508,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cer-404.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bower_components/paper-styles/color.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4097">
@@ -487,31 +532,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cer-app.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="113" column="80" selection-start-line="113" selection-start-column="80" selection-end-line="113" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cer-participantes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="36" column="39" selection-start-line="36" selection-start-column="39" selection-end-line="36" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cer-eventos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-          <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/eventos.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -528,26 +548,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cer-funcionarios.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/voluntarios.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cer-voluntarios.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="36" column="56" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -568,26 +572,117 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cer-fornecedores.html">
+    <entry file="file://$PROJECT_DIR$/data/users.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
+        <state relative-caret-position="153">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#iron-icon#0;n#paper-input#0;n#paper-dialog#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#iron-icon#0;n#paper-input#1;n#paper-dialog#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-eventos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="407">
+          <caret line="29" column="62" selection-start-line="29" selection-start-column="62" selection-end-line="29" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cer-usuarios.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+        <state relative-caret-position="239">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/users.json">
+    <entry file="file://$PROJECT_DIR$/src/cer-fornecedores.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        <state relative-caret-position="366">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-criarevento.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-283">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-voluntarios.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55">
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-criarfuncionario.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-participantes.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-funcionarios.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="21" column="62" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-criarfornecedor.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-app.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="112" column="42" selection-start-line="112" selection-start-column="42" selection-end-line="112" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cer-criarparticipante.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="891">
+          <caret line="57" column="61" selection-start-line="57" selection-start-column="61" selection-end-line="57" selection-end-column="61" />
           <folding />
         </state>
       </provider>

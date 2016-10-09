@@ -1,0 +1,70 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="cer-criarfuncionario">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+            }
+
+            paper-material {
+                background-color: white;
+                margin: 24px;
+                padding: 16px;
+            }
+        </style>
+
+        <paper-material elevation="1" class="fit layout vertical">
+            <h2>Cadastro de Funcionário</h2>
+            <paper-input label="Nome Completo"></paper-input>
+            <paper-input label="Data de Nascimento" type="date"></paper-input>
+            <br><label>Sexo</label>
+            <paper-radio-group>
+                <paper-radio-button name="female">Feminino</paper-radio-button>
+                <paper-radio-button name="male">Masculino</paper-radio-button>
+            </paper-radio-group>
+            <paper-input label="CPF"></paper-input>
+            <paper-input label="RG"></paper-input>
+            <paper-dropdown-menu label="Estado Cívil">
+                <paper-listbox class="dropdown-estadoCivil">
+                    <paper-item>Solteiro</paper-item>
+                    <paper-item>Casado</paper-item>
+                    <paper-item>Separado</paper-item>
+                    <paper-item>Divorciado</paper-item>
+                    <paper-item>Viúvo</paper-item>
+                </paper-listbox>
+            </paper-dropdown-menu>
+            <paper-input label="Formação"></paper-input>
+            <paper-input label="Função"></paper-input>
+            <paper-input label="Endereço"></paper-input>
+            <paper-input label="Telefone"></paper-input>
+            <paper-input label="Celular"></paper-input>
+            <paper-input label="E-mail" type="email"></paper-input>
+
+            <div class="buttons">
+                <br><br>
+                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
+                <paper-button raised dialog-confirm>Cancelar</paper-button>
+            </div>
+        </paper-material>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-criarfuncionario',
+            properties: {
+                _users: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>

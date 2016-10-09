@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
-<dom-module id="cer-funcionarios">
+<dom-module id="cer-criarfornecedor">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -17,36 +17,31 @@
                 margin: 24px;
                 padding: 16px;
             }
-
-            paper-fab {
-                --paper-fab-background: var(--paper-indigo-900);
-                position: fixed;
-                right: 40px;
-                bottom: 40px;
-                z-index: 1000;
-            }
         </style>
 
-        <iron-ajax auto url="/data/funcionarios.json" handle-as="json" last-response="{{_funcionarios}}"></iron-ajax>
-
         <paper-material elevation="1" class="fit layout vertical">
-            <vaadin-grid id="grid" class="flex" items="{{_funcionarios}}">
-                <table>
-                    <colgroup>
-                        <col name="nome">
-                        <col name="telefone">
-                        <col name="função">
-                        <col name="email">
-                    </colgroup>
-                </table>
-            </vaadin-grid>
-        </paper-material>
+            <h2>Cadastro de Fornecedor</h2>
+            <paper-input label="Nome Fantasia"></paper-input>
+            <paper-input label="Razão Social"></paper-input>
+            <paper-input label="CNPJ"></paper-input>
+            <paper-input label="Inscrição Estadual"></paper-input>
+            <paper-input label="Endereço"></paper-input>
+            <paper-input label="Telefone"></paper-input>
+            <paper-input label="Celular"></paper-input>
+            <paper-input label="E-mail" type="email"></paper-input>
+            <paper-input label="Descrição do Fornecedor"></paper-input>
 
-        <paper-fab icon="add"></paper-fab>
+            <div class="buttons">
+                <br><br>
+                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
+                <paper-button raised dialog-confirm>Cancelar</paper-button>
+            </div>
+        </paper-material>
     </template>
+
     <script>
         Polymer({
-            is: 'cer-funcionarios',
+            is: 'cer-criarfornecedor',
             properties: {
                 _users: {
                     type: Array,
