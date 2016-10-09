@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
-<dom-module id="cer-usuarios">
+<dom-module id="cer-funcionarios">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -33,8 +33,8 @@
             <vaadin-grid id="grid" class="flex" items="{{_users}}">
                 <table>
                     <colgroup>
-                        <col name="nome">
-                        <col name="administradores">
+                        <col name="firstName">
+                        <col name="lastName">
                         <col name="email">
                     </colgroup>
                 </table>
@@ -45,7 +45,7 @@
     </template>
     <script>
         Polymer({
-            is: 'cer-usuarios',
+            is: 'cer-funcionarios',
             properties: {
                 _users: {
                     type: Array,
