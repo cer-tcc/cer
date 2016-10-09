@@ -1,7 +1,8 @@
 [
   {
     "nome": "Jose Alberto",
-    "cargo": "Professor",
+    "telefone": "(19) 3477-8592",
+    "função": "Professor",
     "email": "jose.alberto@hotmail.com.br"
   }
 ]

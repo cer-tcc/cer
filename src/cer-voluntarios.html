@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
-<dom-module id="cer-funcionarios">
+<dom-module id="cer-voluntarios">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -27,15 +27,15 @@
             }
         </style>
 
-        <iron-ajax auto url="/data/funcionarios.json" handle-as="json" last-response="{{_funcionarios}}"></iron-ajax>
+        <iron-ajax auto url="/data/voluntarios.json" handle-as="json" last-response="{{_voluntarios}}"></iron-ajax>
 
         <paper-material elevation="1" class="fit layout vertical">
-            <vaadin-grid id="grid" class="flex" items="{{_funcionarios}}">
+            <vaadin-grid id="grid" class="flex" items="{{_voluntarios}}">
                 <table>
                     <colgroup>
                         <col name="nome">
+                        <col name="departamentoAssociado">
                         <col name="telefone">
-                        <col name="função">
                         <col name="email">
                     </colgroup>
                 </table>
@@ -46,7 +46,7 @@
     </template>
     <script>
         Polymer({
-            is: 'cer-funcionarios',
+            is: 'cer-voluntarios',
             properties: {
                 _users: {
                     type: Array,

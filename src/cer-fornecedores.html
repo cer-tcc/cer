@@ -27,14 +27,15 @@
             }
         </style>
 
-        <iron-ajax auto url="/data/fornecedores.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
+        <iron-ajax auto url="/data/fornecedores.json" handle-as="json" last-response="{{_fornecedores}}"></iron-ajax>
 
         <paper-material elevation="1" class="fit layout vertical">
-            <vaadin-grid id="grid" class="flex" items="{{_users}}">
+            <vaadin-grid id="grid" class="flex" items="{{_fornecedores}}">
                 <table>
                     <colgroup>
-                        <col name="nome">
+                        <col name="nomeFantasia">
                         <col name="tipo">
+                        <col name="telefone">
                         <col name="email">
                     </colgroup>
                 </table>

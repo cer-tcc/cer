@@ -1,7 +1,22 @@
 [
   {
-    "nome": "Patricia Pereira",
-    "tipo": "Fornecedor de Alimentos",
-    "email": "patricia.pereira@papersolutions.com.br"
+    "nomeFantasia": "São Vicente",
+    "tipo": "Alimentos",
+    "telefone": "(19) 3466-3031",
+    "email": "s.vicente@gmail.com"
+  },
+
+  {
+    "nomeFantasia": "Marcenaria Joabim",
+    "tipo": "Madeira",
+    "telefone": "(19) 3221-3032",
+    "email": "madereirojoabim@gmail.com"
+  },
+
+  {
+    "nomeFantasia": "Frutaria Mirabela",
+    "tipo": "Frutas frescas",
+    "telefone": "(19) 3212-2222",
+    "email": "frutaria.mirabela@bol.com.br"
   }
 ]

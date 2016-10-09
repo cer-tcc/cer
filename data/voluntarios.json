@@ -1,0 +1,22 @@
+[
+  {
+    "nome": "Maria Joana",
+    "departamentoAssociado": "Cozinha",
+    "telefone": "(19) 99262-4517",
+    "email": "maria.joana@hotmail.com.br"
+  },
+
+  {
+    "nome": "Laura Amorin",
+    "departamentoAssociado": "Recepção",
+    "telefone": "(19) 99322-3997",
+    "email": "laura.amorin@yahoo.com.br"
+  },
+
+  {
+    "nome": "Marcio Andrade",
+    "departamentoAssociado": "Limpeza",
+    "telefone": "(19) 3950-4327",
+    "email": "marcio.andrade@hotmail.com.br"
+  }
+]

@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
-<dom-module id="cer-funcionarios">
+<dom-module id="cer-eventos">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -21,22 +21,21 @@
             paper-fab {
                 --paper-fab-background: var(--paper-indigo-900);
                 position: fixed;
-                right: 50px;
-                top: 70px;
+                right: 40px;
+                bottom: 40px;
                 z-index: 1000;
             }
         </style>
 
-        <iron-ajax auto url="/data/funcionarios.json" handle-as="json" last-response="{{_funcionarios}}"></iron-ajax>
+        <iron-ajax auto url="/data/eventos.json" handle-as="json" last-response="{{_eventos}}"></iron-ajax>
 
         <paper-material elevation="1" class="fit layout vertical">
-            <vaadin-grid id="grid" class="flex" items="{{_funcionarios}}">
+            <vaadin-grid id="grid" class="flex" items="{{_eventos}}">
                 <table>
                     <colgroup>
                         <col name="nome">
-                        <col name="telefone">
-                        <col name="função">
-                        <col name="email">
+                        <col name="data">
+                        <col name="local">
                     </colgroup>
                 </table>
             </vaadin-grid>
@@ -46,7 +45,7 @@
     </template>
     <script>
         Polymer({
-            is: 'cer-funcionarios',
+            is: 'cer-eventos',
             properties: {
                 _users: {
                     type: Array,
