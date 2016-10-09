@@ -1,28 +1,36 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
 <dom-module id="cer-usuarios">
     <template>
-        <style include="iron-flex iron-positioning">
+        <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
             }
+
             paper-material {
                 background-color: white;
                 margin: 24px;
                 padding: 16px;
             }
+
+            paper-fab {
+                --paper-fab-background: var(--paper-indigo-900);
+                position: fixed;
+                right: 10px;
+                top: 70px;
+                z-index: 1000;
+            }
         </style>
 
-        <iron-ajax auto url="employees.json" handle-as="json" last-response="{{_employees}}"></iron-ajax>
+        <iron-ajax auto url="/data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
 
         <paper-material elevation="1" class="fit layout vertical">
-            <vaadin-combo-box label="Filtro por nome" items="[[_names]]" value="{{_filterValue}}"></vaadin-combo-box>
-            <vaadin-grid id="grid" class="flex">
+            <vaadin-grid id="grid" class="flex" items="{{_users}}">
                 <table>
                     <colgroup>
                         <col name="firstName">
@@ -33,39 +41,18 @@
             </vaadin-grid>
         </paper-material>
 
+        <paper-fab icon="add"></paper-fab>
     </template>
     <script>
         Polymer({
             is: 'cer-usuarios',
             properties: {
-                _names: {
-                    type: Array,
-                    value: function() {
-                        return ['Aiden', 'Jace', 'Michael', 'Sarah'];
-                    }
-                },
-                _employees: {
+                _users: {
                     type: Array,
                     value: function() {
                         return [];
                     }
-                },
-                _filterValue: {
-                    type: String,
-                    value: ''
                 }
-            },
-            observers: [
-                '_applyFilter(_filterValue, _employees)'
-            ],
-            _applyFilter: function(filterValue, employees) {
-                this.$.grid.items = employees.filter(function(item) {
-                    if (filterValue) {
-                        return (item.firstName.toLowerCase()).indexOf(filterValue.toLowerCase()) > -1;
-                    } else {
-                        return true;
-                    }
-                }.bind(this));
             }
         });
     </script>

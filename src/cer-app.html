@@ -9,143 +9,143 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
 <dom-module id="cer-app">
-  <template>
-    <style>
-      :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
+    <template>
+        <style>
+            :host {
+                --app-primary-color: var(--paper-blue-grey-600);
+                --app-secondary-color: black;
 
-        display: block;
-      }
+                display: block;
+            }
 
-      app-header {
-        color: #fff;
-        background-color: var(--app-primary-color);
-      }
+            app-header {
+                color: #fff;
+                background-color: var(--app-primary-color);
+            }
 
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: white;
-      }
+            app-header paper-icon-button {
+                --paper-icon-button-ink-color: white;
+            }
 
-      .drawer-list {
-        margin: 0 20px;
-      }
+            .drawer-list {
+                margin: 0 20px;
+            }
 
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        text-decoration: none;
-        color: var(--app-secondary-color);
-        line-height: 40px;
-      }
+            .drawer-list a {
+                display: block;
+                padding: 0 16px;
+                text-decoration: none;
+                color: var(--app-secondary-color);
+                line-height: 40px;
+            }
 
-      .drawer-list a.iron-selected {
-        color: black;
-        font-weight: bold;
-      }
+            .drawer-list a.iron-selected {
+                color: black;
+                font-weight: bold;
+            }
 
-      .logo {
-        margin: auto;
-        margin-top:10px;
-      }
-    </style>
+            .logo {
+                margin: auto;
+                margin-top: 10px;
+            }
 
-    <app-location route="{{route}}"></app-location>
+            iron-pages {
+                position: relative;
+                height: 100%;
+            }
+        </style>
 
-    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+        <app-location route="{{route}}"></app-location>
 
-    <app-drawer-layout fullbleed>
-      <!-- Drawer content -->
-      <app-drawer>
-        <app-toolbar>
-          <img class="logo" src="../images/logo.jpg" alt="">
-        </app-toolbar>
+        <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="participantes" href="/view1">
-            <iron-icon icon="face"></iron-icon>
-            Participantes
-          </a>
-          <a name="eventos" href="/view1">
-            <iron-icon icon="event"></iron-icon>
-            Eventos
-          </a>
-          <a name="funcionarios" href="/view1">
-            <iron-icon icon="editor:insert-emoticon"></iron-icon>
-            Funcionários
-          </a>
-          <a name="voluntarios" href="/view1">
-            <iron-icon icon="favorite"></iron-icon>
-            Voluntários
-          </a>
-          <a name="fornecedores" href="/view1">
-            <iron-icon icon="maps:local-shipping"></iron-icon>
-            Fornecedores
-          </a>
-          <a name="usuarios" href="/usuarios">
-            <iron-icon icon="social:group"></iron-icon>
-            Usuários
-          </a>
-        </iron-selector>
-      </app-drawer>
+        <app-drawer-layout fullbleed>
+            <!-- Drawer content -->
+            <app-drawer>
+                <app-toolbar>
+                    <img class="logo" src="../images/logo.jpg" alt="">
+                </app-toolbar>
 
-      <!-- Main content -->
-      <app-header-layout has-scrolling-region>
-        <app-header condenses reveals effects="waterfall">
-          <app-toolbar>
-            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title></div>
-          </app-toolbar>
-        </app-header>
+                <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                    <a name="painel" href="/">
+                        <iron-icon icon="home"></iron-icon>
+                        Painel</a>
+                    <a name="participantes" href="/participantes">
+                        <iron-icon icon="face"></iron-icon>
+                        Participantes</a>
+                    <a name="eventos" href="/eventos">
+                        <iron-icon icon="event"></iron-icon>
+                        Eventos</a>
+                    <a name="funcionarios" href="/funcionarios">
+                        <iron-icon icon="editor:insert-emoticon"></iron-icon>
+                        Funcionários</a>
+                    <a name="voluntarios" href="/voluntarios">
+                        <iron-icon icon="favorite"></iron-icon>
+                        Voluntários</a>
+                    <a name="fornecedores" href="/fornecedores">
+                        <iron-icon icon="maps:local-shipping"></iron-icon>
+                        Fornecedores</a>
+                    <a name="usuarios" href="/usuarios">
+                        <iron-icon icon="social:group"></iron-icon>
+                        Usuários</a>
+                </iron-selector>
+            </app-drawer>
 
-        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <cer-usuarios name="usuarios"></cer-usuarios>
-          <my-view404 name="view404"></my-view404>
-        </iron-pages>
-      </app-header-layout>
-    </app-drawer-layout>
-  </template>
+            <!-- Main content -->
+            <app-header-layout has-scrolling-region>
+                <app-header condenses reveals effects="waterfall">
+                    <app-toolbar>
+                        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+                        <div main-title></div>
+                        <paper-icon-button icon="search"></paper-icon-button>
+                    </app-toolbar>
+                </app-header>
 
-  <script>
-    Polymer({
-      is: 'cer-app',
+                <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
+                    <cer-usuarios name="usuarios"></cer-usuarios>
+                    <cer-404 name="404"></cer-404>
+                </iron-pages>
+            </app-header-layout>
+        </app-drawer-layout>
+    </template>
 
-      properties: {
-        page: {
-          type: String,
-          reflectToAttribute: true,
-          observer: '_pageChanged'
-        }
-      },
+    <script>
+        Polymer({
+            is: 'cer-app',
 
-      observers: [
-        '_routePageChanged(routeData.page)'
-      ],
+            properties: {
+                page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                }
+            },
 
-      _routePageChanged: function(page) {
-        this.page = page || 'view1';
-      },
+            observers: [
+                '_routePageChanged(routeData.page)'
+            ],
 
-      _pageChanged: function(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('cer-' + page + '.html');
-        this.importHref(resolvedPageUrl, null, this._showPage404, true);
-      },
+            _routePageChanged: function (page) {
+                this.page = page || 'view1';
+            },
 
-      _showPage404: function() {
-        this.page = 'view404';
-      }
-    });
-  </script>
+            _pageChanged: function (page) {
+                // Load page import on demand. Show 404 page if fails
+                var resolvedPageUrl = this.resolveUrl('cer-' + page + '.html');
+                this.importHref(resolvedPageUrl, null, this._showPage404, true);
+            },
+
+            _showPage404: function () {
+                this.page = '404';
+            }
+        });
+    </script>
 </dom-module>
