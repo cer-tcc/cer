@@ -1,7 +1,13 @@
 [
   {
     "nome": "Patricia Pereira",
-    "grupo": "Administradores",
-    "email": "patricia.pereira@papersolutions.com.br"
+    "função": "Administrador",
+    "email": "patricia.pereira@hotmail.com"
+  },
+
+  {
+    "nome": "Marcelina Joaquim",
+    "função": "Diretoria",
+    "email": "marcelina.joaquim@yahoo.com.br"
   }
 ]
