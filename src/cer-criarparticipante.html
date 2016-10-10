@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
 
 <dom-module id="cer-criarparticipante">
     <template>
@@ -24,8 +25,8 @@
         </style>
 
         <paper-card heading="Matrícula de Participante">
-            <div class="card-content">
-                <paper-toggle-button checked>Ativo</paper-toggle-button><br>
+            <div class="card-content"><br>
+                <paper-toggle-button checked>Ativo</paper-toggle-button>
                 <paper-input label="Nome Completo"></paper-input>
                 <paper-input label="R.A."></paper-input><br>
                 <paper-input label="Data de Nascimento" type="date"></paper-input>
@@ -38,7 +39,7 @@
                 <paper-input label="RG do Participante"></paper-input>
                 <paper-input label="Escola"></paper-input>
                 <paper-dropdown-menu label="Período Escolar">
-                    <paper-listbox class="dropdown-periodoEsccolar">
+                    <paper-listbox class="dropdown-content">
                         <paper-item>Matutino</paper-item>
                         <paper-item>Vespertino</paper-item>
                         <paper-item>Noturno</paper-item>
@@ -54,7 +55,7 @@
                 <paper-input label="Local de Trabalho do Responsável"></paper-input>
                 <paper-input label="Grau de instrução do Responsável"></paper-input>
                 <paper-dropdown-menu label="Estado Cívil do Responsável">
-                    <paper-listbox class="dropdown-estadoCivil">
+                    <paper-listbox class="dropdown-content">
                         <paper-item>Solteiro(a)</paper-item>
                         <paper-item>Casado(a)</paper-item>
                         <paper-item>Separado(a)</paper-item>
@@ -63,7 +64,7 @@
                     </paper-listbox>
                 </paper-dropdown-menu>
                 <paper-input label="Responsável Pela Guarda do Participante"></paper-input>
-                <paper-input label="E-mail do Responsável" type="email"></paper-input>
+                <gold-email-input auto-validate label="E-mail do Responsável"></gold-email-input>
                 <paper-input label="A criança mora com quem?"></paper-input>
 
                 <br><label>Tem irmãos?</label>

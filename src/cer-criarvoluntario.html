@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
 
 <dom-module id="cer-criarvoluntario">
     <template>
@@ -31,7 +32,7 @@
                 <paper-input label="CPF"></paper-input>
                 <paper-input label="RG"></paper-input>
                 <paper-dropdown-menu label="Estado Cívil">
-                    <paper-listbox class="dropdown-estadoCivil">
+                    <paper-listbox class="dropdown-content">
                         <paper-item>Solteiro(a)</paper-item>
                         <paper-item>Casado(a)</paper-item>
                         <paper-item>Separado(a)</paper-item>
@@ -44,7 +45,7 @@
                 <paper-input label="Descrição do Trabalho Voluntário"></paper-input>
                 <paper-input label="Telefone"></paper-input>
                 <paper-input label="Celular"></paper-input>
-                <paper-input label="E-mail" type="email"></paper-input><br>
+                <gold-email-input auto-validate label="E-mail"></gold-email-input>
             </div>
 
             <div class="card-actions">
