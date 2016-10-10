@@ -10,35 +10,30 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
+                padding: 23px;
             }
 
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
-            }
-
-            paper-dialog {
-                right: 50px;
-                bottom: 50px;
+            paper-card {
+                width: 100%;
             }
         </style>
 
-        <paper-material elevation="1" class="fit layout vertical">
-            <h2>Cadastro de Evento</h2>
+        <paper-card heading="Cadastro de Evento">
+            <div class="card-content">
                 <paper-input label="Nome"></paper-input>
                 <paper-input label="Descrição" type="text"></paper-input>
                 <paper-input label="Local"></paper-input><br>
                 <paper-input label="Data do Evento" type="date"></paper-input>
                 <paper-input label="Gastos"></paper-input>
                 <paper-input label="Descrição do custo"></paper-input>
-                <paper-input label="Arrecadação"></paper-input>
-            <div class="buttons">
-                <br><br>
+                <paper-input label="Arrecadação"></paper-input><br>
+            </div>
+
+            <div class="card-actions">
                 <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
                 <paper-button raised dialog-confirm>Cancelar</paper-button>
             </div>
-        </paper-material>
+        </paper-card>
     </template>
     <script>
         Polymer({

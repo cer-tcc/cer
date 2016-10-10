@@ -10,29 +10,28 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
+                padding: 23px;
             }
 
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
+            paper-card {
+                width: 100%;
             }
         </style>
 
-        <paper-material elevation="1" class="fit layout vertical">
-            <h2>Cadastro de Usuário</h2>
-            <paper-input label="Login"></paper-input>
-            <paper-input label="Senha" type="password"></paper-input>
-            <paper-input label="Nome do Funcionario"></paper-input>
-            <paper-input label="E-mail" type="email"></paper-input>
-            <paper-input label="Função do Funcionário"></paper-input>
+        <paper-card heading="Cadastro de Usuário">
+            <div class="card-content">
+                <paper-input label="Login"></paper-input>
+                <paper-input label="Senha" type="password"></paper-input>
+                <paper-input label="Nome do Funcionario"></paper-input>
+                <paper-input label="E-mail" type="email"></paper-input>
+                <paper-input label="Função do Funcionário"></paper-input><br>
+            </div>
 
-            <div class="buttons">
-                <br><br>
+            <div class="card-actions">
                 <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
                 <paper-button raised dialog-confirm>Cancelar</paper-button>
             </div>
-        </paper-material>
+        </paper-card>
     </template>
 
     <script>

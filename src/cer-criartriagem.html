@@ -10,38 +10,37 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
+                padding: 23px;
             }
 
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
+            paper-card {
+                width: 100%;
             }
         </style>
 
-        <paper-material elevation="1" class="fit layout vertical">
-            <h2>Ficha de Triagem</h2>
-            <paper-input label="Nome do Participante"></paper-input><br>
-            <paper-input label="Data de Nascimento" type="date"></paper-input>
-            <paper-input label="Escola"></paper-input>
-            <paper-dropdown-menu label="Período Escolar">
-                <paper-listbox class="dropdown-periodoEsccolar">
-                    <paper-item>Matutino</paper-item>
-                    <paper-item>Vespertino</paper-item>
-                    <paper-item>Noturno</paper-item>
-                </paper-listbox>
-            </paper-dropdown-menu>
-            <paper-input label="Nome do Responsável"></paper-input>
-            <paper-input label="Endereço"></paper-input>
-            <paper-input label="Telefone"></paper-input>
-            <paper-input label="Celular"></paper-input>
+        <paper-card heading="Ficha de Triagem">
+            <div class="card-content">
+                <paper-input label="Nome do Participante"></paper-input><br>
+                <paper-input label="Data de Nascimento" type="date"></paper-input>
+                <paper-input label="Escola"></paper-input>
+                <paper-dropdown-menu label="Período Escolar">
+                    <paper-listbox class="dropdown-periodoEsccolar">
+                        <paper-item>Matutino</paper-item>
+                        <paper-item>Vespertino</paper-item>
+                        <paper-item>Noturno</paper-item>
+                    </paper-listbox>
+                </paper-dropdown-menu>
+                <paper-input label="Nome do Responsável"></paper-input>
+                <paper-input label="Endereço"></paper-input>
+                <paper-input label="Telefone"></paper-input>
+                <paper-input label="Celular"></paper-input><br>
+            </div>
 
-            <div class="buttons">
-                <br><br>
+            <div class="card-actions">
                 <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
                 <paper-button raised dialog-confirm>Cancelar</paper-button>
             </div>
-            </paper-material>
+        </paper-card>
     </template>
 
     <script>

@@ -10,7 +10,7 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
-                padding: 10px;
+                padding: 23px;
             }
 
             paper-slider.blue {
@@ -23,7 +23,7 @@
             }
         </style>
 
-        <paper-card heading="Cadastro de Participante">
+        <paper-card heading="Matrícula de Participante">
             <div class="card-content">
                 <paper-toggle-button checked>Ativo</paper-toggle-button><br>
                 <paper-input label="Nome Completo"></paper-input>
@@ -78,12 +78,48 @@
                     <paper-input label="Idade?"></paper-input>
                 </span>
 
-                <paper-input label="Possui alguma deficiência?  Se sim, qual?"></paper-input>
-                <paper-input label="Fez ou faz algum tratamento?  Se sim, qual?"></paper-input>
-                <paper-input label="Tem alergia?  Se sim, qual?"></paper-input>
-                <paper-input label="Possui alguma outra restrição? Se sim, qual?"></paper-input>
+                <br><label>Possui deficiencia?</label>
+                <paper-radio-group selected="nao">
+                    <paper-radio-button name="nao">Não</paper-radio-button>
+                    <paper-radio-button name="sim" checked="{{possuiDeficiencia}}">Sim</paper-radio-button>
+                </paper-radio-group>
 
+                <span hidden="{{!possuiDeficiencia}}">
+                    <paper-input label="Qual?"></paper-input>
+                </span>
+
+
+                <br><label>Fez ou faz algum tratamento?</label>
+                <paper-radio-group selected="nao">
+                    <paper-radio-button name="nao">Não</paper-radio-button>
+                    <paper-radio-button name="sim" checked="{{tratamento}}">Sim</paper-radio-button>
+                </paper-radio-group>
+
+                <span hidden="{{!tratamento}}">
+                    <paper-input label="Qual?"></paper-input>
+                </span>
+
+                <br><label>Tem alergia?</label>
+                <paper-radio-group selected="nao">
+                    <paper-radio-button name="nao">Não</paper-radio-button>
+                    <paper-radio-button name="sim" checked="{{possuiAlergia}}">Sim</paper-radio-button>
+                </paper-radio-group>
+
+                <span hidden="{{!possuiAlergia}}">
+                    <paper-input label="Qual?"></paper-input>
+                </span>
+
+                <br><label>Possui alguma outra restrição?</label>
+                <paper-radio-group selected="nao">
+                    <paper-radio-button name="nao">Não</paper-radio-button>
+                    <paper-radio-button name="sim" checked="{{possuiAlergia}}">Sim</paper-radio-button>
+                </paper-radio-group>
+
+                <span hidden="{{!possuiRestricao}}">
+                    <paper-input label="Qual?"></paper-input>
+                </span>
             </div>
+
             <div class="card-actions">
                 <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
                 <paper-button raised dialog-confirm>Cancelar</paper-button>
