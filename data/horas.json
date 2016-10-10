@@ -1,0 +1,16 @@
+[
+  {
+    "nomeDoFuncionario": "Maria Joana",
+    "totalDeHoras": "10"
+  },
+
+  {
+    "nomeDoFuncionario": "Laura Amorin",
+    "totalDeHoras": "20"
+  },
+
+  {
+    "nomeDoFuncionario": "Marcio Andrade",
+    "totalDeHoras": "-5"
+  }
+]

@@ -1,0 +1,60 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="cer-bancoDeHoras">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+            }
+
+            paper-material {
+                background-color: white;
+                margin: 24px;
+                padding: 16px;
+            }
+
+            paper-fab {
+                --paper-fab-background: var(--paper-indigo-900);
+                position: fixed;
+                right: 40px;
+                bottom: 40px;
+                z-index: 1000;
+            }
+        </style>
+
+        <iron-ajax auto url="/data/horas.json" handle-as="json" last-response="{{_horas}}"></iron-ajax>
+
+        <paper-material elevation="1" class="fit layout vertical">
+            <vaadin-grid id="grid" class="flex" items="{{_horas}}">
+                <table>
+                    <colgroup>
+                        <col name="nomeDoFuncionario">
+                        <col name="totalDeHoras">
+                    </colgroup>
+                </table>
+            </vaadin-grid>
+        </paper-material>
+
+        <a href="/criarbancodehoras">
+            <paper-fab icon="add"></paper-fab>
+        </a>
+    </template>
+    <script>
+        Polymer({
+            is: 'cer-bancoDeHoras',
+            properties: {
+                _users: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>
