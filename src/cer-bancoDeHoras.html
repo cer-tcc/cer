@@ -10,12 +10,12 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
+                padding: 23px;
             }
 
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
+            paper-card {
+                width: 100%;
+                padding: 0;
             }
 
             paper-fab {
@@ -29,7 +29,7 @@
 
         <iron-ajax auto url="/data/horas.json" handle-as="json" last-response="{{_horas}}"></iron-ajax>
 
-        <paper-material elevation="1" class="fit layout vertical">
+        <paper-card heading="Banco de horas">
             <vaadin-grid id="grid" class="flex" items="{{_horas}}">
                 <table>
                     <colgroup>
@@ -44,17 +44,10 @@
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
+
     <script>
         Polymer({
-            is: 'cer-bancoDeHoras',
-            properties: {
-                _users: {
-                    type: Array,
-                    value: function() {
-                        return [];
-                    }
-                }
-            }
+            is: 'cer-bancoDeHoras'
         });
     </script>
 </dom-module>

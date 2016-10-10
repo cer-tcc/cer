@@ -10,12 +10,12 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
+                padding: 23px;
             }
 
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
+            paper-card {
+                width: 100%;
+                padding: 0;
             }
 
             paper-fab {
@@ -29,7 +29,7 @@
 
         <iron-ajax auto url="/data/fornecedores.json" handle-as="json" last-response="{{_fornecedores}}"></iron-ajax>
 
-        <paper-material elevation="1" class="fit layout vertical">
+        <paper-card heading="Fornecedores">
             <vaadin-grid id="grid" class="flex" items="{{_fornecedores}}">
                 <table>
                     <colgroup>
@@ -40,23 +40,16 @@
                     </colgroup>
                 </table>
             </vaadin-grid>
-        </paper-material>
+        </paper-card>
 
         <a href="/criarfornecedor">
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
+
     <script>
         Polymer({
-            is: 'cer-fornecedores',
-            properties: {
-                _users: {
-                    type: Array,
-                    value: function() {
-                        return [];
-                    }
-                }
-            }
+            is: 'cer-fornecedores'
         });
     </script>
 </dom-module>

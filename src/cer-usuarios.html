@@ -10,12 +10,12 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
+                padding: 23px;
             }
 
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
+            paper-card {
+                width: 100%;
+                padding: 0;
             }
 
             paper-fab {
@@ -29,7 +29,7 @@
 
         <iron-ajax auto url="/data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
 
-        <paper-material elevation="1" class="fit layout vertical">
+        <paper-card heading="Usuários">
             <vaadin-grid id="grid" class="flex" items="{{_users}}">
                 <table>
                     <colgroup>
@@ -39,23 +39,16 @@
                     </colgroup>
                 </table>
             </vaadin-grid>
-        </paper-material>
+        </paper-card>
 
         <a href="/criarusuario">
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
+
     <script>
         Polymer({
-            is: 'cer-usuarios',
-            properties: {
-                _users: {
-                    type: Array,
-                    value: function() {
-                        return [];
-                    }
-                }
-            }
+            is: 'cer-usuarios'
         });
     </script>
 </dom-module>

@@ -10,12 +10,12 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
+                padding: 23px;
             }
 
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
+            paper-card {
+                width: 100%;
+                padding: 0;
             }
 
             paper-fab {
@@ -25,17 +25,11 @@
                 bottom: 40px;
                 z-index: 1000;
             }
-
-            iron-icon{
-                position: absolute;
-                left: 500px;
-                bottom: 250px;
-            }
         </style>
 
         <iron-ajax auto url="/data/estoque.json" handle-as="json" last-response="{{_estoque}}"></iron-ajax>
 
-        <paper-material elevation="1" class="fit layout vertical">
+        <paper-card heading="Controle de estoque">
             <vaadin-grid id="grid" class="flex" items="{{_estoque}}">
                 <table>
                     <colgroup>
@@ -45,23 +39,16 @@
                     </colgroup>
                 </table>
             </vaadin-grid>
-        </paper-material>
+        </paper-card>
 
         <a href="/criarproduto">
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
+
     <script>
         Polymer({
-            is: 'cer-estoque',
-            properties: {
-                _eventos: {
-                    type: Array,
-                    value: function() {
-                        return [];
-                    }
-                }
-            }
+            is: 'cer-estoque'
         });
     </script>
 </dom-module>
