@@ -10,86 +10,85 @@
         <style include="iron-flex iron-positioning paper-styles">
             :host {
                 display: block;
-            }
-
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
+                padding: 10px;
             }
 
             paper-slider.blue {
                 --paper-slider-knob-color: var(--paper-light-blue-800);
                 --paper-slider-active-color: var(--paper-light-blue-800);
             }
+
+            paper-card {
+                width: 100%;
+            }
         </style>
 
-        <paper-material elevation="1" class="fit layout vertical">
-            <h2>Cadastro de Participante</h2>
-            <br><paper-toggle-button checked>Ativo</paper-toggle-button><br>
-            <paper-input label="Nome Completo"></paper-input>
-            <paper-input label="R.A."></paper-input><br>
-            <paper-input label="Data de Nascimento" type="date"></paper-input>
-            <paper-input label="NIS do Participante"></paper-input>
-            <br><label>Sexo</label>
-            <paper-radio-group>
-                <paper-radio-button name="female">Feminino</paper-radio-button>
-                <paper-radio-button name="male">Masculino</paper-radio-button>
-            </paper-radio-group>
-            <paper-input label="RG do Participante"></paper-input>
-            <paper-input label="Escola"></paper-input>
-            <paper-dropdown-menu label="Período Escolar">
-                <paper-listbox class="dropdown-periodoEsccolar">
-                    <paper-item>Matutino</paper-item>
-                    <paper-item>Vespertino</paper-item>
-                    <paper-item>Noturno</paper-item>
-                </paper-listbox>
-            </paper-dropdown-menu>
-            <paper-input label="Endereço"></paper-input>
-            <paper-input label="Telefone"></paper-input>
-            <paper-input label="Celular"></paper-input>
-            <paper-input label="Nome do Responsável"></paper-input>
-            <paper-input label="RG do Responsável"></paper-input>
-            <paper-input label="CPF do Responsável"></paper-input>
-            <paper-input label="Profissão do Responsável"></paper-input>
-            <paper-input label="Local de Trabalho do Responsável"></paper-input>
-            <paper-input label="Grau de instrução do Responsável"></paper-input>
-            <paper-dropdown-menu label="Estado Cívil do Responsável">
-                <paper-listbox class="dropdown-estadoCivil">
-                    <paper-item>Solteiro(a)</paper-item>
-                    <paper-item>Casado(a)</paper-item>
-                    <paper-item>Separado(a)</paper-item>
-                    <paper-item>Divorciado(a)</paper-item>
-                    <paper-item>Viúvo(a)</paper-item>
-                </paper-listbox>
-            </paper-dropdown-menu>
-            <paper-input label="Responsável Pela Guarda do Participante"></paper-input>
-            <paper-input label="E-mail do Responsável" type="email"></paper-input>
-            <paper-input label="A criança mora com quem?"></paper-input>
+        <paper-card heading="Cadastro de Participante">
+            <div class="card-content">
+                <paper-toggle-button checked>Ativo</paper-toggle-button><br>
+                <paper-input label="Nome Completo"></paper-input>
+                <paper-input label="R.A."></paper-input><br>
+                <paper-input label="Data de Nascimento" type="date"></paper-input>
+                <paper-input label="NIS do Participante"></paper-input>
+                <br><label>Sexo</label>
+                <paper-radio-group>
+                    <paper-radio-button name="female">Feminino</paper-radio-button>
+                    <paper-radio-button name="male">Masculino</paper-radio-button>
+                </paper-radio-group>
+                <paper-input label="RG do Participante"></paper-input>
+                <paper-input label="Escola"></paper-input>
+                <paper-dropdown-menu label="Período Escolar">
+                    <paper-listbox class="dropdown-periodoEsccolar">
+                        <paper-item>Matutino</paper-item>
+                        <paper-item>Vespertino</paper-item>
+                        <paper-item>Noturno</paper-item>
+                    </paper-listbox>
+                </paper-dropdown-menu>
+                <paper-input label="Endereço"></paper-input>
+                <paper-input label="Telefone"></paper-input>
+                <paper-input label="Celular"></paper-input>
+                <paper-input label="Nome do Responsável"></paper-input>
+                <paper-input label="RG do Responsável"></paper-input>
+                <paper-input label="CPF do Responsável"></paper-input>
+                <paper-input label="Profissão do Responsável"></paper-input>
+                <paper-input label="Local de Trabalho do Responsável"></paper-input>
+                <paper-input label="Grau de instrução do Responsável"></paper-input>
+                <paper-dropdown-menu label="Estado Cívil do Responsável">
+                    <paper-listbox class="dropdown-estadoCivil">
+                        <paper-item>Solteiro(a)</paper-item>
+                        <paper-item>Casado(a)</paper-item>
+                        <paper-item>Separado(a)</paper-item>
+                        <paper-item>Divorciado(a)</paper-item>
+                        <paper-item>Viúvo(a)</paper-item>
+                    </paper-listbox>
+                </paper-dropdown-menu>
+                <paper-input label="Responsável Pela Guarda do Participante"></paper-input>
+                <paper-input label="E-mail do Responsável" type="email"></paper-input>
+                <paper-input label="A criança mora com quem?"></paper-input>
 
-            <br><label>Tem irmãos?</label>
-            <paper-radio-group>
-                <paper-radio-button name="sim">Sim</paper-radio-button>
-                <paper-radio-button name="nao">Não</paper-radio-button>
-            </paper-radio-group>
-            <br>
+                <br><label>Tem irmãos?</label>
+                <paper-radio-group selected="nao">
+                    <paper-radio-button name="nao">Não</paper-radio-button>
+                    <paper-radio-button name="sim" checked="{{possuiIrmaos}}">Sim</paper-radio-button>
+                </paper-radio-group>
+                <br>
 
-            <div>Quantidade de Irmãos</div><br>
-            <paper-slider class="blue" value="0" max="10" editable></paper-slider>
+                <span hidden="{{!possuiIrmaos}}">
+                    <paper-input label="Quantidade de Irmãos" type="number" min="0" max="20"></paper-input>
+                    <paper-input label="Idade?"></paper-input>
+                </span>
 
-            <paper-input label="Idade?"></paper-input>
+                <paper-input label="Possui alguma deficiência?  Se sim, qual?"></paper-input>
+                <paper-input label="Fez ou faz algum tratamento?  Se sim, qual?"></paper-input>
+                <paper-input label="Tem alergia?  Se sim, qual?"></paper-input>
+                <paper-input label="Possui alguma outra restrição? Se sim, qual?"></paper-input>
 
-            <paper-input label="Possui alguma deficiência?  Se sim, qual?"></paper-input>
-            <paper-input label="Fez ou faz algum tratamento?  Se sim, qual?"></paper-input>
-            <paper-input label="Tem alergia?  Se sim, qual?"></paper-input>
-            <paper-input label="Possui alguma outra restrição? Se sim, qual?"></paper-input>
-
-            <div class="buttons">
-                <br><br>
+            </div>
+            <div class="card-actions">
                 <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
                 <paper-button raised dialog-confirm>Cancelar</paper-button>
             </div>
-            </paper-material>
+        </paper-card>
     </template>
 
     <script>
