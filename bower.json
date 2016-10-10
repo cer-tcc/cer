@@ -23,7 +23,8 @@
     "paper-elements": "polymerelements/paper-elements#^1.0.7",
     "vaadin-grid": "^1.1.2",
     "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
-    "vaadin-combo-box": "^1.1.5"
+    "vaadin-combo-box": "^1.1.5",
+    "google-map": "GoogleWebComponents/google-map#^1.1.13"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

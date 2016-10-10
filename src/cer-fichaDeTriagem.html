@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
-<dom-module id="cer-eventos">
+<dom-module id="cer-fichaDeTriagem">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -25,37 +25,29 @@
                 bottom: 40px;
                 z-index: 1000;
             }
-
-            iron-icon{
-                position: absolute;
-                left: 500px;
-                bottom: 250px;
-            }
         </style>
 
-        <iron-ajax auto url="/data/eventos.json" handle-as="json" last-response="{{_eventos}}"></iron-ajax>
+        <iron-ajax auto url="/data/fichaDeTriagem.json" handle-as="json" last-response="{{_fichaDeTriagem}}"></iron-ajax>
 
         <paper-material elevation="1" class="fit layout vertical">
-            <vaadin-grid id="grid" class="flex" items="{{_eventos}}">
+            <vaadin-grid id="grid" class="flex" items="{{_fichaDeTriagem}}">
                 <table>
                     <colgroup>
-                        <col name="nome">
-                        <col name="data">
-                        <col name="local">
+                        <col name="nomeDoCandidato">
+                        <col name="nomeDoResponsável">
+                        <col name="telefone">
                     </colgroup>
                 </table>
             </vaadin-grid>
         </paper-material>
 
         <paper-fab icon="add"></paper-fab>
-
-        <iron-icon icon="icons:android"></iron-icon>
     </template>
     <script>
         Polymer({
-            is: 'cer-eventos',
+            is: 'cer-fichaDeTriagem',
             properties: {
-                _eventos: {
+                _users: {
                     type: Array,
                     value: function() {
                         return [];

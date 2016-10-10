@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
-<dom-module id="cer-eventos">
+<dom-module id="cer-criarevento">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -18,44 +18,33 @@
                 padding: 16px;
             }
 
-            paper-fab {
-                --paper-fab-background: var(--paper-indigo-900);
-                position: fixed;
-                right: 40px;
-                bottom: 40px;
-                z-index: 1000;
-            }
-
-            iron-icon{
-                position: absolute;
-                left: 500px;
-                bottom: 250px;
+            paper-dialog {
+                right: 50px;
+                bottom: 50px;
             }
         </style>
 
-        <iron-ajax auto url="/data/eventos.json" handle-as="json" last-response="{{_eventos}}"></iron-ajax>
-
         <paper-material elevation="1" class="fit layout vertical">
-            <vaadin-grid id="grid" class="flex" items="{{_eventos}}">
-                <table>
-                    <colgroup>
-                        <col name="nome">
-                        <col name="data">
-                        <col name="local">
-                    </colgroup>
-                </table>
-            </vaadin-grid>
+            <h2>Cadastro de Evento</h2>
+                <paper-input label="Nome"></paper-input>
+                <paper-input label="Descrição" type="text"></paper-input>
+                <paper-input label="Local"></paper-input><br>
+                <paper-input label="Data do Evento" type="date"></paper-input>
+                <paper-input label="Gastos"></paper-input>
+                <paper-input label="Descrição do custo"></paper-input>
+                <paper-input label="Arrecadação"></paper-input>
+            <div class="buttons">
+                <br><br>
+                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
+                <paper-button raised dialog-confirm>Cancelar</paper-button>
+            </div>
         </paper-material>
-
-        <paper-fab icon="add"></paper-fab>
-
-        <iron-icon icon="icons:android"></iron-icon>
     </template>
     <script>
         Polymer({
-            is: 'cer-eventos',
+            is: 'cer-criarevento',
             properties: {
-                _eventos: {
+                _users: {
                     type: Array,
                     value: function() {
                         return [];
