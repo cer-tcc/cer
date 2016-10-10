@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
-<dom-module id="cer-frequencia">
+<dom-module id="cer-estoque">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -33,26 +33,27 @@
             }
         </style>
 
-        <iron-ajax auto url="/data/frequencia.json" handle-as="json" last-response="{{_frequencia}}"></iron-ajax>
+        <iron-ajax auto url="/data/estoque.json" handle-as="json" last-response="{{_estoque}}"></iron-ajax>
 
         <paper-material elevation="1" class="fit layout vertical">
-            <vaadin-grid id="grid" class="flex" items="{{_frequencia}}">
+            <vaadin-grid id="grid" class="flex" items="{{_estoque}}">
                 <table>
                     <colgroup>
-                        <col name="participante">
-                        <col name="porcentagemDeFaltas">
+                        <col name="nome">
+                        <col name="tipo">
+                        <col name="quantidade">
                     </colgroup>
                 </table>
             </vaadin-grid>
         </paper-material>
 
-        <a href="/criarchamada">
+        <a href="/criarproduto">
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
     <script>
         Polymer({
-            is: 'cer-frequencia',
+            is: 'cer-estoque',
             properties: {
                 _eventos: {
                     type: Array,

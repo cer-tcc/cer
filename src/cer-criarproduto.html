@@ -1,0 +1,50 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="cer-criarproduto">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+                padding: 23px;
+            }
+
+            paper-card {
+                width: 100%;
+            }
+        </style>
+
+        <paper-card heading="Cadastro de Produto">
+            <div class="card-content">
+                <paper-input label="Nome do Produto"></paper-input>
+                <paper-input label="Tipo"></paper-input>
+                <paper-input label="Quantidade" type="number"></paper-input>
+                <paper-input label="Fornecedor"></paper-input>
+                <paper-input label="Comprador"></paper-input><br>
+            </div>
+
+            <div class="card-actions">
+                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
+                <paper-button raised dialog-confirm>Cancelar</paper-button>
+            </div>
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-criarproduto',
+            properties: {
+                _users: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>
