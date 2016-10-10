@@ -14,6 +14,7 @@
 <link rel="import" href="../bower_components/iron-icons/editor-icons.html">
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../bower_components/iron-icons/notification-icons.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
 <dom-module id="cer-app">
@@ -81,6 +82,9 @@
                     <a name="participantes" href="/participantes">
                         <iron-icon icon="face"></iron-icon>
                         Participantes</a>
+                    <a name="frequencia" href="/frequencia">
+                        <iron-icon icon="notification:event-note"></iron-icon>
+                        Controle de Frequência</a>
                     <a name="eventos" href="/eventos">
                         <iron-icon icon="event"></iron-icon>
                         Eventos</a>
@@ -94,7 +98,7 @@
                         <iron-icon icon="maps:local-shipping"></iron-icon>
                         Fornecedores</a>
                     <a name="fichaDeTriagem" href="/fichaDeTriagem">
-                        <iron-icon icon="social:group"></iron-icon>
+                        <iron-icon icon="editor:format-align-justify"></iron-icon>
                         Ficha de Triagem</a>
                     <a name="usuarios" href="/usuarios">
                         <iron-icon icon="social:group"></iron-icon>
@@ -139,6 +143,7 @@
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
                     <cer-funcionarios name="funcionarios"></cer-funcionarios>
                     <cer-participantes name="participantes"></cer-participantes>
+                    <cer-frequencia name="frequencia"></cer-frequencia>
                     <cer-eventos name="eventos"></cer-eventos>
                     <cer-voluntarios name="voluntarios"></cer-voluntarios>
                     <cer-fornecedores name="fornecedores"></cer-fornecedores>
