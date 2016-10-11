@@ -5,7 +5,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
-<dom-module id="cer-criarchamada">
+<dom-module id="cer-criarconvite">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -13,34 +13,17 @@
                 padding: 23px;
             }
 
-            paper-slider.blue {
-                --paper-slider-knob-color: var(--paper-light-blue-800);
-                --paper-slider-active-color: var(--paper-light-blue-800);
-            }
-
             paper-card {
                 width: 100%;
-                padding: 0px;
-            }
-
-            vaadin-grid{
-                --primary-color: var(--paper-teal-600);
             }
         </style>
 
-        <iron-ajax auto url="/data/chamada.json" handle-as="json" last-response="{{_chamada}}"></iron-ajax>
-
-        <paper-input label="Data" type="date"></paper-input>
-
-        <paper-card heading="Chamada de Participantes">
+        <paper-card heading="Cadastro de Convites">
             <div class="card-content">
-                <vaadin-grid id="sort" selection-mode="multi" items="{{_chamada}}">
-                    <table>
-                        <colgroup>
-                            <col name="participante" sortable/>
-                        </colgroup>
-                    </table>
-                </vaadin-grid>
+                <paper-input label="Evento"></paper-input>
+                <paper-input label="Tipo de Convite"></paper-input>
+                <paper-input label="Preço (varia de acordo com o tipo)" type="number"></paper-input>
+                <paper-input label="Quantidade" type="number"></paper-input><br>
             </div>
 
             <div class="card-actions">
@@ -52,7 +35,7 @@
 
     <script>
         Polymer({
-            is: 'cer-criarchamada',
+            is: 'cer-criarconvite',
             properties: {
                 _users: {
                     type: Array,

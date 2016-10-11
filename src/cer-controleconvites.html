@@ -4,8 +4,10 @@
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 
-<dom-module id="cer-eventos">
+
+<dom-module id="cer-controleconvites">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
             :host {
@@ -25,6 +27,28 @@
                 bottom: 40px;
                 z-index: 1000;
             }
+
+            app-header {
+                color: #fff;
+                background-color: var(--app-primary-color);
+            }
+
+            app-header paper-icon-button {
+                --paper-icon-button-ink-color: white;
+            }
+
+            paper-tabs {
+                width: 100%;
+            }
+
+
+            paper-tab[link] a {
+                /* These mixins (from iron-flex-layout) center the link text. */
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+                color: #fff;
+                text-decoration: none;
+            }
         </style>
 
         <iron-ajax auto url="/data/eventos.json" handle-as="json" last-response="{{_eventos}}"></iron-ajax>
@@ -35,27 +59,27 @@
                 <a href="/controleconvites" class="link" tabindex="-1"> Controle de Convites</a>
             </paper-tabs>
 
-            <h2>Eventos</h2>
 
+            <h2>Controle de Convites</h2>
             <vaadin-grid id="grid" class="flex" items="{{_eventos}}">
                 <table>
                     <colgroup>
                         <col name="nome">
-                        <col name="data">
-                        <col name="local">
+                        <col name="quantidadeDeConvites">
+                        <col name="convitesVendidos">
                     </colgroup>
                 </table>
             </vaadin-grid>
         </paper-card>
 
-        <a href="/criarevento">
+        <a href="/criarconvite">
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
 
     <script>
         Polymer({
-            is: 'cer-eventos'
+            is: 'cer-controleconvites'
         });
     </script>
 </dom-module>

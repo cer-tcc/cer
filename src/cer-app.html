@@ -58,10 +58,10 @@
                 margin-top: 10px;
             }
 
-            iron-pages {
-                position: relative;
-                height: 100%;
-            }
+            /*iron-pages {*/
+                /*position: relative;*/
+                /*height: 100%;*/
+            /*}*/
         </style>
 
         <app-location route="{{route}}"></app-location>
@@ -113,8 +113,8 @@
             </app-drawer>
 
             <!-- Main content -->
-            <app-header-layout has-scrolling-region>
-                <app-header condenses reveals effects="waterfall">
+            <app-header-layout>
+                <app-header condenses fixed effects="waterfall">
                     <app-toolbar>
                         <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
                         <div main-title></div>
@@ -144,6 +144,8 @@
                     <cer-criarproduto name="criarproduto"></cer-criarproduto>
                     <cer-criarchamada name="criarchamada"></cer-criarchamada>
                     <cer-criarbancodehoras name="criarbancodehoras"></cer-criarbancodehoras>
+                    <cer-controleconvites name="controleconvites"></cer-controleconvites>
+                    <cer-criarconvite name="criarconvite"></cer-criarconvite>
                     <cer-404 name="404"></cer-404>
                 </iron-pages>
             </app-header-layout>
