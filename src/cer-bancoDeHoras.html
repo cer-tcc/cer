@@ -29,7 +29,7 @@
 
         <iron-ajax auto url="/data/horas.json" handle-as="json" last-response="{{_horas}}"></iron-ajax>
 
-        <paper-card heading="Banco de horas">
+        <paper-card heading="Banco de Horas">
             <vaadin-grid id="grid" class="flex" items="{{_horas}}">
                 <table>
                     <colgroup>
@@ -38,7 +38,7 @@
                     </colgroup>
                 </table>
             </vaadin-grid>
-        </paper-material>
+        </paper-card>
 
         <a href="/criarbancodehoras">
             <paper-fab icon="add"></paper-fab>

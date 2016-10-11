@@ -25,6 +25,12 @@
                 bottom: 40px;
                 z-index: 1000;
             }
+            h2{
+                padding: 16px;
+                font-size: 24px;
+                font-weight: 400;
+            }
+
         </style>
 
         <iron-ajax auto url="/data/eventos.json" handle-as="json" last-response="{{_eventos}}"></iron-ajax>
