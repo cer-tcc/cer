@@ -1,20 +1,26 @@
 [
   {
+    "nome": "Arroz",
+    "quantidade": "30kg",
+    "tipo": "Cozinha"
+  },
+
+  {
     "nome": "Leite",
     "quantidade": "10",
     "tipo": "Cozinha"
   },
 
   {
-    "nome": "Cartolina",
-    "quantidade": "60",
-    "tipo": "Papelaria"
-  },
-
-  {
     "nome": "Martelo",
     "quantidade": "2",
     "tipo": "Marcenaria"
+  },
+
+  {
+    "nome": "Cartolina",
+    "quantidade": "60",
+    "tipo": "Papelaria"
   },
 
   {
@@ -27,11 +33,5 @@
     "nome": "Grampeador",
     "quantidade": "2",
     "tipo": "Papelaria"
-  },
-
-  {
-    "nome": "Arroz",
-    "quantidade": "30kg",
-    "tipo": "Cozinha"
   }
 ]

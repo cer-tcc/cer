@@ -1,8 +1,20 @@
 [
   {
-    "nome": "Patricia Pereira",
+    "nome": "Flávio Mocca",
     "função": "Administrador",
-    "email": "patricia.pereira@hotmail.com"
+    "email": "ademir_getulio@hotmail.com"
+  },
+
+  {
+    "nome": "Maria Joana",
+    "função": "Professor",
+    "email": "maria.joana@yahoo.com.br"
+  },
+
+  {
+    "nome": "Marcio Andrade",
+    "função": "Diretoria",
+    "email": "marcelina.joaquim@yahoo.com.br"
   },
 
   {

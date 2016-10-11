@@ -1,14 +1,14 @@
 [
   {
-    "nome": "Maria Joana",
+    "nome": "Aparecido Silva",
     "departamentoAssociado": "Cozinha",
-    "telefone": "(19) 99262-4517",
-    "email": "maria.joana@hotmail.com.br"
+    "telefone": "(19) 3192-3999",
+    "email": "aparecidosilva_122@hotmail.com"
   },
 
   {
     "nome": "Laura Amorin",
-    "departamentoAssociado": "Recepção",
+    "departamentoAssociado": "Recepção de Convidados",
     "telefone": "(19) 99322-3997",
     "email": "laura.amorin@yahoo.com.br"
   },
@@ -17,6 +17,20 @@
     "nome": "Marcio Andrade",
     "departamentoAssociado": "Limpeza",
     "telefone": "(19) 3950-4327",
-    "email": "marcio.andrade@hotmail.com.br"
+    "email": "marcio.andrade@hotmail.com"
+  },
+
+  {
+    "nome": "Maria Joana",
+    "departamentoAssociado": "Cozinha",
+    "telefone": "(19) 99262-4517",
+    "email": "maria.joana@hotmail.com"
+  },
+
+  {
+    "nome": "Oswaldo Campos",
+    "departamentoAssociado": "Animador de Festa",
+    "telefone": "(19) 3728-3221",
+    "email": "palhaco_oswaldo.campos@hotmail.com"
   }
 ]

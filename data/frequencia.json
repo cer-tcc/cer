@@ -1,22 +1,7 @@
 [
   {
-    "participante": "Leticia Giolli",
-    "porcentagemDeFaltas": "10%"
-  },
-
-  {
-    "participante": "Patricia Pereira dos Santos",
-    "porcentagemDeFaltas": "15%"
-  },
-
-  {
     "participante": "Daniel Ferreira Gimenes",
     "porcentagemDeFaltas": "20%"
-  },
-
-  {
-    "participante": "Mateus Grigati",
-    "porcentagemDeFaltas": "5%"
   },
 
   {
@@ -25,7 +10,22 @@
   },
 
   {
+    "participante": "Leticia Giolli",
+    "porcentagemDeFaltas": "10%"
+  },
+
+  {
+    "participante": "Mateus Grigati",
+    "porcentagemDeFaltas": "5%"
+  },
+
+  {
     "participante": "Nathalia Maria Euzébio dos Reis",
     "porcentagemDeFaltas": "22%"
+  },
+
+  {
+    "participante": "Patricia Pereira dos Santos",
+    "porcentagemDeFaltas": "15%"
   }
 ]

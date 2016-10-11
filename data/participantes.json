@@ -1,5 +1,17 @@
 [
   {
+    "nome": "Daniel Ferreira Gimenes",
+    "responsável": "Nidelson Gimenes",
+    "telefone": "(19) 99262-4517"
+  },
+
+  {
+    "nome": "Gabriel Coradelli",
+    "responsável": "Marcelo Coradelli",
+    "telefone": "(19) 99742-3267"
+  },
+
+  {
     "nome": "Leticia Giolli",
     "responsável": "Mauricio Giolli",
     "telefone": "(19) 99294-4544"
@@ -21,17 +33,5 @@
     "nome": "Patricia Pereira dos Santos",
     "responsável": "Rosely Pereira da Silva",
     "telefone": "(19) 93262-1217"
-  },
-
-  {
-    "nome": "Daniel Ferreira Gimenes",
-    "responsável": "Nidelson Gimenes",
-    "telefone": "(19) 99262-4517"
-  },
-
-  {
-    "nome": "Gabriel Coradelli",
-    "responsável": "Marcelo Coradelli",
-    "telefone": "(19) 99742-3267"
   }
 ]

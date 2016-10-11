@@ -1,8 +1,57 @@
 [
   {
-    "nome": "Jose Alberto",
+    "nome": "Adalberto Junior",
     "telefone": "(19) 3477-8592",
-    "função": "Professor",
-    "email": "jose.alberto@hotmail.com.br"
+    "função": "Professor de Música",
+    "email": "adalberto@hotmail.com"
+  },
+
+  {
+    "nome": "Flávio Mocca",
+    "telefone": "(19) 2329-8322",
+    "função": "Administrador",
+    "email": "flaviomtt@yahoo.com.br"
+  },
+
+  {
+    "nome": "Jose Alberto",
+    "telefone": "(19) 3212-4442",
+    "função": "Serviços Gerais",
+    "email": "jose.alberto@hotmail.com"
+  },
+
+  {
+    "nome": "Laura Amorin",
+    "telefone": "(19) 3211-3212",
+    "função": "Cozinheira",
+    "email": "amorin.laura19@yahoo.com.br"
+  },
+
+  {
+    "nome": "Maria Joana",
+    "telefone": "(19) 3211-3212",
+    "função": "Professora de Educação Fisica",
+    "email": "maria.joana@yahoo.com.br"
+  },
+
+  {
+    "nome": "Marcio Andrade",
+    "telefone": "(19) 3829-3222",
+    "função": "Administrador",
+    "email": "adm.marcio_andrade@gmail.com"
+  },
+
+  {
+    "nome": "Nelci Laverne",
+    "telefone": "(19) 3321-3242",
+    "função": "Diretoria",
+    "email": "nercilaverne@gmail.com"
+  },
+
+  {
+    "nome": "Zilda Nielsen",
+    "telefone": "(19) 3211-8143",
+    "função": "Professora de Libras",
+    "email": "zildinha__ni@gmail.com"
   }
 ]

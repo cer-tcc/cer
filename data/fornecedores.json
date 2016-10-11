@@ -1,9 +1,38 @@
 [
   {
-    "nomeFantasia": "São Vicente",
-    "tipo": "Alimentos",
-    "telefone": "(19) 3466-3031",
-    "email": "s.vicente@gmail.com"
+    "nomeFantasia": "Aluguel Maomé",
+    "tipo": "Aluguel de Brinquedos",
+    "telefone": "(19) 3652-7659",
+    "email": "solbrinqudos@hotmail.com"
+  },
+
+  {
+    "nomeFantasia": "Brinquedos Sol",
+    "tipo": "Brinquedos Educativos",
+    "telefone": "(42) 3492-3049",
+    "email": "solbrinqudos@hotmail.com"
+  },
+
+  {
+    "nomeFantasia": "Frutaria Mirabela",
+    "tipo": "Frutas frescas",
+    "telefone": "(19) 3212-2222",
+    "email": "frutaria.mirabela@bol.com.br"
+  },
+
+  {
+    "nomeFantasia": "Fazenda São João",
+    "tipo": "Legumes e Vegetais",
+    "telefone": "(19) 3312-5952",
+    "email": "fazenda_saojoao@gmail.com"
+  },
+
+
+  {
+    "nomeFantasia": "Fazenda Lolo",
+    "tipo": "Legumes e Vegetais",
+    "telefone": "(19) 3455-8940",
+    "email": "lolo_fazenda@bol.com.br"
   },
 
   {
@@ -13,10 +42,25 @@
     "email": "madereirojoabim@gmail.com"
   },
 
+
   {
-    "nomeFantasia": "Frutaria Mirabela",
-    "tipo": "Frutas frescas",
-    "telefone": "(19) 3212-2222",
-    "email": "frutaria.mirabela@bol.com.br"
+    "nomeFantasia": "Padaria Pãozinho",
+    "tipo": "Padaria",
+    "telefone": "(19) 3281-3213",
+    "email": "Não especificado"
+  },
+
+  {
+    "nomeFantasia": "Papelaria Nova Esperança",
+    "tipo": "Papelaria",
+    "telefone": "(19) 3463-3893",
+    "email": "papelaria.nova.esperanca@gmail.com"
+  },
+
+  {
+    "nomeFantasia": "São Vicente",
+    "tipo": "Alimentos",
+    "telefone": "(19) 3466-3031",
+    "email": "s.vicente@gmail.com"
   }
 ]

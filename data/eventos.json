@@ -10,15 +10,6 @@
   },
 
   {
-    "nome": "Porco no Rolete",
-    "data": "19/12/2016",
-    "local": "Centro Educacional Rebouças",
-    "totalArrecadado": "R$2.800,00",
-    "convitesVendidos": "96",
-    "quantidadeDeConvites": "100"
-  },
-
-  {
     "nome": "Noite Italiana",
     "data": "30/01/2017",
     "local": "Centro Educacional Rebouças",
@@ -32,6 +23,15 @@
     "data": "10/09/2017",
     "local": "Centro Educacional Rebouças",
     "totalArrecadado": "R$1.900,00",
+    "convitesVendidos": "96",
+    "quantidadeDeConvites": "100"
+  },
+
+  {
+    "nome": "Porco no Rolete",
+    "data": "19/12/2016",
+    "local": "Centro Educacional Rebouças",
+    "totalArrecadado": "R$2.800,00",
     "convitesVendidos": "96",
     "quantidadeDeConvites": "100"
   }
