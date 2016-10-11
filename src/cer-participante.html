@@ -1,0 +1,51 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="cer-participante">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+                padding: 23px;
+            }
+
+            paper-card {
+                width: 100%;
+                padding: 0;
+            }
+        </style>
+
+        <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
+
+        <iron-ajax auto url="/data/participantes.json" handle-as="json" last-response="{{_participantes}}"></iron-ajax>
+
+        <paper-card heading="{{participante.nome}}">
+            <div class="card-actions">
+                <paper-button>Editar</paper-button>
+                <paper-button>Excluir</paper-button>
+                </paper-icon-button>
+            </div>
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-participante',
+            properties: {
+                route: Object,
+                participante: {
+                    type: Object,
+                    computed: 'getItem(_participantes, _routeData.id)'
+                }
+            },
+
+            getItem: function (items, id) {
+                return items[id];
+            }
+        });
+    </script>
+</dom-module>

@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-location/iron-location.html">
 <link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
@@ -27,10 +28,11 @@
             }
         </style>
 
+        <iron-location path="{{path}}"></iron-location>
         <iron-ajax auto url="/data/participantes.json" handle-as="json" last-response="{{_participantes}}"></iron-ajax>
 
         <paper-card heading="Participantes">
-            <vaadin-grid id="grid" class="flex" items="{{_participantes}}">
+            <vaadin-grid id="grid" class="flex" items="{{_participantes}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
                         <col name="nome">
@@ -48,7 +50,15 @@
 
     <script>
         Polymer({
-            is: 'cer-participantes'
+            is: 'cer-participantes',
+
+            _select: function () {
+                var selected = this.$.grid.selection.selected();
+
+                if (selected.length == 1) {
+                    this.path = '/participante/' + selected[0];
+                }
+            }
         });
     </script>
 </dom-module>

@@ -26,7 +26,8 @@
     "vaadin-combo-box": "^1.1.5",
     "google-map": "GoogleWebComponents/google-map#^1.1.13",
     "gold-email-input": "PolymerElements/gold-email-input#^1.0.7",
-    "gold-zip-input": "PolymerElements/gold-zip-input#^1.0.6"
+    "gold-zip-input": "PolymerElements/gold-zip-input#^1.0.6",
+    "iron-location": "PolymerElements/iron-location#^0.8.9"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
