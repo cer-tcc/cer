@@ -45,8 +45,12 @@
             }
 
             .logo {
-                padding: 10px 0px;
-                width: 18%;
+                width: 80px;
+            }
+
+            .drawer-list {
+                display: block;
+                margin-top: 70px;
             }
 
             .drawer-list a {
@@ -76,16 +80,17 @@
 
         <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-
         <app-header-layout>
             <app-header condenses shadow fixed>
                 <paper-toolbar>
-                    <div class="flex">
+                    <paper-icon-button icon="menu"></paper-icon-button>
+
+                    <div class="title">
                         <img class="logo" src="/images/logo_cer.png" alt="CER">
                     </div>
-                    <paper-icon-button icon="menu"></paper-icon-button>
-                    <span class="title">Centro Educacional Rebouças</span>
+
                     <paper-icon-button icon="search"></paper-icon-button>
+
                     <a name="mensagens" href="/mensagens">
                         <paper-icon-button style="color: white" id="number" icon="communication:email" alt="inbox"></paper-icon-button>
                         <paper-badge for="number" class="blue" label="5"></paper-badge>
