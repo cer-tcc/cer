@@ -17,40 +17,69 @@
             paper-card {
                 width: 100%;
             }
+
+            .grid {
+                @apply(--layout-horizontal);
+            }
+
+            .grid > section {
+                @apply(--layout-flex);
+            }
+
+            .grid > section:not(:first-child) {
+                margin-left: 20px;
+            }
+
+            @media (max-width: 767px) {
+                .grid {
+                    display: block;
+                    margin-top: 0;
+                }
+
+                .grid > section:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
         </style>
 
 
         <paper-card heading="Cadastro de Voluntários">
-            <div class="card-content">
-                <paper-input label="Nome Completo"></paper-input><br>
-                <paper-input label="Data de Nascimento" type="date"></paper-input>
-                <br><label>Sexo</label>
-                <paper-radio-group>
-                    <paper-radio-button name="female">Feminino</paper-radio-button>
-                    <paper-radio-button name="male">Masculino</paper-radio-button>
-                </paper-radio-group>
-                <paper-input label="CPF"></paper-input>
-                <paper-input label="RG"></paper-input>
-                <paper-dropdown-menu label="Estado Cívil">
-                    <paper-listbox class="dropdown-content">
-                        <paper-item>Solteiro(a)</paper-item>
-                        <paper-item>Casado(a)</paper-item>
-                        <paper-item>Separado(a)</paper-item>
-                        <paper-item>Divorciado(a)</paper-item>
-                        <paper-item>Viúvo(a)</paper-item>
-                    </paper-listbox>
-                </paper-dropdown-menu><br><br>
-                <paper-input label="Data do Início do Trabalho Voluntário" type="date"></paper-input>
-                <paper-input label="Departamento Associado"></paper-input>
-                <paper-input label="Descrição do Trabalho Voluntário"></paper-input>
-                <paper-input label="Telefone"></paper-input>
-                <paper-input label="Celular"></paper-input>
-                <gold-email-input auto-validate label="E-mail"></gold-email-input>
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Nome Completo"></paper-input>
+                    <paper-input label="Data de Nascimento" type="date"></paper-input>
+                    <paper-dropdown-menu label="Sexo">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Feminino</paper-item>
+                            <paper-item>Masculino</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                    <paper-input label="CPF"></paper-input>
+                    <paper-input label="RG"></paper-input>
+                    <paper-dropdown-menu label="Estado Cívil">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Solteiro(a)</paper-item>
+                            <paper-item>Casado(a)</paper-item>
+                            <paper-item>Separado(a)</paper-item>
+                            <paper-item>Divorciado(a)</paper-item>
+                            <paper-item>Viúvo(a)</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                </section>
+
+                <section>
+                    <paper-input label="Departamento Associado"></paper-input>
+                    <paper-input label="Descrição do Trabalho Voluntário"></paper-input>
+                    <paper-input label="Telefone"></paper-input>
+                    <paper-input label="Celular"></paper-input>
+                    <gold-email-input auto-validate label="E-mail"></gold-email-input>
+                    <paper-input label="Data do Início do Trabalho Voluntário" type="date"></paper-input>
+                </section>
             </div>
 
             <div class="card-actions">
-                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
-                <paper-button raised dialog-confirm>Cancelar</paper-button>
+                <paper-button autofocus>Confirmar</paper-button>
+                <paper-button>Cancelar</paper-button>
             </div>
         </paper-card>
     </template>

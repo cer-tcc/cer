@@ -16,15 +16,15 @@
     "uf": "SP",
     "telefone": "(19) 3026-7142",
     "celular": "(19) 99403-5909",
-    "responsavel": "Nidelson Gimenes",
+    "responsável": "Nidelson Gimenes",
     "rgDoResposavel": "90075224-6",
     "cpfDoResposavel": "879.328.125-89",
     "profissaoDoResposavel": "Analista de Sistemas",
-    "localDeTrabalhoDoResponsavel": "CoreMAX",
-    "grauDeInstrucaoDoResponsavel": "Ensino técnico completo",
-    "estadoCivilDoResponsavel": "solteiro",
-    "responsavelPelaGuardaDoParticipante": "mãe",
-    "emailDoResponsavel": "nidelson@gmail.com",
+    "localDeTrabalhoDoresponsável": "CoreMAX",
+    "grauDeInstrucaoDoresponsável": "Ensino técnico completo",
+    "estadoCivilDoresponsável": "solteiro",
+    "responsávelPelaGuardaDoParticipante": "mãe",
+    "emailDoresponsável": "nidelson@gmail.com",
     "possuiIrmaos": "nao",
     "temDeficiencia": "nao",
     "tratamento": "nao",
@@ -52,7 +52,7 @@
 
   {
     "nome": "Nathalia Maria Euzébio dos Reis",
-    "responsavel": "João Euzébio Reis",
+    "responsável": "João Euzébio Reis",
     "telefone": "(19) 99392-4427"
   },
 

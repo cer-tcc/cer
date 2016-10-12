@@ -16,23 +16,53 @@
             paper-card {
                 width: 100%;
             }
+
+            .grid {
+                @apply(--layout-horizontal);
+            }
+
+            .grid > section {
+                @apply(--layout-flex);
+            }
+
+            .grid > section:not(:first-child) {
+                margin-left: 20px;
+            }
+
+            @media (max-width: 767px) {
+                .grid {
+                    display: block;
+                    margin-top: 0;
+                }
+
+                .grid > section:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
         </style>
 
         <paper-card heading="Cadastro de Horas">
-            <div class="card-content">
-                <paper-input label="Nome do Funcionário"></paper-input>
-                <paper-input label="Data" type="date"></paper-input>
-                <paper-input label="Descrição"></paper-input><br>
-                <paper-radio-group selected="credito">
-                    <paper-radio-button name="debito">Débito</paper-radio-button>
-                    <paper-radio-button name="credito">Crédito</paper-radio-button>
-                </paper-radio-group>
-                <paper-input label="Quantidade" type="number"></paper-input><br>
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Data" type="date"></paper-input>
+                    <paper-input label="Nome do Funcionário"></paper-input>
+                    <paper-input label="Descrição"></paper-input>
+                </section>
+
+                <section>
+                    <paper-dropdown-menu label="Tipo">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Credito</paper-item>
+                            <paper-item>Débito</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                    <paper-input label="Quantidade de Horas" type="number"></paper-input>
+                </section>
             </div>
 
             <div class="card-actions">
-                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
-                <paper-button raised dialog-confirm>Cancelar</paper-button>
+                <paper-button autofocus>Confirmar</paper-button>
+                <paper-button>Cancelar</paper-button>
             </div>
         </paper-card>
     </template>

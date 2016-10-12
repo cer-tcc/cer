@@ -16,22 +16,49 @@
             paper-card {
                 width: 100%;
             }
+
+            .grid {
+                @apply(--layout-horizontal);
+            }
+
+            .grid > section {
+                @apply(--layout-flex);
+            }
+
+            .grid > section:not(:first-child) {
+                margin-left: 20px;
+            }
+
+            @media (max-width: 767px) {
+                .grid {
+                    display: block;
+                    margin-top: 0;
+                }
+
+                .grid > section:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
         </style>
 
         <paper-card heading="Cadastro de Evento">
-            <div class="card-content">
-                <paper-input label="Nome"></paper-input>
-                <paper-input label="Descrição" type="text"></paper-input>
-                <paper-input label="Local"></paper-input><br>
-                <paper-input label="Data do Evento" type="date"></paper-input>
-                <paper-input label="Gastos"></paper-input>
-                <paper-input label="Descrição do custo"></paper-input>
-                <paper-input label="Arrecadação"></paper-input><br>
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Data do Evento" type="date"></paper-input>
+                    <paper-input label="Nome"></paper-input>
+                    <paper-input label="Descrição" type="text"></paper-input>
+                    <paper-input label="Local"></paper-input><br>
+                </section>
+                <section>
+                    <paper-input label="Gastos"></paper-input>
+                    <paper-input label="Descrição do custo"></paper-input>
+                    <paper-input label="Arrecadação"></paper-input><br>
+                </section>
             </div>
 
             <div class="card-actions">
-                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
-                <paper-button raised dialog-confirm>Cancelar</paper-button>
+                <paper-button autofocus>Confirmar</paper-button>
+                <paper-button >Cancelar</paper-button>
             </div>
         </paper-card>
     </template>

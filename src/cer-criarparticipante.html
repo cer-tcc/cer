@@ -22,113 +22,141 @@
             paper-card {
                 width: 100%;
             }
+
+            .grid {
+                @apply(--layout-horizontal);
+            }
+
+            .grid > section {
+                @apply(--layout-flex);
+            }
+
+            .grid > section:not(:first-child) {
+                margin-left: 20px;
+            }
+
+            @media (max-width: 767px) {
+                .grid {
+                    display: block;
+                    margin-top: 0;
+                }
+
+                .grid > section:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
         </style>
 
         <paper-card heading="Matrícula de Participante">
-            <div class="card-content">
-                <paper-toggle-button checked>Ativo</paper-toggle-button>
-                <paper-input label="Nome Completo"></paper-input>
-                <paper-input label="R.A."></paper-input><br>
-                <paper-input label="Data de Nascimento" type="date"></paper-input>
-                <paper-input label="NIS do Participante"></paper-input>
-                <br><label>Sexo</label>
-                <paper-radio-group>
-                    <paper-radio-button name="female">Feminino</paper-radio-button>
-                    <paper-radio-button name="male">Masculino</paper-radio-button>
-                </paper-radio-group>
-                <paper-input label="RG do Participante"></paper-input>
-                <paper-input label="Escola"></paper-input>
-                <paper-dropdown-menu label="Período Escolar">
-                    <paper-listbox class="dropdown-content">
-                        <paper-item>Matutino</paper-item>
-                        <paper-item>Vespertino</paper-item>
-                        <paper-item>Noturno</paper-item>
-                    </paper-listbox>
-                </paper-dropdown-menu>
-                <paper-input label="Rua"></paper-input>
-                <paper-input label="Número"></paper-input>
-                <paper-input label="Complemento"></paper-input>
-                <gold-zip-input label="CEP"></gold-zip-input>
-                <paper-input label="Cidade"></paper-input>
-                <paper-input label="UF"></paper-input>
-                <paper-input label="Telefone"></paper-input>
-                <paper-input label="Celular"></paper-input>
-                <paper-input label="Nome do Responsável"></paper-input>
-                <paper-input label="RG do Responsável"></paper-input>
-                <paper-input label="CPF do Responsável"></paper-input>
-                <paper-input label="Profissão do Responsável"></paper-input>
-                <paper-input label="Local de Trabalho do Responsável"></paper-input>
-                <paper-input label="Grau de instrução do Responsável"></paper-input>
-                <paper-dropdown-menu label="Estado Cívil do Responsável">
-                    <paper-listbox class="dropdown-content">
-                        <paper-item>Solteiro(a)</paper-item>
-                        <paper-item>Casado(a)</paper-item>
-                        <paper-item>Separado(a)</paper-item>
-                        <paper-item>Divorciado(a)</paper-item>
-                        <paper-item>Viúvo(a)</paper-item>
-                    </paper-listbox>
-                </paper-dropdown-menu>
-                <paper-input label="Responsável Pela Guarda do Participante"></paper-input>
-                <gold-email-input auto-validate label="E-mail do Responsável"></gold-email-input>
-                <paper-input label="A criança mora com quem?"></paper-input>
-
-                <br><label>Tem irmãos?</label>
-                <paper-radio-group selected="nao">
-                    <paper-radio-button name="nao">Não</paper-radio-button>
-                    <paper-radio-button name="sim" checked="{{possuiIrmaos}}">Sim</paper-radio-button>
-                </paper-radio-group>
-                <br>
-
-                <span hidden="{{!possuiIrmaos}}">
-                    <paper-input label="Quantidade de Irmãos" type="number" min="0" max="20"></paper-input>
-                    <paper-input label="Idade?"></paper-input>
-                </span>
-
-                <br><label>Possui deficiencia?</label>
-                <paper-radio-group selected="nao">
-                    <paper-radio-button name="nao">Não</paper-radio-button>
-                    <paper-radio-button name="sim" checked="{{possuiDeficiencia}}">Sim</paper-radio-button>
-                </paper-radio-group>
-
-                <span hidden="{{!possuiDeficiencia}}">
-                    <paper-input label="Qual?"></paper-input>
-                </span>
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Nome Completo"></paper-input>
+                    <paper-dropdown-menu label="Sexo">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Feminino</paper-item>
+                            <paper-item>Masculino</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                    <paper-input label="R.A."></paper-input>
+                    <paper-input label="Data de Nascimento" type="date"></paper-input>
+                    <paper-input label="NIS do Participante"></paper-input>
+                    <paper-input label="RG do Participante"></paper-input>
+                    <paper-input label="Escola"></paper-input>
+                    <paper-dropdown-menu label="Período Escolar">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Matutino</paper-item>
+                            <paper-item>Vespertino</paper-item>
+                            <paper-item>Noturno</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                    <paper-input label="Rua"></paper-input>
+                    <paper-input label="Número"></paper-input>
+                    <paper-input label="Complemento"></paper-input>
+                    <gold-zip-input label="CEP"></gold-zip-input>
+                    <paper-input label="Cidade"></paper-input>
+                    <paper-input label="UF"></paper-input>
+                    <paper-input label="Telefone"></paper-input>
+                    <paper-input label="Celular"></paper-input>
+                </section>
 
 
-                <br><label>Fez ou faz algum tratamento?</label>
-                <paper-radio-group selected="nao">
-                    <paper-radio-button name="nao">Não</paper-radio-button>
-                    <paper-radio-button name="sim" checked="{{tratamento}}">Sim</paper-radio-button>
-                </paper-radio-group>
+                <section>
+                    <paper-input label="Nome do Responsável"></paper-input>
+                    <paper-input label="RG do Responsável"></paper-input>
+                    <paper-input label="CPF do Responsável"></paper-input>
+                    <paper-input label="Profissão do Responsável"></paper-input>
+                    <paper-input label="Local de Trabalho do Responsável"></paper-input>
+                    <paper-input label="Grau de instrução do Responsável"></paper-input>
+                    <paper-dropdown-menu label="Estado Cívil do Responsável">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Solteiro(a)</paper-item>
+                            <paper-item>Casado(a)</paper-item>
+                            <paper-item>Separado(a)</paper-item>
+                            <paper-item>Divorciado(a)</paper-item>
+                            <paper-item>Viúvo(a)</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                    <paper-input label="Responsável Pela Guarda do Participante"></paper-input>
+                    <gold-email-input auto-validate label="E-mail do Responsável"></gold-email-input>
+                    <paper-input label="A criança mora com quem?"></paper-input>
 
-                <span hidden="{{!tratamento}}">
-                    <paper-input label="Qual?"></paper-input>
-                </span>
+                    <br><label>Tem irmãos?</label>
+                    <paper-radio-group selected="nao">
+                        <paper-radio-button name="nao">Não</paper-radio-button>
+                        <paper-radio-button name="sim" checked="{{possuiIrmaos}}">Sim</paper-radio-button>
+                    </paper-radio-group>
 
-                <br><label>Tem alergia?</label>
-                <paper-radio-group selected="nao">
-                    <paper-radio-button name="nao">Não</paper-radio-button>
-                    <paper-radio-button name="sim" checked="{{possuiAlergia}}">Sim</paper-radio-button>
-                </paper-radio-group>
+                    <span hidden="{{!possuiIrmaos}}">
+                        <paper-input label="Quantidade de Irmãos" type="number" min="0" max="20"></paper-input>
+                        <paper-input label="Idade?"></paper-input>
+                    </span>
 
-                <span hidden="{{!possuiAlergia}}">
-                    <paper-input label="Qual?"></paper-input>
-                </span>
+                        <br><label>Possui deficiencia?</label>
+                        <paper-radio-group selected="nao">
+                            <paper-radio-button name="nao">Não</paper-radio-button>
+                            <paper-radio-button name="sim" checked="{{possuiDeficiencia}}">Sim</paper-radio-button>
+                        </paper-radio-group>
 
-                <br><label>Possui alguma outra restrição?</label>
-                <paper-radio-group selected="nao">
-                    <paper-radio-button name="nao">Não</paper-radio-button>
-                    <paper-radio-button name="sim" checked="{{possuiRestricao}}">Sim</paper-radio-button>
-                </paper-radio-group>
+                    <span hidden="{{!possuiDeficiencia}}">
+                        <paper-input label="Qual?"></paper-input>
+                    </span>
 
-                <span hidden="{{!possuiRestricao}}">
-                    <paper-input label="Qual?"></paper-input>
-                </span>
+
+                        <br><label>Fez ou faz algum tratamento?</label>
+                        <paper-radio-group selected="nao">
+                            <paper-radio-button name="nao">Não</paper-radio-button>
+                            <paper-radio-button name="sim" checked="{{tratamento}}">Sim</paper-radio-button>
+                        </paper-radio-group>
+
+                    <span hidden="{{!tratamento}}">
+                        <paper-input label="Qual?"></paper-input>
+                    </span>
+
+                        <br><label>Tem alergia?</label>
+                        <paper-radio-group selected="nao">
+                            <paper-radio-button name="nao">Não</paper-radio-button>
+                            <paper-radio-button name="sim" checked="{{possuiAlergia}}">Sim</paper-radio-button>
+                        </paper-radio-group>
+
+                    <span hidden="{{!possuiAlergia}}">
+                        <paper-input label="Qual?"></paper-input>
+                    </span>
+
+                        <br><label>Possui alguma outra restrição?</label>
+                        <paper-radio-group selected="nao">
+                            <paper-radio-button name="nao">Não</paper-radio-button>
+                            <paper-radio-button name="sim" checked="{{possuiRestricao}}">Sim</paper-radio-button>
+                        </paper-radio-group>
+
+                    <span hidden="{{!possuiRestricao}}">
+                        <paper-input label="Qual?"></paper-input>
+                    </span>
+                </section>
             </div>
 
             <div class="card-actions">
-                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
-                <paper-button raised dialog-confirm>Cancelar</paper-button>
+                <paper-button autofocus>Confirmar</paper-button>
+                <paper-button>Cancelar</paper-button>
             </div>
         </paper-card>
     </template>

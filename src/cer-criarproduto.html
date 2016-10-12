@@ -16,20 +16,47 @@
             paper-card {
                 width: 100%;
             }
+
+            .grid {
+                @apply(--layout-horizontal);
+            }
+
+            .grid > section {
+                @apply(--layout-flex);
+            }
+
+            .grid > section:not(:first-child) {
+                margin-left: 20px;
+            }
+
+            @media (max-width: 767px) {
+                .grid {
+                    display: block;
+                    margin-top: 0;
+                }
+
+                .grid > section:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
         </style>
 
         <paper-card heading="Cadastro de Produto">
-            <div class="card-content">
-                <paper-input label="Nome do Produto"></paper-input>
-                <paper-input label="Tipo"></paper-input>
-                <paper-input label="Quantidade" type="number"></paper-input>
-                <paper-input label="Fornecedor"></paper-input>
-                <paper-input label="Comprador"></paper-input><br>
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Nome do Produto"></paper-input>
+                    <paper-input label="Tipo"></paper-input>
+                    <paper-input label="Quantidade" type="number"></paper-input>
+                </section>
+                <section>
+                    <paper-input label="Fornecedor"></paper-input>
+                    <paper-input label="Comprador"></paper-input><br>
+                </section>
             </div>
 
             <div class="card-actions">
-                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
-                <paper-button raised dialog-confirm>Cancelar</paper-button>
+                <paper-button autofocus>Confirmar</paper-button>
+                <paper-button>Cancelar</paper-button>
             </div>
         </paper-card>
     </template>

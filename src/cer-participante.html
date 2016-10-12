@@ -47,15 +47,16 @@
         <paper-card heading="{{participante.nome}}">
             <div class="card-content grid">
                 <section>
+                    <paper-dropdown-menu label="Sexo">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Feminino</paper-item>
+                            <paper-item>Masculino</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
                     <paper-input label="R.A." value="{{participante.ra}}"></paper-input>
                     <paper-input label="Data de Nascimento" type="date"
                                  value="{{participante.dataDeNascimento}}"></paper-input>
                     <paper-input label="NIS do Participante" value="{{participante.nis}}"></paper-input>
-                    <label>Sexo</label>
-                    <paper-radio-group selected="{{participante.sexo}}">
-                        <paper-radio-button name="female">Feminino</paper-radio-button>
-                        <paper-radio-button name="male">Masculino</paper-radio-button>
-                    </paper-radio-group>
                     <paper-input label="RG do Participante" value="{{participante.rg}}"></paper-input>
                     <paper-input label="Escola"></paper-input>
                     <paper-dropdown-menu label="Período Escolar">
