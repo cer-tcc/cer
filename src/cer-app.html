@@ -22,12 +22,11 @@
         <style>
             :host {
                 --app-primary-color: var(--paper-blue-grey-600);
-                --app-secondary-color: black;
-
+                --app-accent-color: var(--paper-indigo-900);
                 display: block;
             }
 
-            app-header {
+            paper-toolbar {
                 color: #fff;
                 background-color: var(--app-primary-color);
             }
@@ -36,32 +35,36 @@
                 --paper-icon-button-ink-color: white;
             }
 
-            .drawer-list {
-                margin: 0 20px;
+            app-drawer {
+                --app-drawer-content-container: {
+                    box-shadow: 1px 0 2px 1px rgba(0,0,0,0.18);
+                }
+
+                --app-drawer-scrim-background: rgba(179, 157, 219, 0.5);
+            }
+
+            .logo {
+                padding: 10px 0;
+                text-align: center;
             }
 
             .drawer-list a {
                 display: block;
                 padding: 0 16px;
                 text-decoration: none;
-                color: var(--app-secondary-color);
+                font-size: 14px;
+                color: var(--light-theme-secondary-color);
                 line-height: 40px;
+                font-weight: 500;
+            }
+
+            .drawer-list a:hover {
+                background-color: rgba(158,158,158,0.2);
             }
 
             .drawer-list a.iron-selected {
-                color: black;
-                font-weight: bold;
+                color: var(--app-accent-color);
             }
-
-            .logo {
-                margin: auto;
-                margin-top: 10px;
-            }
-
-            /*iron-pages {*/
-                /*position: relative;*/
-                /*height: 100%;*/
-            /*}*/
         </style>
 
         <app-location route="{{route}}"></app-location>
@@ -71,9 +74,9 @@
         <app-drawer-layout fullbleed>
             <!-- Drawer content -->
             <app-drawer>
-                <app-toolbar>
-                    <img class="logo" src="../images/logo.jpg" alt="">
-                </app-toolbar>
+                <div class="logo" class="flex">
+                    <img src="/images/logo.jpg" alt="CER">
+                </div>
 
                 <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
                     <a name="painel" href="/">
@@ -114,12 +117,12 @@
 
             <!-- Main content -->
             <app-header-layout>
-                <app-header condenses fixed effects="waterfall">
-                    <app-toolbar>
-                        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-                        <div main-title></div>
+                <app-header condenses shadow fixed>
+                    <paper-toolbar>
+                        <paper-icon-button icon="menu"></paper-icon-button>
+                        <span class="title">Centro Educacional Rebouças</span>
                         <paper-icon-button icon="search"></paper-icon-button>
-                    </app-toolbar>
+                    </paper-toolbar>
                 </app-header>
 
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
@@ -128,6 +131,7 @@
                     <cer-participante name="participante" route="[[subroute]]"></cer-participante>
                     <cer-frequencia name="frequencia"></cer-frequencia>
                     <cer-eventos name="eventos"></cer-eventos>
+                    <cer-evento name="evento" route="[[subroute]]"></cer-evento>
                     <cer-voluntarios name="voluntarios"></cer-voluntarios>
                     <cer-fornecedores name="fornecedores"></cer-fornecedores>
                     <cer-fichaDeTriagem name="fichaDeTriagem"></cer-fichaDeTriagem>

@@ -1,0 +1,66 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="cer-evento">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+            }
+
+            paper-tabs {
+                background-color: var(--paper-blue-grey-500);
+                color: #fff;
+                --paper-tabs-selection-bar-color: #fff;
+                @apply(--layout-self-end);
+            }
+
+            paper-tab {
+                --paper-tab-ink: #fff;
+            }
+
+            div.main {
+                padding: 23px;
+            }
+
+            paper-card {
+                width: 100%;
+                padding: 0;
+            }
+        </style>
+
+        <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
+
+        <iron-ajax auto url="/data/eventos.json" handle-as="json" last-response="{{_eventos}}"></iron-ajax>
+
+        <paper-tabs selected="0">
+            <paper-tab>Resumo</paper-tab>
+            <paper-tab>Convites</paper-tab>
+            <paper-tab>Despesas</paper-tab>
+        </paper-tabs>
+
+        <div class="main">
+            <paper-card heading="[[evento.nome]]">
+            </paper-card>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-evento',
+            properties: {
+                route: Object,
+                evento: {
+                    type: Object,
+                    computed: 'getItem(_eventos, _routeData.id)'
+                }
+            },
+
+            getItem: function (items, id) {
+                return items[id];
+            }
+        });
+    </script>
+</dom-module>
