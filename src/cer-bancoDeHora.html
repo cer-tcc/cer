@@ -1,0 +1,89 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="cer-bancoDeHora">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+                padding: 23px;
+            }
+
+            paper-card {
+                width: 100%;
+            }
+
+            .grid {
+                @apply(--layout-horizontal);
+            }
+
+            .grid > section {
+                @apply(--layout-flex);
+            }
+
+            .grid > section:not(:first-child) {
+                margin-left: 20px;
+            }
+
+            @media (max-width: 767px) {
+                .grid {
+                    display: block;
+                    margin-top: 0;
+                }
+
+                .grid > section:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
+        </style>
+
+        <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
+
+        <iron-ajax auto url="/data/horas.json" handle-as="json" last-response="{{_horas}}"></iron-ajax>
+
+        <paper-card heading="{{horas.nomeDoFuncionario}}">
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Data" type="date"></paper-input>
+                    <paper-input label="Descrição"></paper-input>
+                </section>
+
+                <section>
+                    <paper-dropdown-menu label="Tipo">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Credito</paper-item>
+                            <paper-item>Débito</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                    <paper-input label="Quantidade de Horas" type="number"></paper-input>
+                </section>
+            </div>
+
+            <div class="card-actions">
+                <paper-button autofocus>Editar</paper-button>
+                <paper-button>Excluir</paper-button>
+            </div>
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-bancoDeHora',
+            properties: {
+                route: Object,
+                bancoDeHora: {
+                    type: Object,
+                    computed: 'getItem(_horas, _routeData.id)'
+                }
+            },
+
+            getItem: function (items, id) {
+                return items[id];
+            }
+        });
+    </script>
+</dom-module>

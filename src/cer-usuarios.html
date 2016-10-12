@@ -27,10 +27,11 @@
             }
         </style>
 
+        <iron-location path="{{path}}"></iron-location>
         <iron-ajax auto url="/data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
 
         <paper-card heading="Usuários">
-            <vaadin-grid id="grid" class="flex" items="{{_users}}">
+            <vaadin-grid id="grid" class="flex" items="{{_users}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
                         <col name="nome">
@@ -48,7 +49,15 @@
 
     <script>
         Polymer({
-            is: 'cer-usuarios'
+            is: 'cer-usuarios',
+
+            _select: function () {
+                var selected = this.$.grid.selection.selected();
+
+                if (selected.length == 1) {
+                    this.path = '/usuario/' + selected[0];
+                }
+            }
         });
     </script>
 </dom-module>
