@@ -15,6 +15,7 @@
 <link rel="import" href="../bower_components/iron-icons/maps-icons.html">
 <link rel="import" href="../bower_components/iron-icons/social-icons.html">
 <link rel="import" href="../bower_components/iron-icons/notification-icons.html">
+<link rel="import" href="../bower_components/iron-icons/communication-icons.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
 <dom-module id="cer-app">
@@ -38,7 +39,7 @@
             app-drawer {
                 --app-drawer-content-container: {
                     box-shadow: 1px 0 2px 1px rgba(0,0,0,0.18);
-                }
+            };
 
                 --app-drawer-scrim-background: rgba(179, 157, 219, 0.5);
             }
@@ -64,6 +65,10 @@
 
             .drawer-list a.iron-selected {
                 color: var(--app-accent-color);
+            }
+
+            .blue {
+                --paper-badge-background: var(--paper-light-blue-300);
             }
         </style>
 
@@ -109,6 +114,9 @@
                     <a name="bancoDeHoras" href="/bancoDeHoras">
                         <iron-icon icon="icons:schedule"></iron-icon>
                         Banco de Horas</a>
+                    <a name="mensagens" href="/mensagens">
+                        <iron-icon icon="communication:email"></iron-icon>
+                        Caixa de Entrada</a>
                     <a name="usuarios" href="/usuarios">
                         <iron-icon icon="social:group"></iron-icon>
                         Usuários</a>
@@ -122,6 +130,10 @@
                         <paper-icon-button icon="menu"></paper-icon-button>
                         <span class="title">Centro Educacional Rebouças</span>
                         <paper-icon-button icon="search"></paper-icon-button>
+                        <a name="mensagens" href="/mensagens">
+                           <paper-icon-button style="color: white" id="number" icon="communication:email" alt="inbox"></paper-icon-button>
+                           <paper-badge for="number" class="blue" label="3"></paper-badge>
+                        </a>
                     </paper-toolbar>
                 </app-header>
 
@@ -143,6 +155,7 @@
                     <cer-estoques name="estoques" route="[[subroute]]"></cer-estoques>
                     <cer-bancoDeHoras name="bancoDeHoras"></cer-bancoDeHoras>
                     <cer-bancoDeHora name="bancoDeHora" route="[[subroute]]"></cer-bancoDeHora>
+                    <cer-mensagens name="mensagens"></cer-mensagens>
                     <cer-usuarios name="usuarios"></cer-usuarios>
                     <cer-usuario name="usuario" route="[[subroute]]"></cer-usuario>
                     <cer-login name="login"></cer-login>

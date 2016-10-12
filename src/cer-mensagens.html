@@ -1,0 +1,65 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+
+<dom-module id="cer-mensagens">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+                padding: 23px;
+            }
+
+            paper-fab {
+                --paper-fab-background: var(--paper-indigo-900);
+                position: fixed;
+                right: 40px;
+                bottom: 40px;
+                z-index: 1000;
+            }
+
+            #notes {
+                @apply(--layout-vertical);
+                @apply(--layout-wrap);
+                height: 344px;
+                width: 384px;
+            }
+
+            #notes > paper-card {
+                box-sizing: border-box;
+                max-width: 300px;
+                margin: 4px;
+                flex: 0 0 auto;
+            }
+        </style>
+
+        <div id="notes">
+            <paper-card style="background-color: deepskyblue" heading="Ligar para o responsável pelo participate: Lucas Silva" class="cyan">
+                <div class="card-actions">
+                    <span>Alerta: Participante próximo ao limite de faltas</span>
+                </div>
+            </paper-card>
+            <paper-card style="background-color: yellow" heading="Reunião dos Pais" class="cyan">
+                <div class="card-actions">
+                    <span>28/10/2016</span>
+                </div>
+            </paper-card>
+            <paper-card style="background-color: deeppink" heading="Homenagem ao Outubro Rosa" class="cyan">
+                <div class="card-actions">
+                    <span>Outubro</span>
+                </div>
+            </paper-card>
+        </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-mensagens'
+        });
+    </script>
+</dom-module>
