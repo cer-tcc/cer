@@ -10,8 +10,26 @@
   },
 
   {
+    "nome": "Homenagem ao Outubro Rosa",
+    "data": "23/10/2016",
+    "local": "Centro Educacional Rebouças",
+    "totalArrecadado": "R$1.300,00",
+    "convitesVendidos": "50",
+    "quantidadeDeConvites": "50"
+  },
+
+  {
+    "nome": "Porco no Rolete",
+    "data": "18/12/2016",
+    "local": "Centro Educacional Rebouças",
+    "totalArrecadado": "R$2.800,00",
+    "convitesVendidos": "96",
+    "quantidadeDeConvites": "100"
+  },
+
+  {
     "nome": "Noite Italiana",
-    "data": "30/01/2017",
+    "data": "28/01/2017",
     "local": "Centro Educacional Rebouças",
     "totalArrecadado": "R$3.159,00",
     "convitesVendidos": "96",
@@ -20,18 +38,9 @@
 
   {
     "nome": "Noite Mexicana",
-    "data": "10/09/2017",
+    "data": "09/09/2017",
     "local": "Centro Educacional Rebouças",
     "totalArrecadado": "R$1.900,00",
-    "convitesVendidos": "96",
-    "quantidadeDeConvites": "100"
-  },
-
-  {
-    "nome": "Porco no Rolete",
-    "data": "19/12/2016",
-    "local": "Centro Educacional Rebouças",
-    "totalArrecadado": "R$2.800,00",
     "convitesVendidos": "96",
     "quantidadeDeConvites": "100"
   }

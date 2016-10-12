@@ -88,7 +88,7 @@
                     <paper-icon-button icon="search"></paper-icon-button>
                     <a name="mensagens" href="/mensagens">
                         <paper-icon-button style="color: white" id="number" icon="communication:email" alt="inbox"></paper-icon-button>
-                        <paper-badge for="number" class="blue" label="3"></paper-badge>
+                        <paper-badge for="number" class="blue" label="5"></paper-badge>
                     </a>
                 </paper-toolbar>
             </app-header>
@@ -96,7 +96,7 @@
             <app-drawer-layout>
                 <app-drawer>
                     <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-                        <a name="painel" href="/">
+                        <a name="painel" href="/painel">
                             <iron-icon icon="home"></iron-icon>
                             Painel</a>
                         <a name="participantes" href="/participantes">
@@ -126,9 +126,6 @@
                         <a name="bancoDeHoras" href="/bancoDeHoras">
                             <iron-icon icon="icons:schedule"></iron-icon>
                             Banco de Horas</a>
-                        <a name="mensagens" href="/mensagens">
-                            <iron-icon icon="communication:email"></iron-icon>
-                            Caixa de Entrada</a>
                         <a name="usuarios" href="/usuarios">
                             <iron-icon icon="social:group"></iron-icon>
                             Usuários</a>
