@@ -20,7 +20,7 @@
 
             paper-card {
                 width: 100%;
-                padding: 0px;
+                padding: 0;
             }
 
             vaadin-grid{
@@ -30,7 +30,7 @@
 
         <iron-ajax auto url="/data/chamada.json" handle-as="json" last-response="{{_chamada}}"></iron-ajax>
 
-        <paper-input label="Data" type="date"></paper-input>
+        <paper-input label="Data" type="date" value="2016-10-11"></paper-input>
 
         <paper-card heading="Chamada de Participantes">
             <div class="card-content">
@@ -44,8 +44,8 @@
             </div>
 
             <div class="card-actions">
-                <paper-button raised dialog-confirm autofocus>Confirmar</paper-button>
-                <paper-button raised dialog-confirm>Cancelar</paper-button>
+                <paper-button autofocus>Confirmar</paper-button>
+                <paper-button >Cancelar</paper-button>
             </div>
         </paper-card>
     </template>
