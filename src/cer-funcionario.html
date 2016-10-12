@@ -1,0 +1,123 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="cer-funcionario">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+                padding: 23px;
+            }
+
+            paper-card {
+                width: 100%;
+                padding: 0;
+            }
+
+            paper-fab {
+                --paper-fab-background: var(--paper-indigo-900);
+                position: fixed;
+                right: 40px;
+                bottom: 40px;
+                z-index: 1000;
+            }
+
+            .grid {
+                @apply(--layout-horizontal);
+            }
+
+            .grid > section {
+                @apply(--layout-flex);
+            }
+
+            .grid > section:not(:first-child) {
+                margin-left: 20px;
+            }
+
+            @media (max-width: 767px) {
+                .grid {
+                    display: block;
+                    margin-top: 0;
+                }
+
+                .grid > section:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
+        </style>
+
+        <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
+
+        <iron-ajax auto url="/data/funcionarios.json" handle-as="json" last-response="{{_funcionarios}}"></iron-ajax>
+
+        <paper-card heading="{{funcionario.nome}}">
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Data de Nascimento" type="date"></paper-input>
+                    <paper-input label="CPF"></paper-input>
+                    <paper-input label="RG"></paper-input>
+                    <paper-dropdown-menu label="Estado Cívil">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Solteiro(a)</paper-item>
+                            <paper-item>Casado(a)</paper-item>
+                            <paper-item>Separado(a)</paper-item>
+                            <paper-item>Divorciado(a)</paper-item>
+                            <paper-item>Viúvo(a)</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu><br>
+                    <paper-dropdown-menu label="Sexo">
+                        <paper-listbox class="dropdown-content">
+                            <paper-item>Feminino</paper-item>
+                            <paper-item>Masculino</paper-item>
+                        </paper-listbox>
+                    </paper-dropdown-menu><br><br>
+                    <paper-input label="Rua"></paper-input>
+                    <paper-input label="Número"></paper-input>
+                    <paper-input label="Complemento"></paper-input>
+                </section>
+
+                <section>
+                    <paper-input label="Formação" type="text"></paper-input>
+                    <paper-input label="Função"></paper-input>
+                    <paper-input label="Telefone"></paper-input>
+                    <paper-input label="Celular"></paper-input>
+                    <gold-email-input auto-validate label="E-mail"></gold-email-input>
+                    <paper-input label="Data da Admissão" type="date"></paper-input><br>
+
+                    <gold-zip-input label="CEP"></gold-zip-input>
+                    <paper-input label="Cidade"></paper-input>
+                    <paper-input label="UF"></paper-input>
+                </section>
+            </div>
+
+            <div class="card-actions">
+                <paper-button autofocus>Editar</paper-button>
+                <paper-button>Excluir</paper-button>
+            </div>
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-funcionario',
+
+            properties: {
+                route: Object,
+                funcionario: {
+                    type: Object,
+                    computed: 'getItem(_funcionarios, _routeData.id)'
+                }
+            },
+
+            getItem: function (items, id) {
+                return items[id];
+            }
+        });
+    </script>
+</dom-module>

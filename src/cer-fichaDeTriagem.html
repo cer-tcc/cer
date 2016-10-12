@@ -27,10 +27,11 @@
             }
         </style>
 
+        <iron-location path="{{path}}"></iron-location>
         <iron-ajax auto url="/data/fichaDeTriagem.json" handle-as="json" last-response="{{_fichaDeTriagem}}"></iron-ajax>
 
         <paper-card heading="Ficha de Triagem">
-            <vaadin-grid id="grid" class="flex" items="{{_fichaDeTriagem}}">
+            <vaadin-grid id="grid" class="flex" items="{{_fichaDeTriagem}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
                         <col name="nomeDoCandidato">
@@ -48,7 +49,14 @@
 
     <script>
         Polymer({
-            is: 'cer-fichaDeTriagem'
+            is: 'cer-fichaDeTriagem',
+            _select: function () {
+                var selected = this.$.grid.selection.selected();
+
+                if (selected.length == 1) {
+                    this.path = '/fichasDeTriagem/' + selected[0];
+                }
+            }
         });
     </script>
 </dom-module>

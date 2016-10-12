@@ -27,10 +27,11 @@
             }
         </style>
 
+        <iron-location path="{{path}}"></iron-location>
         <iron-ajax auto url="/data/voluntarios.json" handle-as="json" last-response="{{_voluntarios}}"></iron-ajax>
 
         <paper-card heading="Voluntários">
-            <vaadin-grid id="grid" class="flex" items="{{_voluntarios}}">
+            <vaadin-grid id="grid" class="flex" items="{{_voluntarios}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
                         <col name="nome">
@@ -49,7 +50,15 @@
 
     <script>
         Polymer({
-            is: 'cer-voluntarios'
+            is: 'cer-voluntarios',
+
+            _select: function () {
+                var selected = this.$.grid.selection.selected();
+
+                if (selected.length == 1) {
+                    this.path = '/voluntario/' + selected[0];
+                }
+            }
         });
     </script>
 </dom-module>

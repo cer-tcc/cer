@@ -27,10 +27,11 @@
             }
         </style>
 
+        <iron-location path="{{path}}"></iron-location>
         <iron-ajax auto url="/data/horas.json" handle-as="json" last-response="{{_horas}}"></iron-ajax>
 
         <paper-card heading="Banco de Horas">
-            <vaadin-grid id="grid" class="flex" items="{{_horas}}">
+            <vaadin-grid id="grid" class="flex" items="{{_horas}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
                         <col name="nomeDoFuncionario">
@@ -47,7 +48,15 @@
 
     <script>
         Polymer({
-            is: 'cer-bancoDeHoras'
+            is: 'cer-bancoDeHoras',
+
+            _select: function () {
+                var selected = this.$.grid.selection.selected();
+
+                if (selected.length == 1) {
+                    this.path = '/bancoDeHora/' + selected[0];
+                }
+            }
         });
     </script>
 </dom-module>

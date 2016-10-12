@@ -27,10 +27,11 @@
             }
         </style>
 
+        <iron-location path="{{path}}"></iron-location>
         <iron-ajax auto url="/data/fornecedores.json" handle-as="json" last-response="{{_fornecedores}}"></iron-ajax>
 
         <paper-card heading="Fornecedores">
-            <vaadin-grid id="grid" class="flex" items="{{_fornecedores}}">
+            <vaadin-grid id="grid" class="flex" items="{{_fornecedores}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
                         <col name="nomeFantasia">
@@ -49,7 +50,15 @@
 
     <script>
         Polymer({
-            is: 'cer-fornecedores'
+            is: 'cer-fornecedores',
+
+            _select: function () {
+                var selected = this.$.grid.selection.selected();
+
+                if (selected.length == 1) {
+                    this.path = '/fornecedor/' + selected[0];
+                }
+            }
         });
     </script>
 </dom-module>

@@ -27,10 +27,11 @@
             }
         </style>
 
+        <iron-location path="{{path}}"></iron-location>
         <iron-ajax auto url="/data/estoque.json" handle-as="json" last-response="{{_estoque}}"></iron-ajax>
 
         <paper-card heading="Controle de Estoque">
-            <vaadin-grid id="grid" class="flex" items="{{_estoque}}">
+            <vaadin-grid id="grid" class="flex" items="{{_estoque}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
                         <col name="nome">
@@ -48,7 +49,15 @@
 
     <script>
         Polymer({
-            is: 'cer-estoque'
+            is: 'cer-estoque',
+
+            _select: function () {
+                var selected = this.$.grid.selection.selected();
+
+                if (selected.length == 1) {
+                    this.path = '/estoques/' + selected[0];
+                }
+            }
         });
     </script>
 </dom-module>
