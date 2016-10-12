@@ -45,13 +45,13 @@
             }
 
             .logo {
-                padding: 10px 10px;
-                width: 45%;
+                padding: 10px 0px;
+                width: 18%;
             }
 
             .drawer-list a {
                 display: block;
-                padding: 0 16px;
+                padding: 0 15px;
                 text-decoration: none;
                 font-size: 14px;
                 color: var(--light-theme-secondary-color);
@@ -76,66 +76,65 @@
 
         <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-        <app-drawer-layout fullbleed>
-            <!-- Drawer content -->
-            <app-drawer>
-                <div class="flex">
-                    <img class="logo"  src="/images/logo_cer.png" alt="CER">
-                </div>
 
-                <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-                    <a name="painel" href="/">
-                        <iron-icon icon="home"></iron-icon>
-                        Painel</a>
-                    <a name="participantes" href="/participantes">
-                        <iron-icon icon="face"></iron-icon>
-                        Participantes</a>
-                    <a name="frequencia" href="/frequencia">
-                        <iron-icon icon="notification:event-note"></iron-icon>
-                        Controle de Frequência</a>
-                    <a name="eventos" href="/eventos">
-                        <iron-icon icon="event"></iron-icon>
-                        Eventos</a>
-                    <a name="funcionarios" href="/funcionarios">
-                        <iron-icon icon="icons:work"></iron-icon>
-                        Funcionários</a>
-                    <a name="voluntarios" href="/voluntarios">
-                        <iron-icon icon="icons:favorite-border"></iron-icon>
-                        Voluntários</a>
-                    <a name="fornecedores" href="/fornecedores">
-                        <iron-icon icon="maps:local-shipping"></iron-icon>
-                        Fornecedores</a>
-                    <a name="fichaDeTriagem" href="/fichaDeTriagem">
-                        <iron-icon icon="editor:format-align-justify"></iron-icon>
-                        Ficha de Triagem</a>
-                    <a name="estoque" href="/estoque">
-                        <iron-icon icon="maps:local-grocery-store"></iron-icon>
-                        Controle de Estoque</a>
-                    <a name="bancoDeHoras" href="/bancoDeHoras">
-                        <iron-icon icon="icons:schedule"></iron-icon>
-                        Banco de Horas</a>
+        <app-header-layout>
+            <app-header condenses shadow fixed>
+                <paper-toolbar>
+                    <div class="flex">
+                        <img class="logo" src="/images/logo_cer.png" alt="CER">
+                    </div>
+                    <paper-icon-button icon="menu"></paper-icon-button>
+                    <span class="title">Centro Educacional Rebouças</span>
+                    <paper-icon-button icon="search"></paper-icon-button>
                     <a name="mensagens" href="/mensagens">
-                        <iron-icon icon="communication:email"></iron-icon>
-                        Caixa de Entrada</a>
-                    <a name="usuarios" href="/usuarios">
-                        <iron-icon icon="social:group"></iron-icon>
-                        Usuários</a>
-                </iron-selector>
-            </app-drawer>
+                        <paper-icon-button style="color: white" id="number" icon="communication:email" alt="inbox"></paper-icon-button>
+                        <paper-badge for="number" class="blue" label="3"></paper-badge>
+                    </a>
+                </paper-toolbar>
+            </app-header>
 
-            <!-- Main content -->
-            <app-header-layout>
-                <app-header condenses shadow fixed>
-                    <paper-toolbar>
-                        <paper-icon-button icon="menu"></paper-icon-button>
-                        <span class="title">Centro Educacional Rebouças</span>
-                        <paper-icon-button icon="search"></paper-icon-button>
+            <app-drawer-layout>
+                <app-drawer>
+                    <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                        <a name="painel" href="/">
+                            <iron-icon icon="home"></iron-icon>
+                            Painel</a>
+                        <a name="participantes" href="/participantes">
+                            <iron-icon icon="face"></iron-icon>
+                            Participantes</a>
+                        <a name="frequencia" href="/frequencia">
+                            <iron-icon icon="notification:event-note"></iron-icon>
+                            Controle de Frequência</a>
+                        <a name="eventos" href="/eventos">
+                            <iron-icon icon="event"></iron-icon>
+                            Eventos</a>
+                        <a name="funcionarios" href="/funcionarios">
+                            <iron-icon icon="icons:work"></iron-icon>
+                            Funcionários</a>
+                        <a name="voluntarios" href="/voluntarios">
+                            <iron-icon icon="icons:favorite-border"></iron-icon>
+                            Voluntários</a>
+                        <a name="fornecedores" href="/fornecedores">
+                            <iron-icon icon="maps:local-shipping"></iron-icon>
+                            Fornecedores</a>
+                        <a name="fichaDeTriagem" href="/fichaDeTriagem">
+                            <iron-icon icon="editor:format-align-justify"></iron-icon>
+                            Ficha de Triagem</a>
+                        <a name="estoque" href="/estoque">
+                            <iron-icon icon="maps:local-grocery-store"></iron-icon>
+                            Controle de Estoque</a>
+                        <a name="bancoDeHoras" href="/bancoDeHoras">
+                            <iron-icon icon="icons:schedule"></iron-icon>
+                            Banco de Horas</a>
                         <a name="mensagens" href="/mensagens">
-                           <paper-icon-button style="color: white" id="number" icon="communication:email" alt="inbox"></paper-icon-button>
-                           <paper-badge for="number" class="blue" label="3"></paper-badge>
-                        </a>
-                    </paper-toolbar>
-                </app-header>
+                            <iron-icon icon="communication:email"></iron-icon>
+                            Caixa de Entrada</a>
+                        <a name="usuarios" href="/usuarios">
+                            <iron-icon icon="social:group"></iron-icon>
+                            Usuários</a>
+                    </iron-selector>
+                </app-drawer>
+
 
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
                     <cer-funcionarios name="funcionarios"></cer-funcionarios>
@@ -173,8 +172,8 @@
                     <cer-criarconvite name="criarconvite"></cer-criarconvite>
                     <cer-404 name="404"></cer-404>
                 </iron-pages>
-            </app-header-layout>
-        </app-drawer-layout>
+            </app-drawer-layout>
+        </app-header-layout>
     </template>
 
     <script>

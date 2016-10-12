@@ -24,10 +24,10 @@
       <file leaf-file-name="cer-app.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cer-app.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+            <state relative-caret-position="102">
+              <caret line="85" column="38" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
               <folding>
-                <element signature="n#style#0;n#paper-icon-button#0;n#a#0;n#paper-toolbar#0;n#app-header#0;n#app-header-layout#0;n#app-drawer-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#paper-icon-button#0;n#a#0;n#paper-toolbar#0;n#app-header#0;n#app-header-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -303,12 +303,12 @@
       <workItem from="1476223235114" duration="2437000" />
       <workItem from="1476227795076" duration="9005000" />
       <workItem from="1476244180891" duration="4351000" />
-      <workItem from="1476289523031" duration="4989000" />
+      <workItem from="1476289523031" duration="6604000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96416000" />
+    <option name="totallyTimeSpent" value="98031000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -767,10 +767,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cer-app.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="48" column="25" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+        <state relative-caret-position="102">
+          <caret line="85" column="38" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
           <folding>
-            <element signature="n#style#0;n#paper-icon-button#0;n#a#0;n#paper-toolbar#0;n#app-header#0;n#app-header-layout#0;n#app-drawer-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#paper-icon-button#0;n#a#0;n#paper-toolbar#0;n#app-header#0;n#app-header-layout#0;n#template#0;n#dom-module#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
