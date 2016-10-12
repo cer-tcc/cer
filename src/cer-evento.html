@@ -2,6 +2,12 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animatable.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="cer-evento-resumo.html">
+<link rel="import" href="cer-evento-convites.html">
+<link rel="import" href="cer-evento-financeiro.html">
 
 <dom-module id="cer-evento">
     <template>
@@ -20,31 +26,31 @@
             paper-tab {
                 --paper-tab-ink: #fff;
             }
-
-            div.main {
-                padding: 23px;
-            }
-
-            paper-card {
-                width: 100%;
-                padding: 0;
-            }
         </style>
 
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
 
         <iron-ajax auto url="/data/eventos.json" handle-as="json" last-response="{{_eventos}}"></iron-ajax>
 
-        <paper-tabs selected="0">
+        <paper-tabs selected="{{_selectedTab}}">
             <paper-tab>Resumo</paper-tab>
             <paper-tab>Convites</paper-tab>
-            <paper-tab>Despesas</paper-tab>
+            <paper-tab>Controle financeiro</paper-tab>
         </paper-tabs>
 
-        <div class="main">
-            <paper-card heading="[[evento.nome]]">
-            </paper-card>
-        </div>
+        <neon-animated-pages class="flex" selected="[[_selectedTab]]" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+            <neon-animatable>
+                <cer-evento-resumo evento="[[_evento]]"></cer-evento-resumo>
+            </neon-animatable>
+
+            <neon-animatable>
+                <cer-evento-convites></cer-evento-convites>
+            </neon-animatable>
+
+            <neon-animatable>
+                <cer-evento-financeiro></cer-evento-financeiro>
+            </neon-animatable>
+        </neon-animated-pages>
     </template>
 
     <script>
@@ -52,9 +58,15 @@
             is: 'cer-evento',
             properties: {
                 route: Object,
-                evento: {
+                _evento: {
                     type: Object,
                     computed: 'getItem(_eventos, _routeData.id)'
+                },
+                _selectedTab: {
+                    type: Number,
+                    value: function () {
+                        return 1;
+                    }
                 }
             },
 

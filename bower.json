@@ -29,7 +29,8 @@
     "gold-zip-input": "PolymerElements/gold-zip-input#^1.0.6",
     "iron-location": "PolymerElements/iron-location#^0.8.9",
     "paper-date-picker": "polymer-paper-datepicker#^1.2.0",
-    "paper-card": "PolymerElements/paper-card#^1.1.4"
+    "paper-card": "PolymerElements/paper-card#^1.1.4",
+    "neon-animation": "PolymerElements/neon-animation#^1.2.4"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

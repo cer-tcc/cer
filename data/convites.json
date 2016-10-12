@@ -1,0 +1,27 @@
+[
+  {
+    "vendedor": "Daniel Ferreira Gimenes",
+    "convitesPendentes": "20",
+    "convitesVendidos": "5"
+  },
+  {
+    "vendedor": "Gabriel Coradelli",
+    "convitesPendentes": "10",
+    "convitesVendidos": "30"
+  },
+  {
+    "vendedor": "Letícia Giolli",
+    "convitesPendentes": "0",
+    "convitesVendidos": "10"
+  },
+  {
+    "vendedor": "Mateus Grigatti",
+    "convitesPendentes": "5",
+    "convitesVendidos": "10"
+  },
+  {
+    "vendedor": "Patricia Pereira dos Santos",
+    "convitesPendentes": "20",
+    "convitesVendidos": "30"
+  }
+]
