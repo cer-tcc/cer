@@ -5,6 +5,8 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../bower_components/gold-zip-input/gold-zip-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 
 <dom-module id="cer-voluntario">
     <template>
@@ -67,15 +69,23 @@
                             <paper-item>Viúvo(a)</paper-item>
                         </paper-listbox>
                     </paper-dropdown-menu>
-                </section>
 
-                <section>
                     <paper-input label="Departamento Associado"></paper-input>
                     <paper-input label="Descrição do Trabalho Voluntário"></paper-input>
                     <paper-input label="Telefone"></paper-input>
                     <paper-input label="Celular"></paper-input>
-                    <gold-email-input auto-validate label="E-mail"></gold-email-input>
+                </section>
+
+                <section>
                     <paper-input label="Data do Início do Trabalho Voluntário" type="date"></paper-input>
+                    <gold-email-input auto-validate label="E-mail"></gold-email-input>
+                    <gold-zip-input label="CEP"></gold-zip-input>
+                    <paper-input label="Rua"></paper-input>
+                    <paper-input label="Número"></paper-input>
+                    <paper-input label="Complemento"></paper-input>
+                    <paper-input label="Bairro"></paper-input>
+                    <paper-input label="Cidade"></paper-input>
+                    <paper-input label="UF"></paper-input>
                 </section>
             </div>
 
