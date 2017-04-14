@@ -1,62 +1,51 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <dom-module id="cer-usuarios">
     <template>
-        <style include="iron-flex iron-positioning paper-styles">
-            :host {
-                display: block;
-                padding: 23px;
-            }
+        <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-            paper-card {
-                width: 100%;
-                padding: 0;
-            }
-
-            paper-fab {
-                --paper-fab-background: var(--paper-indigo-900);
-                position: fixed;
-                right: 40px;
-                bottom: 40px;
-                z-index: 1000;
-            }
-        </style>
-
-        <iron-location path="{{path}}"></iron-location>
-        <iron-ajax auto url="/data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
-
-        <paper-card heading="Usuários">
-            <vaadin-grid id="grid" class="flex" items="{{_users}}" on-selected-items-changed="_select">
-                <table>
-                    <colgroup>
-                        <col name="nome">
-                        <col name="função">
-                        <col name="email">
-                    </colgroup>
-                </table>
-            </vaadin-grid>
-        </paper-card>
-
-        <a href="/criarusuario">
-            <paper-fab icon="add"></paper-fab>
-        </a>
+        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
+            <cer-usuarios-adicionar name="adicionar"></cer-usuarios-adicionar>
+            <cer-usuarios-editar name="editar" route="[[subroute]]"></cer-usuarios-editar>
+            <cer-usuarios-listar name="listar" route="[[subroute]]"></cer-usuarios-listar>
+            <cer-usuarios-visualizar name="visualizar" route="[[subroute]]"></cer-usuarios-visualizar>
+            <cer-404 name="404"></cer-404>
+        </iron-pages>
     </template>
 
     <script>
         Polymer({
             is: 'cer-usuarios',
-
-            _select: function () {
-                var selected = this.$.grid.selection.selected();
-
-                if (selected.length == 1) {
-                    this.path = '/usuario/' + selected[0];
+            
+            properties: {
+                route: {
+                    type: String
+                },
+                page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
                 }
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+
+            _routePageChanged: function (page) {
+                console.log('routechangedusuarios');
+                this.page = page || 'listar';
+            },
+
+            _pageChanged: function (page) {
+                var resolvedPageUrl = this.resolveUrl('usuarios/cer-usuarios-' + page + '.html');
+                this.importHref(resolvedPageUrl, null, this._showPage404, true);
+            },
+
+            _showPage404: function () {
+                this.page = '404';
             }
         });
     </script>

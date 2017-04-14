@@ -1,0 +1,63 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+
+<dom-module id="cer-usuarios-listar">
+    <template>
+        <style include="iron-flex iron-positioning paper-styles">
+            :host {
+                display: block;
+                padding: 23px;
+            }
+
+            paper-card {
+                width: 100%;
+                padding: 0;
+            }
+
+            paper-fab {
+                --paper-fab-background: var(--paper-indigo-900);
+                position: fixed;
+                right: 40px;
+                bottom: 40px;
+                z-index: 1000;
+            }
+        </style>
+
+        <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
+        <iron-ajax auto url="/data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
+        
+        <paper-card heading="Usuários">
+            <vaadin-grid id="grid" class="flex" items="{{_users}}" on-selected-items-changed="_select">
+                <table>
+                    <colgroup>
+                        <col name="nome">
+                        <col name="função">
+                        <col name="email">
+                    </colgroup>
+                </table>
+            </vaadin-grid>
+        </paper-card>
+        
+        <a href="/usuarios/adicionar">
+            <paper-fab icon="add"></paper-fab>
+        </a>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-usuarios-listar',
+
+            _select: function () {
+                var selected = this.$.grid.selection.selected();
+
+                if (selected.length == 1) {
+                    this.path = '/usuario/' + selected[0];
+                }
+            }
+        });
+    </script>
+</dom-module>

@@ -50,6 +50,12 @@
         <paper-card heading="Matrícula de Participante">
             <div class="card-content grid">
                 <section>
+                    <label>Status</label>
+                    <paper-radio-group selected="ativo">
+                        <paper-radio-button name="ativo">Ativo</paper-radio-button>
+                        <paper-radio-button name="inativo">Inativo</paper-radio-button>
+                    </paper-radio-group>
+
                     <paper-input label="Nome Completo"></paper-input>
                     <paper-dropdown-menu label="Sexo">
                         <paper-listbox class="dropdown-content">
