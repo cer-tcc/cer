@@ -8,23 +8,6 @@
 <dom-module id="cer-frequencia">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
-            :host {
-                display: block;
-                padding: 23px;
-            }
-
-            paper-card {
-                width: 100%;
-                padding: 0;
-            }
-
-            paper-fab {
-                --paper-fab-background: var(--paper-indigo-900);
-                position: fixed;
-                right: 40px;
-                bottom: 40px;
-                z-index: 1000;
-            }
         </style>
 
         <iron-ajax auto url="/data/frequencia.json" handle-as="json" last-response="{{_frequencia}}"></iron-ajax>
