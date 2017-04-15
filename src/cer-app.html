@@ -22,8 +22,10 @@
     <template>
         <style>
             :host {
+                --primary-color: var(--paper-blue-grey-600);
                 --app-primary-color: var(--paper-blue-grey-600);
-                --app-accent-color: var(--paper-indigo-900);
+                --app-accent-color: var(--paper-blue-grey-600);
+                font-family: Roboto, Noto, sans-serif;  
                 display: block;
             }
 
@@ -39,18 +41,17 @@
             app-drawer {
                 --app-drawer-content-container: {
                     box-shadow: 1px 0 2px 1px rgba(0,0,0,0.18);
-            };
-
+                };
                 --app-drawer-scrim-background: rgba(179, 157, 219, 0.5);
             }
 
             .logo {
-                width: 90px;
+                width: 70px;
             }
 
             .drawer-list {
                 display: block;
-                margin-top: 70px;
+                margin-top: 80px;
             }
 
             .drawer-list a {
@@ -62,6 +63,11 @@
                 line-height: 40px;
                 font-weight: 500;
             }
+         
+            a iron-icon{
+                padding-right: 3px;
+                padding-bottom: 5px;
+            }
 
             .drawer-list a:hover {
                 background-color: rgba(158,158,158,0.2);
@@ -71,7 +77,7 @@
                 color: var(--app-accent-color);
             }
 
-            .blue {
+            .badge {
                 --paper-badge-background: var(--paper-light-blue-300);
             }
         </style>
@@ -95,7 +101,7 @@
 
                     <a name="mensagens" href="/painel/mensagens">
                         <paper-icon-button style="color: white" id="number" icon="communication:email" alt="inbox"></paper-icon-button>
-                        <paper-badge for="number" class="blue" label="5"></paper-badge>
+                        <paper-badge for="number" class="badge" label="5"></paper-badge>
                     </a>
                 </paper-toolbar>
             </app-header>
