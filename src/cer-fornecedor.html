@@ -5,7 +5,8 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
-<link rel="import" href="../bower_components/gold-zip-input/gold-zip-input.html">
+<link rel="import" href="../bower_components/br-elements/br-elements.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
 
 <dom-module id="cer-fornecedor">
     <template>
@@ -20,7 +21,7 @@
             <div class="card-content grid">
                 <section>
                     <paper-input label="Razão Social"></paper-input>
-                    <paper-input label="CNPJ"></paper-input>
+                    <br-cnpj-input></br-cnpj-input>
                     <paper-input label="Inscrição Estadual"></paper-input>
                     <gold-email-input auto-validate label="E-mail"></gold-email-input>
                     <paper-input label="Descrição do Fornecedor"></paper-input>
@@ -29,13 +30,13 @@
                 </section>
 
                 <section>
-                    <gold-zip-input label="CEP"></gold-zip-input>
+                    <br-cep-input></br-cep-input>
                     <paper-input label="Rua"></paper-input>
                     <paper-input label="Número"></paper-input>
                     <paper-input label="Complemento"></paper-input>
                     <paper-input label="Bairro"></paper-input>
-                    <paper-input label="Cidade"></paper-input>
-                    <paper-input label="UF"></paper-input>
+                    <vaadin-combo-box label="Estado"></vaadin-combo-box>
+                    <vaadin-combo-box label="Cidade"></vaadin-combo-box>
                 </section>
             </div>
 
