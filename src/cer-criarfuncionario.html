@@ -1,12 +1,10 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
-<link rel="import" href="../bower_components/gold-zip-input/gold-zip-input.html">
-<link rel="import" href="../bower_components/gold-zip-input/gold-zip-input.html">
+<link rel="import" href="../bower_components/br-elements/br-elements.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
 
 <dom-module id="cer-criarfuncionario">
     <template>
@@ -16,42 +14,33 @@
         <paper-card heading="Cadastro de Funcionário">
             <div class="card-content grid">
                 <section>
-                    <paper-input label="Nome Completo"></paper-input>
+                    <paper-input label="Nome Completo" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
                     <paper-input label="Data de Nascimento" type="date"></paper-input>
-                    <paper-input label="CPF"></paper-input>
-                    <paper-input label="RG"></paper-input>
-                    <paper-dropdown-menu label="Estado Cívil">
-                        <paper-listbox class="dropdown-content">
-                            <paper-item>Solteiro(a)</paper-item>
-                            <paper-item>Casado(a)</paper-item>
-                            <paper-item>Separado(a)</paper-item>
-                            <paper-item>Divorciado(a)</paper-item>
-                            <paper-item>Viúvo(a)</paper-item>
-                        </paper-listbox>
-                    </paper-dropdown-menu><br>
-                    <paper-dropdown-menu label="Sexo">
-                        <paper-listbox class="dropdown-content">
-                            <paper-item>Feminino</paper-item>
-                            <paper-item>Masculino</paper-item>
-                        </paper-listbox>
-                    </paper-dropdown-menu><br><br><br>
-                    <gold-zip-input label="CEP"></gold-zip-input>
-                    <paper-input label="Rua"></paper-input>
-                    <paper-input label="Número"></paper-input>
-                    <paper-input label="Complemento"></paper-input>
+                    <br-cpf-input></br-cpf-input>
+                    <paper-input label="RG" maxlength="30"></paper-input>
+                    <vaadin-combo-box label="Estado Cívil"></vaadin-combo-box>
+                    <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
+
+                    <vaadin-combo-box label="Sexo"></vaadin-combo-box>
+                    <!--Opções: Feminino / Masculino -->
+
+                    <br-cep-input></br-cep-input>
+                    <paper-input label="Rua" maxlength="500"></paper-input>
+                    <paper-input label="Número" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
+                    <paper-input label="Complemento" maxlength="500"></paper-input>
                 </section>
 
                 <section>
-                    <paper-input label="Formação" type="text"></paper-input>
-                    <paper-input label="Função"></paper-input>
-                    <paper-input label="Telefone"></paper-input>
-                    <paper-input label="Celular"></paper-input>
+                    <paper-input label="Formação" allowed-pattern="[A-Za-z\-]"></paper-input>
+                    <vaadin-combo-box label="Função"></vaadin-combo-box>
+                    <br-tel-input></br-tel-input>
+                    <br-cel-input></br-cel-input>
                     <gold-email-input auto-validate label="E-mail"></gold-email-input>
                     <paper-input label="Data da Admissão" type="date"></paper-input>
 
-                    <paper-input label="Bairro"></paper-input>
-                    <paper-input label="Cidade"></paper-input>
-                    <paper-input label="UF"></paper-input>
+                    <paper-input label="Bairro" maxlength="500"></paper-input>
+                    <vaadin-combo-box label="Estado"></vaadin-combo-box>
+                    <vaadin-combo-box label="Cidade"></vaadin-combo-box>
                 </section>
             </div>
 

@@ -1,7 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 
@@ -13,13 +12,13 @@
         <paper-card heading="Cadastro de Produto">
             <div class="card-content grid">
                 <section>
-                    <paper-input label="Nome do Produto"></paper-input>
-                    <paper-input label="Tipo"></paper-input>
+                    <paper-input label="Nome do Produto" maxlength="200"></paper-input>
+                    <paper-input label="Tipo" maxlength="100"></paper-input>
                     <paper-input label="Quantidade" type="number"></paper-input>
                 </section>
                 <section>
-                    <paper-input label="Fornecedor"></paper-input>
-                    <paper-input label="Comprador"></paper-input><br>
+                    <vaadin-combo-box label="Fornecedor"></vaadin-combo-box>
+                    <vaadin-combo-box label="Comprador"></vaadin-combo-box>
                 </section>
             </div>
 
