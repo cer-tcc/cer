@@ -6,15 +6,6 @@
 <dom-module id="cer-evento-convites">
     <template>
         <style>
-            :host {
-                display: block;
-                padding: 23px;
-            }
-
-            paper-card {
-                width: 100%;
-                padding: 0;
-            }
         </style>
 
         <iron-ajax auto url="/data/convites.json" handle-as="json" last-response="{{_convites}}"></iron-ajax>

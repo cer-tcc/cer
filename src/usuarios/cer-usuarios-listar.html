@@ -5,31 +5,20 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
 
+<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
+
 <dom-module id="cer-usuarios-listar">
     <template>
-        <style include="iron-flex iron-positioning paper-styles">
-            :host {
-                display: block;
-                padding: 23px;
-            }
-
-            paper-card {
-                width: 100%;
-                padding: 0;
-            }
-
-            paper-fab {
-                --paper-fab-background: var(--paper-indigo-900);
-                position: fixed;
-                right: 40px;
-                bottom: 40px;
-                z-index: 1000;
+        <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
+            paper-card{
+                padding: 0px;
             }
         </style>
 
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
-        <iron-ajax auto url="/data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
-        
+
+        <iron-ajax auto url="/../data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
+
         <paper-card heading="Usuários">
             <vaadin-grid id="grid" class="flex" items="{{_users}}" on-selected-items-changed="_select">
                 <table>
@@ -41,7 +30,7 @@
                 </table>
             </vaadin-grid>
         </paper-card>
-        
+
         <a href="/usuarios/adicionar">
             <paper-fab icon="add"></paper-fab>
         </a>
@@ -55,7 +44,8 @@
                 var selected = this.$.grid.selection.selected();
 
                 if (selected.length == 1) {
-                    this.path = '/usuario/' + selected[0];
+                    console.log(selected);
+                    window.location = '/usuarios/visualizar/' + selected[0];
                 }
             }
         });

@@ -1,0 +1,45 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="cer-usuarios">
+    <template>
+        <app-route route="{{route}}" pattern="/usuarios/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+        <iron-pages selected="[[_page]]" attr-for-selected="name">
+            <cer-usuarios-listar name="listar" route="[[subroute]]"></cer-usuarios-listar>
+            <cer-usuarios-visualizar name="visualizar" route="[[subroute]]"></cer-usuarios-visualizar>
+            <cer-usuarios-adicionar name="adicionar"></cer-usuarios-adicionar>
+            <cer-usuarios-editar name="editar" route="[[subroute]]"></cer-usuarios-editar>
+        </iron-pages>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-usuarios',
+            
+            properties: {
+                route: Object,
+                _page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                }
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+
+            _routePageChanged: function (page) {
+                this._page = page || 'listar';
+            },
+
+            _pageChanged: function (page) {
+                var resolvedPageUrl = this.resolveUrl('cer-usuarios-' + page + '.html');
+
+                this.importHref(resolvedPageUrl, null, null, true);
+            }
+        });
+    </script>
+</dom-module>

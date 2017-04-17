@@ -5,45 +5,15 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../bower_components/br-elements/br-elements.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
 
 <dom-module id="cer-criarparticipante">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
-            :host {
-                display: block;
-                padding: 23px;
-            }
-
             paper-slider.blue {
                 --paper-slider-knob-color: var(--paper-light-blue-800);
                 --paper-slider-active-color: var(--paper-light-blue-800);
-            }
-
-            paper-card {
-                width: 100%;
-            }
-
-            .grid {
-                @apply(--layout-horizontal);
-            }
-
-            .grid > section {
-                @apply(--layout-flex);
-            }
-
-            .grid > section:not(:first-child) {
-                margin-left: 20px;
-            }
-
-            @media (max-width: 767px) {
-                .grid {
-                    display: block;
-                    margin-top: 0;
-                }
-
-                .grid > section:not(:first-child) {
-                    margin-left: 0;
-                }
             }
         </style>
 
@@ -56,56 +26,44 @@
                         <paper-radio-button name="inativo">Inativo</paper-radio-button>
                     </paper-radio-group>
 
-                    <paper-input label="Nome Completo"></paper-input>
-                    <paper-dropdown-menu label="Sexo">
-                        <paper-listbox class="dropdown-content">
-                            <paper-item>Feminino</paper-item>
-                            <paper-item>Masculino</paper-item>
-                        </paper-listbox>
-                    </paper-dropdown-menu>
-                    <paper-input label="R.A."></paper-input>
-                    <paper-input label="Data de Nascimento" type="date"></paper-input>
-                    <paper-input label="NIS do Participante"></paper-input>
-                    <paper-input label="RG do Participante"></paper-input>
-                    <paper-input label="Escola"></paper-input>
-                    <paper-dropdown-menu label="Período Escolar">
-                        <paper-listbox class="dropdown-content">
-                            <paper-item>Matutino</paper-item>
-                            <paper-item>Vespertino</paper-item>
-                            <paper-item>Noturno</paper-item>
-                        </paper-listbox>
-                    </paper-dropdown-menu>
-                    <gold-zip-input label="CEP"></gold-zip-input>
-                    <paper-input label="Rua"></paper-input>
-                    <paper-input label="Número"></paper-input>
-                    <paper-input label="Complemento"></paper-input>
-                    <paper-input label="Bairro"></paper-input>
-                    <paper-input label="Cidade"></paper-input>
-                    <paper-input label="UF"></paper-input>
-                    <paper-input label="Telefone"></paper-input>
-                    <paper-input label="Celular"></paper-input>
+                    <paper-input label="Nome Completo" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
+                    <vaadin-combo-box label="Sexo"></vaadin-combo-box>
+                    <!--Opções: Feminino / Masculino -->
+
+                    <paper-input label="R.A." value="{{participante.ra}}" maxlength="50"></paper-input>
+                    <paper-input label="Data de Nascimento" type="date"
+                                 value="{{participante.dataDeNascimento}}"></paper-input>
+                    <paper-input label="NIS do Participante" value="{{participante.nis}}"></paper-input>
+                    <paper-input label="RG do Participante" value="{{participante.rg}}" maxlength="50"></paper-input>
+                    <paper-input label="Escola" maxlength="200"></paper-input>
+                    <vaadin-combo-box label="Período Escolar"></vaadin-combo-box>
+                    <!--Opções: Matutino / Vespertino / Noturno -->
+
+                    <br-cep-input></br-cep-input>
+                    <paper-input label="Rua" maxlength="500"></paper-input>
+                    <paper-input label="Número" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
+                    <paper-input label="Complemento" maxlength="500"></paper-input>
+                    <paper-input label="Bairro" maxlength="500"></paper-input>
+                    <vaadin-combo-box label="Estado"></vaadin-combo-box>
+                    <vaadin-combo-box label="Cidade"></vaadin-combo-box>
+                    <br-tel-input></br-tel-input>
+                    <br-cel-input></br-cel-input>
                 </section>
-
-
                 <section>
-                    <paper-input label="Nome do Responsável"></paper-input>
-                    <paper-input label="RG do Responsável"></paper-input>
-                    <paper-input label="CPF do Responsável"></paper-input>
-                    <paper-input label="Profissão do Responsável"></paper-input>
-                    <paper-input label="Local de Trabalho do Responsável"></paper-input>
+                    <paper-input label="Nome do Responsável" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
+                    <paper-input label="RG do Responsável" maxlength="30"></paper-input>
+                    <br-cpf-input label="CPF do Responsável"></br-cpf-input>
+                    <paper-input label="Profissão do Responsável" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
+                    <paper-input label="Local de Trabalho do Responsável" maxlength="200"></paper-input>
                     <paper-input label="Grau de instrução do Responsável"></paper-input>
-                    <paper-dropdown-menu label="Estado Cívil do Responsável">
-                        <paper-listbox class="dropdown-content">
-                            <paper-item>Solteiro(a)</paper-item>
-                            <paper-item>Casado(a)</paper-item>
-                            <paper-item>Separado(a)</paper-item>
-                            <paper-item>Divorciado(a)</paper-item>
-                            <paper-item>Viúvo(a)</paper-item>
-                        </paper-listbox>
-                    </paper-dropdown-menu>
-                    <paper-input label="Responsável Pela Guarda do Participante"></paper-input>
+                    <!--Ver se da para fazer o grau de instrução do responsável como combo-box -->
+
+                    <vaadin-combo-box label="Estado Cívil do Responsável"></vaadin-combo-box>
+                    <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
+
+                    <paper-input label="Responsável Pela Guarda do Participante" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
                     <gold-email-input auto-validate label="E-mail do Responsável"></gold-email-input>
-                    <paper-input label="A criança mora com quem?"></paper-input>
+                    <paper-input label="A criança mora com quem?" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
 
                     <br><label>Tem irmãos?</label>
                     <paper-radio-group selected="nao">
@@ -114,56 +72,55 @@
                     </paper-radio-group>
 
                     <span hidden="{{!possuiIrmaos}}">
-                        <paper-input label="Quantidade de Irmãos" type="number" min="0" max="20"></paper-input>
-                        <paper-input label="Idade?"></paper-input>
+                    <paper-input label="Quantidade de Irmãos" type="number" min="0" max="20" maxlength="2"></paper-input>
+                        <paper-input label="Idade?" maxlength="2"></paper-input>
                     </span>
 
-                        <br><label>Possui deficiencia?</label>
-                        <paper-radio-group selected="nao">
-                            <paper-radio-button name="nao">Não</paper-radio-button>
-                            <paper-radio-button name="sim" checked="{{possuiDeficiencia}}">Sim</paper-radio-button>
-                        </paper-radio-group>
+                    <br><label>Possui deficiencia?</label>
+                    <paper-radio-group selected="nao">
+                        <paper-radio-button name="nao">Não</paper-radio-button>
+                        <paper-radio-button name="sim" checked="{{possuiDeficiencia}}">Sim</paper-radio-button>
+                    </paper-radio-group>
 
                     <span hidden="{{!possuiDeficiencia}}">
-                        <paper-input label="Qual?"></paper-input>
+                        <paper-input label="Qual?" maxlength="500"></paper-input>
                     </span>
 
 
-                        <br><label>Fez ou faz algum tratamento?</label>
-                        <paper-radio-group selected="nao">
-                            <paper-radio-button name="nao">Não</paper-radio-button>
-                            <paper-radio-button name="sim" checked="{{tratamento}}">Sim</paper-radio-button>
-                        </paper-radio-group>
+                    <br><label>Fez ou faz algum tratamento?</label>
+                    <paper-radio-group selected="nao">
+                        <paper-radio-button name="nao">Não</paper-radio-button>
+                        <paper-radio-button name="sim" checked="{{tratamento}}">Sim</paper-radio-button>
+                    </paper-radio-group>
 
                     <span hidden="{{!tratamento}}">
-                        <paper-input label="Qual?"></paper-input>
+                        <paper-input label="Qual?" maxlength="500"></paper-input>
                     </span>
 
-                        <br><label>Tem alergia?</label>
-                        <paper-radio-group selected="nao">
-                            <paper-radio-button name="nao">Não</paper-radio-button>
-                            <paper-radio-button name="sim" checked="{{possuiAlergia}}">Sim</paper-radio-button>
-                        </paper-radio-group>
+                    <br><label>Tem alergia?</label>
+                    <paper-radio-group selected="nao">
+                        <paper-radio-button name="nao">Não</paper-radio-button>
+                        <paper-radio-button name="sim" checked="{{possuiAlergia}}">Sim</paper-radio-button>
+                    </paper-radio-group>
 
                     <span hidden="{{!possuiAlergia}}">
-                        <paper-input label="Qual?"></paper-input>
+                        <paper-input label="Qual?" maxlength="500"></paper-input>
                     </span>
 
-                        <br><label>Possui alguma outra restrição?</label>
-                        <paper-radio-group selected="nao">
-                            <paper-radio-button name="nao">Não</paper-radio-button>
-                            <paper-radio-button name="sim" checked="{{possuiRestricao}}">Sim</paper-radio-button>
-                        </paper-radio-group>
+                    <br><label>Possui alguma outra restrição?</label>
+                    <paper-radio-group selected="nao">
+                        <paper-radio-button name="nao">Não</paper-radio-button>
+                        <paper-radio-button name="sim" checked="{{possuiRestricao}}">Sim</paper-radio-button>
+                    </paper-radio-group>
 
                     <span hidden="{{!possuiRestricao}}">
-                        <paper-input label="Qual?"></paper-input>
+                        <paper-input label="Qual?" maxlength="500"></paper-input>
                     </span>
                 </section>
             </div>
-
             <div class="card-actions">
-                <paper-button autofocus>Confirmar</paper-button>
-                <paper-button>Cancelar</paper-button>
+                <paper-button>Editar</paper-button>
+                <paper-button>Excluir</paper-button>
             </div>
         </paper-card>
     </template>

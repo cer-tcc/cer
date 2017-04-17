@@ -1,31 +1,16 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
-<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
-<link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
-<dom-module id="cer-mensagens">
+<dom-module id="cer-painel">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
-            :host {
-                display: block;
-                padding: 23px;
-            }
-
-            paper-fab {
-                --paper-fab-background: var(--paper-indigo-900);
-                position: fixed;
-                right: 40px;
-                bottom: 40px;
-                z-index: 1000;
-            }
-
             #notes {
-                @apply(--layout-vertical);
-                @apply(--layout-wrap);
+                @apply --layout-vertical;
+                @apply --layout-wrap;
+                
                 height: 344px;
                 width: 384px;
             }
@@ -69,7 +54,7 @@
 
     <script>
         Polymer({
-            is: 'cer-mensagens'
+            is: 'cer-painel'
         });
     </script>
 </dom-module>

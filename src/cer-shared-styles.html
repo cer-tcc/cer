@@ -1,0 +1,76 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="cer-shared-styles">
+    <template>
+        <style>
+            :host {
+                display: block;
+                padding: 35px;
+            }
+
+            paper-card {
+                width: 100%;
+                padding: 10px;
+
+                /*Heading do Paper Card*/
+                --paper-card-header-text: {
+                    font-size: 17pt;
+                };
+            }
+
+            paper-dropdown-menu{
+                width: 100%;
+            }
+
+            /* Botão para adicionar */
+            paper-fab {
+                --paper-fab-background: var(--paper-blue-grey-700);
+                position: fixed;
+                right: 40px;
+                bottom: 40px;
+                z-index: 1000;
+            }
+
+            .grid {
+                @apply(--layout-horizontal);
+            }
+
+            .grid > section {
+                @apply(--layout-flex);
+            }
+
+            .grid > section:not(:first-child) {
+                margin-left: 40px;
+            }
+
+            @media (max-width: 767px) {
+                .grid {
+                    display: block;
+                    margin-top: 0;
+                }
+
+                .grid > section:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
+
+            @media screen and (max-width: 767px) and (min-width: 300px)  {
+                paper-card {
+                    /*Heading do Paper Card*/
+                    --paper-card-header-text: {
+                        font-size: 10pt;
+                    };
+                }
+            }
+
+            @media screen and (max-width: 1040px) and (min-width: 768px) {
+                paper-card {
+                    /*Heading do Paper Card*/
+                    --paper-card-header-text: {
+                        font-size: 14pt;
+                    };
+                }
+            }
+        </style>
+    </template>
+</dom-module>

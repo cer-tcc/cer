@@ -1,72 +1,36 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/br-elements/br-elements.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
-<link rel="import" href="../bower_components/gold-zip-input/gold-zip-input.html">
 
 <dom-module id="cer-criartriagem">
     <template>
         <style include="iron-flex iron-positioning paper-styles">
-            :host {
-                display: block;
-                padding: 23px;
-            }
-
-            paper-card {
-                width: 100%;
-            }
-
-            .grid {
-                @apply(--layout-horizontal);
-            }
-
-            .grid > section {
-                @apply(--layout-flex);
-            }
-
-            .grid > section:not(:first-child) {
-                margin-left: 20px;
-            }
-
-            @media (max-width: 767px) {
-                .grid {
-                    display: block;
-                    margin-top: 0;
-                }
-
-                .grid > section:not(:first-child) {
-                    margin-left: 0;
-                }
-            }
         </style>
 
         <paper-card heading="Ficha de Triagem">
             <div class="card-content grid">
                 <section>
-                    <paper-input label="Nome do Participante"></paper-input>
+                    <paper-input label="Nome Completo" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
                     <paper-input label="Data de Nascimento" type="date"></paper-input>
-                    <paper-input label="Escola"></paper-input>
-                    <paper-dropdown-menu label="Período Escolar">
-                        <paper-listbox class="dropdown-content">
-                            <paper-item>Matutino</paper-item>
-                            <paper-item>Vespertino</paper-item>
-                            <paper-item>Noturno</paper-item>
-                        </paper-listbox>
-                    </paper-dropdown-menu>
-                    <paper-input label="Nome do Responsável"></paper-input>
-                    <paper-input label="Telefone"></paper-input>
-                    <paper-input label="Celular"></paper-input><br>
+                    <paper-input label="Escola" maxlength="200"></paper-input>
+                    <vaadin-combo-box label="Período Escolar"></vaadin-combo-box>
+                    <!--Opções: Matutino / Vespertino / Noturno -->
+
+                    <paper-input label="Nome do Responsável" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
+                    <br-tel-input></br-tel-input>
+                    <br-cel-input></br-cel-input>
                 </section>
                 <section>
-                    <gold-zip-input label="CEP"></gold-zip-input>
-                    <paper-input label="Rua"></paper-input>
-                    <paper-input label="Número"></paper-input>
-                    <paper-input label="Complemento"></paper-input>
-                    <paper-input label="Bairro"></paper-input>
-                    <paper-input label="Cidade"></paper-input>
-                    <paper-input label="UF"></paper-input>
+                    <br-cep-input></br-cep-input>
+                    <paper-input label="Rua" maxlength="500"></paper-input>
+                    <paper-input label="Número" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
+                    <paper-input label="Complemento" maxlength="500"></paper-input>
+                    <paper-input label="Bairro" maxlength="500"></paper-input>
+                    <vaadin-combo-box label="Estado"></vaadin-combo-box>
+                    <vaadin-combo-box label="Cidade"></vaadin-combo-box>
                 </section>
             </div>
 
