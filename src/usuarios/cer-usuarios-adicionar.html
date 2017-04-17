@@ -1,50 +1,62 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
-<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
-<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
+<link rel="import" href="../../bower_components/polymerfire/polymerfire.html">
+<link rel="import" href="../cer-shared-styles.html">
 
 <dom-module id="cer-usuarios-adicionar">
     <template>
-        <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
-        </style>
+        <style include="cer-shared-styles"></style>
 
-        <paper-card heading="Cadastro de Usuário">
-            <div class="card-content grid">
-                <section>
-                    <vaadin-combo-box label="Funcionário"></vaadin-combo-box>
-                    <vaadin-combo-box label="Função"></vaadin-combo-box>
-                    <gold-email-input label="E-mail" auto-validate maxlength="200"></gold-email-input>
-                </section>
-                <section>
-                    <paper-input label="Login" maxlength="30"></paper-input>
-                    <paper-input label="Senha" type="password" maxlength="30"></paper-input>
-                    <!--Campo novo-->
-                    <paper-input label="Confirmar Senha" type="password" maxlength="30"></paper-input>
-                </section>
-            </div>
+        <firebase-query
+            log
+            id="query"
+            path="/usuarios"
+            data="{{_usuarios}}">
+        </firebase-query>
 
-            <div class="card-actions">
-                <paper-button autofocus>Confirmar</paper-button>
-                <a href="/usuarios/listar">
-                    <paper-button>Cancelar</paper-button>
-                </a>
-            </div>
-        </paper-card>
+        <form id="form" is="iron-form" on-iron-form-presubmit="_onSubmit">
+            <paper-card heading="Adicionar usuário">
+                <div class="card-content grid">
+                    <section>
+                        <paper-input label="Nome" name="nome" required></paper-input>
+                        <paper-input label="Sobrenome" name="sobrenome" required></paper-input>
+                        <gold-email-input label="E-mail" name="email" required auto-validate></gold-email-input>
+                    </section>
+
+                    <section>
+                        <paper-input label="Senha" name="senha" type="password" required></paper-input>
+                        <paper-input label="Confirmar Senha" name="confirmarSenha" type="password" required></paper-input>
+                    </section>
+                </div>
+
+                <div class="card-actions">
+                    <paper-button type="submit" autofocus on-tap="_submit">Adicionar</paper-button>
+                    <a href="/usuarios/listar">
+                        <paper-button>Cancelar</paper-button>
+                    </a>
+                </div>
+            </paper-card>
+        </form>
     </template>
 
     <script>
         Polymer({
             is: 'cer-usuarios-adicionar',
-            properties: {
-                _users: {
-                    type: Array,
-                    value: function() {
-                        return [];
-                    }
-                }
+
+            _submit: function () {
+                this.$.form.submit();
+            },
+
+            _onSubmit: function (event) {
+                event.preventDefault();
+
+                var usuario = event.target.serialize();
+
+                this.$.query.ref.push(usuario).then(() => {
+                    window.location = '/usuarios/listar';
+                });
             }
         });
     </script>

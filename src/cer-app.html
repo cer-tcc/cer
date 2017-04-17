@@ -17,6 +17,7 @@
 <link rel="import" href="../bower_components/iron-icons/notification-icons.html">
 <link rel="import" href="../bower_components/iron-icons/communication-icons.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 
 <dom-module id="cer-app">
     <template>
@@ -81,6 +82,12 @@
                 --paper-badge-background: var(--paper-light-blue-300);
             }
         </style>
+
+        <firebase-app
+            auth-domain="cer-app-a5f10.firebaseapp.com"
+            database-url="https://cer-app-a5f10.firebaseio.com/"
+            api-key="AIzaSyDXX4CZ1gw8qdnhjOG_I_JrTKAaCiIllwg">
+        </firebase-app>
 
         <app-location route="{{route}}"></app-location>
 

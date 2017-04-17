@@ -1,48 +1,70 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
-<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
-<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../cer-shared-styles.html">
 
 <dom-module id="cer-usuarios-editar">
     <template>
-        <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
-        </style>
+        <style include="cer-shared-styles"></style>
 
-        <paper-card heading="Editar Usuário">
-            <div class="card-content grid">
-                <section>
-                    <vaadin-combo-box label="Funcionário"></vaadin-combo-box>
-                    <vaadin-combo-box label="Função"></vaadin-combo-box>
-                    <gold-email-input label="E-mail" auto-validate maxlength="200"></gold-email-input>
-                </section>
-                <section>
-                    <paper-input label="Login" maxlength="30"></paper-input>
-                    <paper-input label="Senha" type="password"></paper-input>
-                    <!--Campo novo-->
-                    <paper-input label="Confirmar Senha" type="password" maxlength="30"></paper-input>
-                </section>
-            </div>
+        <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
 
-            <div class="card-actions">
-                <paper-button autofocus>Confirmar</paper-button>
-                <paper-button>Cancelar</paper-button>
-            </div>
-        </paper-card>
+        <firebase-document id="document" path="/usuarios/[[_routeData.id]]" data="{{_usuario}}"></firebase-document>
+
+        <form id="form" is="iron-form" on-iron-form-presubmit="_onSubmit">
+            <paper-card heading="Editar usuário">
+                <div class="card-content grid">
+                    <section>
+                        <paper-input label="Nome" name="nome" value="[[_usuario.nome]]" required></paper-input>
+                        <paper-input label="Sobrenome" name="sobrenome" value="[[_usuario.sobrenome]]" required></paper-input>
+                        <gold-email-input label="E-mail" name="email" value="[[_usuario.email]]" required auto-validate></gold-email-input>
+                    </section>
+
+                    <section>
+                        <paper-input label="Senha" name="senha" type="password"></paper-input>
+                        <paper-input label="Confirmar Senha" name="confirmarSenha" type="password"></paper-input>
+                    </section>
+                </div>
+
+                <div class="card-actions">
+                    <paper-button class="delete" on-tap="_excluir">Excluir</paper-button>
+
+                    <paper-button autofocus on-tap="_submit">Salvar</paper-button>
+
+                    <a href="/usuarios/listar">
+                        <paper-button>Cancelar</paper-button>
+                    </a>
+                </div>
+            </paper-card>
+        </form>
     </template>
 
     <script>
         Polymer({
             is: 'cer-usuarios-editar',
-            properties: {
-                _users: {
-                    type: Array,
-                    value: function() {
-                        return [];
-                    }
-                }
+
+            _excluir: function () {
+                this._usuario = null;
+
+                this.$.document.transactionsComplete.then(() => {
+                    window.location = '/usuarios/listar';
+                });
+            },
+
+            _submit: function () {
+                this.$.form.submit();
+            },
+
+            _onSubmit: function (event) {
+                event.preventDefault();
+
+                this._usuario = event.target.serialize();
+
+                this.$.document.transactionsComplete.then(() => {
+                    window.location = '/usuarios/listar';
+                });
             }
         });
     </script>
