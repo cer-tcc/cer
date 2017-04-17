@@ -16,8 +16,9 @@
         </style>
 
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
+
         <iron-ajax auto url="/../data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
-        
+
         <paper-card heading="Usuários">
             <vaadin-grid id="grid" class="flex" items="{{_users}}" on-selected-items-changed="_select">
                 <table>
@@ -29,7 +30,7 @@
                 </table>
             </vaadin-grid>
         </paper-card>
-        
+
         <a href="/usuarios/adicionar">
             <paper-fab icon="add"></paper-fab>
         </a>
@@ -44,7 +45,7 @@
 
                 if (selected.length == 1) {
                     console.log(selected);
-                    this.path = '/usuarios/visualizar/' + selected[0];
+                    window.location = '/usuarios/visualizar/' + selected[0];
                 }
             }
         });
