@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="cer-triagem">
+    <template>
+        <app-route route="{{route}}" pattern="/triagem/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+        <iron-pages selected="[[_page]]" attr-for-selected="name">
+            <cer-triagem-listar name="listar" route="[[subroute]]"></cer-triagem-listar>
+            <cer-triagem-visualizar name="visualizar" route="[[subroute]]"></cer-triagem-visualizar>
+            <cer-triagem-adicionar name="adicionar"></cer-triagem-adicionar>
+        </iron-pages>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-triagem',
+            
+            properties: {
+                route: Object,
+                _page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                }
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+
+            _routePageChanged: function (page) {
+                this._page = page || 'listar';
+            },
+
+            _pageChanged: function (page) {
+                var resolvedPageUrl = this.resolveUrl('cer-triagem-' + page + '.html');
+
+                this.importHref(resolvedPageUrl, null, null, true);
+            }
+        });
+    </script>
+</dom-module>

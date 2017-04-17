@@ -1,64 +1,66 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/br-elements/br-elements.html">
-<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../../bower_components/br-elements/br-elements.html">
+<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
 
-<dom-module id="cer-participante">
+<dom-module id="cer-participantes-adicionar">
     <template>
-        <style include="iron-flex iron-positioning paper-styles">
+        <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
         </style>
 
-        <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
-
-        <iron-ajax auto url="/data/participantes.json" handle-as="json" last-response="{{_participantes}}"></iron-ajax>
-
-        <paper-card heading="{{participante.nome}}">
+        <paper-card heading="Matrícula de Participante">
             <div class="card-content grid">
                 <section>
                     <label>Status</label>
                     <paper-radio-group selected="ativo">
                         <paper-radio-button name="ativo">Ativo</paper-radio-button>
                         <paper-radio-button name="inativo">Inativo</paper-radio-button>
-                    </paper-radio-group><br>
+                    </paper-radio-group>
+
+                    <paper-input label="Nome Completo" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
                     <vaadin-combo-box label="Sexo"></vaadin-combo-box>
                     <!--Opções: Feminino / Masculino -->
 
-                    <paper-input label="R.A." value="{{participante.ra}}"></paper-input>
+                    <paper-input label="R.A." value="{{participante.ra}}" maxlength="50"></paper-input>
                     <paper-input label="Data de Nascimento" type="date"
                                  value="{{participante.dataDeNascimento}}"></paper-input>
                     <paper-input label="NIS do Participante" value="{{participante.nis}}"></paper-input>
-                    <paper-input label="RG do Participante" value="{{participante.rg}}"></paper-input>
-                    <paper-input label="Escola"></paper-input>
+                    <paper-input label="RG do Participante" value="{{participante.rg}}" maxlength="50"></paper-input>
+                    <paper-input label="Escola" maxlength="200"></paper-input>
                     <vaadin-combo-box label="Período Escolar"></vaadin-combo-box>
                     <!--Opções: Matutino / Vespertino / Noturno -->
 
                     <br-cep-input></br-cep-input>
-                    <paper-input label="Rua"></paper-input>
-                    <paper-input label="Número"></paper-input>
-                    <paper-input label="Complemento"></paper-input>
-                    <paper-input label="Bairro"></paper-input>
+                    <paper-input label="Rua" maxlength="500"></paper-input>
+                    <paper-input label="Número" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
+                    <paper-input label="Complemento" maxlength="500"></paper-input>
+                    <paper-input label="Bairro" maxlength="500"></paper-input>
                     <vaadin-combo-box label="Estado"></vaadin-combo-box>
                     <vaadin-combo-box label="Cidade"></vaadin-combo-box>
                     <br-tel-input></br-tel-input>
                     <br-cel-input></br-cel-input>
                 </section>
                 <section>
-                    <paper-input label="Nome do Responsável"></paper-input>
-                    <paper-input label="RG do Responsável"></paper-input>
+                    <paper-input label="Nome do Responsável" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
+                    <paper-input label="RG do Responsável" maxlength="30"></paper-input>
                     <br-cpf-input label="CPF do Responsável"></br-cpf-input>
-                    <paper-input label="Profissão do Responsável"></paper-input>
-                    <paper-input label="Local de Trabalho do Responsável"></paper-input>
+                    <paper-input label="Profissão do Responsável" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
+                    <paper-input label="Local de Trabalho do Responsável" maxlength="200"></paper-input>
                     <paper-input label="Grau de instrução do Responsável"></paper-input>
+                    <!--Ver se da para fazer o grau de instrução do responsável como combo-box -->
+
                     <vaadin-combo-box label="Estado Cívil do Responsável"></vaadin-combo-box>
                     <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
 
-                    <paper-input label="Responsável Pela Guarda do Participante"></paper-input>
+                    <paper-input label="Responsável Pela Guarda do Participante" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
                     <gold-email-input auto-validate label="E-mail do Responsável"></gold-email-input>
-                    <paper-input label="A criança mora com quem?"></paper-input>
+                    <paper-input label="A criança mora com quem?" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
 
                     <br><label>Tem irmãos?</label>
                     <paper-radio-group selected="nao">
@@ -78,7 +80,7 @@
                     </paper-radio-group>
 
                     <span hidden="{{!possuiDeficiencia}}">
-                        <paper-input label="Qual?"></paper-input>
+                        <paper-input label="Qual?" maxlength="500"></paper-input>
                     </span>
 
 
@@ -89,7 +91,7 @@
                     </paper-radio-group>
 
                     <span hidden="{{!tratamento}}">
-                        <paper-input label="Qual?"></paper-input>
+                        <paper-input label="Qual?" maxlength="500"></paper-input>
                     </span>
 
                     <br><label>Tem alergia?</label>
@@ -99,7 +101,7 @@
                     </paper-radio-group>
 
                     <span hidden="{{!possuiAlergia}}">
-                        <paper-input label="Qual?"></paper-input>
+                        <paper-input label="Qual?" maxlength="500"></paper-input>
                     </span>
 
                     <br><label>Possui alguma outra restrição?</label>
@@ -109,30 +111,30 @@
                     </paper-radio-group>
 
                     <span hidden="{{!possuiRestricao}}">
-                        <paper-input label="Qual?"></paper-input>
+                        <paper-input label="Qual?" maxlength="500"></paper-input>
                     </span>
                 </section>
             </div>
+
             <div class="card-actions">
-                <paper-button>Editar</paper-button>
-                <paper-button>Excluir</paper-button>
+                <paper-button autofocus>Confirmar</paper-button>
+                <a href="/participantes/listar">
+                    <paper-button>Cancelar</paper-button>
+                </a>
             </div>
         </paper-card>
     </template>
 
     <script>
         Polymer({
-            is: 'cer-participante',
+            is: 'cer-participantes-adicionar',
             properties: {
-                route: Object,
-                participante: {
-                    type: Object,
-                    computed: 'getItem(_participantes, _routeData.id)'
+                _participantes: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
                 }
-            },
-
-            getItem: function (items, id) {
-                return items[id];
             }
         });
     </script>

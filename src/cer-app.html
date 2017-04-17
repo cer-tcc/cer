@@ -46,7 +46,7 @@
             }
 
             .logo {
-                width: 70px;
+                width: 75px;
             }
 
             .drawer-list {
@@ -111,25 +111,25 @@
                         <a name="painel" href="/painel/mensagens">
                             <iron-icon icon="home"></iron-icon>
                             Painel</a>
-                        <a name="participantes" href="/participantes">
+                        <a name="participantes" href="/participantes/listar">
                             <iron-icon icon="face"></iron-icon>
                             Participantes</a>
-                        <a name="frequencia" href="/frequencia">
+                        <a name="frequencia" href="/frequencia/listar">
                             <iron-icon icon="notification:event-note"></iron-icon>
                             Controle de Frequência</a>
                         <a name="eventos" href="/eventos">
                             <iron-icon icon="event"></iron-icon>
                             Eventos</a>
-                        <a name="funcionarios" href="/funcionarios">
+                        <a name="funcionarios" href="/funcionarios/listar">
                             <iron-icon icon="icons:work"></iron-icon>
                             Funcionários</a>
-                        <a name="voluntarios" href="/voluntarios">
+                        <a name="voluntarios" href="/voluntarios/listar">
                             <iron-icon icon="icons:favorite-border"></iron-icon>
                             Voluntários</a>
-                        <a name="fornecedores" href="/fornecedores">
+                        <a name="fornecedores" href="/fornecedores/listar">
                             <iron-icon icon="maps:local-shipping"></iron-icon>
                             Fornecedores</a>
-                        <a name="fichaDeTriagem" href="/fichaDeTriagem">
+                        <a name="fichaDeTriagem" href="/triagem/listar">
                             <iron-icon icon="editor:format-align-justify"></iron-icon>
                             Ficha de Triagem</a>
                         <a name="estoque" href="/estoque">
@@ -146,7 +146,14 @@
 
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
                     <cer-painel name="painel"></cer-painel>
+                    <cer-eventos name="eventos" route="[[route]]"></cer-eventos>
+                    <cer-fornecedores name="fornecedores" route="[[route]]"></cer-fornecedores>
+                    <cer-frequencia name="frequencia" route="[[route]]"></cer-frequencia>
+                    <cer-funcionarios name="funcionarios" route="[[route]]"></cer-funcionarios>
+                    <cer-participantes name="participantes" route="[[route]]"></cer-participantes>
+                    <cer-triagem name="triagem" route="[[route]]"></cer-triagem>
                     <cer-usuarios name="usuarios" route="[[route]]"></cer-usuarios>
+                    <cer-voluntarios name="voluntarios" route="[[route]]"></cer-voluntarios>
                     <cer-404 name="404"></cer-404>
                 </iron-pages>
             </app-drawer-layout>

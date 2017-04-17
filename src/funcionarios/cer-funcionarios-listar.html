@@ -6,22 +6,23 @@
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../cer-shared-styles.html"> <!--Style-->
 
-<dom-module id="cer-usuarios-listar">
+<dom-module id="cer-funcionarios-listar">
     <template>
         <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
             paper-card{
-                padding: 0;
+                padding: 0px;
             }
         </style>
 
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
-        <iron-ajax auto url="/../data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
+        <iron-ajax auto url="/../data/funcionarios.json" handle-as="json" last-response="{{_funcionarios}}"></iron-ajax>
 
-        <paper-card heading="Usuários">
-            <vaadin-grid id="grid" class="flex" items="{{_users}}" on-selected-items-changed="_select">
+        <paper-card heading="Funcionários">
+            <vaadin-grid id="grid" class="flex" items="{{_funcionarios}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
                         <col name="nome">
+                        <col name="telefone">
                         <col name="função">
                         <col name="email">
                     </colgroup>
@@ -29,20 +30,20 @@
             </vaadin-grid>
         </paper-card>
 
-        <a href="/usuarios/adicionar">
+        <a href="/funcionarios/adicionar">
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
 
     <script>
         Polymer({
-            is: 'cer-usuarios-listar',
+            is: 'cer-funcionarios-listar',
 
             _select: function () {
                 var selected = this.$.grid.selection.selected();
 
                 if (selected.length == 1) {
-                    window.location = '/usuarios/visualizar/' + selected[0];
+                    window.location = '/funcionarios/visualizar/' + selected[0];
                 }
             }
         });

@@ -1,0 +1,61 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../../bower_components/br-elements/br-elements.html">
+<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
+
+<dom-module id="cer-fornecedores-adicionar">
+    <template>
+        <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
+        </style>
+
+        <paper-card heading="Cadastro de Fornecedor">
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Nome Fantasia" maxlength="200"></paper-input>
+                    <paper-input label="Razão Social" maxlength="200"></paper-input>
+                    <br-cnpj-input></br-cnpj-input>
+                    <paper-input label="Inscrição Estadual" maxlength="100"></paper-input>
+                    <gold-email-input auto-validate label="E-mail"></gold-email-input>
+                    <paper-input label="Descrição do Fornecedor" maxlength="500"></paper-input>
+                    <br-tel-input></br-tel-input>
+                    <br-cel-input></br-cel-input>
+                </section>
+
+                <section>
+                    <br-cep-input></br-cep-input>
+                    <paper-input label="Rua" maxlength="500"></paper-input>
+                    <paper-input label="Número" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
+                    <paper-input label="Complemento" maxlength="500"></paper-input>
+                    <paper-input label="Bairro" maxlength="500"></paper-input>
+                    <vaadin-combo-box label="Estado"></vaadin-combo-box>
+                    <vaadin-combo-box label="Cidade"></vaadin-combo-box>
+                </section>
+            </div>  
+
+            <div class="card-actions">
+                <paper-button autofocus>Confirmar</paper-button>
+                <a href="/fornecedores/listar">
+                    <paper-button>Cancelar</paper-button>
+                </a>
+            </div>
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-fornecedores-adicionar',
+            properties: {
+                _users: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>

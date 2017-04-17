@@ -3,10 +3,11 @@
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
 
 <dom-module id="cer-painel">
     <template>
-        <style include="iron-flex iron-positioning paper-styles">
+        <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
             #notes {
                 @apply --layout-vertical;
                 @apply --layout-wrap;
@@ -24,22 +25,22 @@
         </style>
 
         <div id="notes">
-            <paper-card style="background-color: orangered" heading="Ligar para o responsável pelo participate: Patricia Pereira dos Santos" class="cyan">
+            <paper-card style="background-color: #AFEADC" heading="Ligar para o responsável pelo participate: Patricia Pereira dos Santos" class="cyan">
                 <div class="card-actions">
                     <span>ALERTA: Participante próximo ao limite de faltas</span>
                 </div>
             </paper-card>
-            <paper-card style="background-color: yellow" heading="Porco no Rolete" class="cyan">
+            <paper-card style="background-color: #008CCA" heading="Porco no Rolete" class="cyan">
                 <div class="card-actions">
                     <span>Domingo, 18 de dezembro de 2017</span>
                 </div>
             </paper-card>
-            <paper-card style="background-color: darkorange" heading="Noite Italiana" class="cyan">
+            <paper-card style="background-color: #F4F5F0" heading="Noite Italiana" class="cyan">
                 <div class="card-actions">
                     <span>Sábado, 28 de janeiro de 2017</span>
                 </div>
             </paper-card>
-            <paper-card style="background-color: green" heading="Noite Mexicana" class="cyan">
+            <paper-card style="background-color: #9E8BBA" heading="Noite Mexicana" class="cyan">
                 <div class="card-actions">
                     <span>Sábado, 9 de setembro de 2017</span>
                 </div>

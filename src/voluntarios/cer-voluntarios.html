@@ -1,0 +1,45 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="cer-voluntarios">
+    <template>
+        <app-route route="{{route}}" pattern="/voluntarios/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+        <iron-pages selected="[[_page]]" attr-for-selected="name">
+            <cer-voluntarios-listar name="listar" route="[[subroute]]"></cer-voluntarios-listar>
+            <cer-voluntarios-visualizar name="visualizar" route="[[subroute]]"></cer-voluntarios-visualizar>
+            <cer-voluntarios-adicionar name="adicionar"></cer-voluntarios-adicionar>
+            <cer-voluntarios-editar name="editar" route="[[subroute]]"></cer-voluntarios-editar>
+        </iron-pages>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-voluntarios',
+            
+            properties: {
+                route: Object,
+                _page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                }
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+
+            _routePageChanged: function (page) {
+                this._page = page || 'listar';
+            },
+
+            _pageChanged: function (page) {
+                var resolvedPageUrl = this.resolveUrl('cer-voluntarios-' + page + '.html');
+
+                this.importHref(resolvedPageUrl, null, null, true);
+            }
+        });
+    </script>
+</dom-module>

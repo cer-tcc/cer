@@ -1,17 +1,18 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
-<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
-<link rel="import" href="../bower_components/br-elements/br-elements.html">
-<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../../bower_components/br-elements/br-elements.html">
+<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
 
-<dom-module id="cer-criarfornecedor">
+<dom-module id="cer-fornecedores-editar">
     <template>
-        <style include="iron-flex iron-positioning paper-styles">
+        <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
         </style>
 
-        <paper-card heading="Cadastro de Fornecedor">
+        <paper-card heading="Editar Fornecedor">
             <div class="card-content grid">
                 <section>
                     <paper-input label="Nome Fantasia" maxlength="200"></paper-input>
@@ -37,14 +38,16 @@
 
             <div class="card-actions">
                 <paper-button autofocus>Confirmar</paper-button>
-                <paper-button>Cancelar</paper-button>
+                <a href="/fornecedores/listar">
+                    <paper-button>Cancelar</paper-button>
+                </a>
             </div>
         </paper-card>
     </template>
 
     <script>
         Polymer({
-            is: 'cer-criarfornecedor',
+            is: 'cer-fornecedores-editar',
             properties: {
                 _users: {
                     type: Array,

@@ -6,7 +6,7 @@
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../cer-shared-styles.html"> <!--Style-->
 
-<dom-module id="cer-usuarios-listar">
+<dom-module id="cer-fornecedores-listar">
     <template>
         <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
             paper-card{
@@ -15,34 +15,35 @@
         </style>
 
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
-        <iron-ajax auto url="/../data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
+        <iron-ajax auto url="/../data/fornecedores.json" handle-as="json" last-response="{{_fornecedores}}"></iron-ajax>
 
-        <paper-card heading="Usuários">
-            <vaadin-grid id="grid" class="flex" items="{{_users}}" on-selected-items-changed="_select">
+        <paper-card heading="Fornecedores">
+            <vaadin-grid id="grid" class="flex" items="{{_fornecedores}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
-                        <col name="nome">
-                        <col name="função">
+                        <col name="nomeFantasia">
+                        <col name="tipo">
+                        <col name="telefone">
                         <col name="email">
                     </colgroup>
                 </table>
             </vaadin-grid>
         </paper-card>
 
-        <a href="/usuarios/adicionar">
+        <a href="/fornecedores/adicionar">
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
 
     <script>
         Polymer({
-            is: 'cer-usuarios-listar',
+            is: 'cer-fornecedores-listar',
 
             _select: function () {
                 var selected = this.$.grid.selection.selected();
 
                 if (selected.length == 1) {
-                    window.location = '/usuarios/visualizar/' + selected[0];
+                    window.location = '/fornecedores/visualizar/' + selected[0];
                 }
             }
         });

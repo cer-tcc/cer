@@ -4,7 +4,6 @@
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
 <link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
-
 <link rel="import" href="../cer-shared-styles.html"> <!--Style-->
 
 <dom-module id="cer-usuarios-visualizar">
@@ -13,7 +12,6 @@
         </style>
 
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
-
         <iron-ajax auto url="/data/users.json" handle-as="json" last-response="{{_users}}"></iron-ajax>
 
         <paper-card heading="{{usuario.nome}}">

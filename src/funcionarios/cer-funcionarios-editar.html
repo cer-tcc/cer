@@ -1,0 +1,70 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../../bower_components/br-elements/br-elements.html">
+<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
+
+<dom-module id="cer-funcionarios-editar">
+    <template>
+        <style include="cer-shared-styles iron-flex iron-positioning paper-styles">
+        </style>
+
+        <paper-card heading="Editar Funcionário">
+            <div class="card-content grid">
+                <section>
+                    <paper-input label="Nome Completo" allowed-pattern="[A-Za-z\-]" maxlength="200"></paper-input>
+                    <paper-input label="Data de Nascimento" type="date"></paper-input>
+                    <br-cpf-input></br-cpf-input>
+                    <paper-input label="RG" maxlength="30"></paper-input>
+                    <vaadin-combo-box label="Estado Cívil"></vaadin-combo-box>
+                    <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
+
+                    <vaadin-combo-box label="Sexo"></vaadin-combo-box>
+                    <!--Opções: Feminino / Masculino -->
+
+                    <br-cep-input></br-cep-input>
+                    <paper-input label="Rua" maxlength="500"></paper-input>
+                    <paper-input label="Número" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
+                    <paper-input label="Complemento" maxlength="500"></paper-input>
+                </section>
+
+                <section>
+                    <paper-input label="Formação" allowed-pattern="[A-Za-z\-]"></paper-input>
+                    <vaadin-combo-box label="Função"></vaadin-combo-box>
+                    <br-tel-input></br-tel-input>
+                    <br-cel-input></br-cel-input>
+                    <gold-email-input auto-validate label="E-mail"></gold-email-input>
+                    <paper-input label="Data da Admissão" type="date"></paper-input>
+
+                    <paper-input label="Bairro" maxlength="500"></paper-input>
+                    <vaadin-combo-box label="Estado"></vaadin-combo-box>
+                    <vaadin-combo-box label="Cidade"></vaadin-combo-box>
+                </section>
+            </div>
+
+            <div class="card-actions">
+                <paper-button autofocus>Confirmar</paper-button>
+                <a href="/funcionarios/listar">
+                    <paper-button>Cancelar</paper-button>
+                </a>
+            </div>
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-funcionarios-editar',
+            properties: {
+                _funcionarios: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>
