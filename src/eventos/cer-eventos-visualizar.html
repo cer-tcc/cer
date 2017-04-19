@@ -1,17 +1,17 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animatable.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="cer-evento-resumo.html">
-<link rel="import" href="cer-evento-convites.html">
-<link rel="import" href="cer-evento-financeiro.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
+<link rel="import" href="cer-eventos-resumo.html">
+<link rel="import" href="cer-eventos-convites-listar.html">
+<link rel="import" href="cer-eventos-controle-financeiro.html">
+<link rel="import" href="../cer-shared-styles.html">
 
-<dom-module id="cer-evento">
+<dom-module id="cer-eventos-visualizar">
     <template>
-        <style include="iron-flex iron-positioning paper-styles">
+        <style include="cer-shared-styles">
             paper-tabs {
                 background-color: var(--paper-blue-grey-500);
                 color: #fff;
@@ -36,22 +36,22 @@
 
         <neon-animated-pages class="flex" selected="[[_selectedTab]]" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
             <neon-animatable>
-                <cer-evento-resumo evento="[[_evento]]"></cer-evento-resumo>
+                <cer-eventos-resumo evento="[[_evento]]"></cer-eventos-resumo>
             </neon-animatable>
 
             <neon-animatable>
-                <cer-evento-convites></cer-evento-convites>
+                <cer-eventos-convites-listar></cer-eventos-convites-listar>
             </neon-animatable>
 
             <neon-animatable>
-                <cer-evento-financeiro></cer-evento-financeiro>
+                <cer-eventos-controle-financeiro></cer-eventos-controle-financeiro>
             </neon-animatable>
         </neon-animated-pages>
     </template>
 
     <script>
         Polymer({
-            is: 'cer-evento',
+            is: 'cer-eventos-visualizar',
             properties: {
                 route: Object,
                 _evento: {

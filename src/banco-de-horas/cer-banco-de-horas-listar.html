@@ -4,46 +4,44 @@
 <link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
-<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
+<link rel="import" href="../cer-shared-styles.html">
 
-<dom-module id="cer-fornecedores-listar">
+<dom-module id="cer-banco-de-horas-listar">
     <template>
         <style include="cer-shared-styles">
-            paper-card{
+            paper-card {
                 padding: 0;
             }
         </style>
-
+        
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
-        <iron-ajax auto url="/../data/fornecedores.json" handle-as="json" last-response="{{_fornecedores}}"></iron-ajax>
+        <iron-ajax auto url="/../data/horas.json" handle-as="json" last-response="{{_horas}}"></iron-ajax>
 
-        <paper-card heading="Fornecedores">
-            <vaadin-grid id="grid" class="flex" items="{{_fornecedores}}" on-selected-items-changed="_select">
+        <paper-card heading="Banco de Horas">
+            <vaadin-grid id="grid" class="flex" items="{{_horas}}" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
-                        <col name="nomeFantasia">
-                        <col name="tipo">
-                        <col name="telefone">
-                        <col name="email">
+                        <col name="funcionario">
+                        <col name="totalDeHoras">
                     </colgroup>
                 </table>
             </vaadin-grid>
         </paper-card>
 
-        <a href="/fornecedores/adicionar">
+        <a href="/banco-de-horas/adicionar">
             <paper-fab icon="add"></paper-fab>
         </a>
     </template>
 
     <script>
         Polymer({
-            is: 'cer-fornecedores-listar',
+            is: 'cer-banco-de-horas-listar',
 
             _select: function () {
                 var selected = this.$.grid.selection.selected();
 
                 if (selected.length == 1) {
-                    window.location = '/fornecedores/visualizar/' + selected[0];
+                    window.location = '/banco-de-horas/visualizar/' + selected[0];
                 }
             }
         });

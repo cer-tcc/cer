@@ -1,0 +1,55 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="cer-eventos">
+    <template>
+        <app-route route="{{route}}" pattern="/eventos/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+        <iron-pages selected="[[_page]]" attr-for-selected="name">
+            <cer-eventos-visualizar name="visualizar" route="[[subroute]]"></cer-eventos-visualizar>
+            <cer-eventos-listar name="listar" route="[[subroute]]"></cer-eventos-listar>
+            <cer-eventos-adicionar name="adicionar"></cer-eventos-adicionar>
+            <cer-eventos-editar name="editar" route="[[subroute]]"></cer-eventos-editar>
+
+            <!--Referente ao Convite-->
+            <cer-eventos-convites-adicionar name="convites-adicionar" route="[[subroute]]"></cer-eventos-convites-adicionar>
+            <cer-eventos-convites-listar name="convites-listar" route="[[subroute]]"></cer-eventos-convites-listar>
+
+            <!-- Referente ao Controle Financeiro -->
+            <cer-eventos-controle-financeiro name="controle-financeiro" route="[[subroute]]"></cer-eventos-controle-financeiro>
+
+            <!-- Referente ao Resumo do Evento-->
+            <cer-eventos-resumo name="resumo" route="[[subroute]]"></cer-eventos-resumo>
+        </iron-pages>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-eventos',
+            
+            properties: {
+                route: Object,
+                _page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                }
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+
+            _routePageChanged: function (page) {
+                this._page = page || 'listar';
+            },
+
+            _pageChanged: function (page) {
+                var resolvedPageUrl = this.resolveUrl('cer-eventos-' + page + '.html');
+
+                this.importHref(resolvedPageUrl, null, null, true);
+            }
+        });
+    </script>
+</dom-module>

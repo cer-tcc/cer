@@ -18,6 +18,7 @@
 <link rel="import" href="../bower_components/iron-icons/communication-icons.html">
 <link rel="import" href="../bower_components/paper-elements/paper-elements.html">
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+<link rel="stylesheet" type="text/css" href="../css/style-app.css">
 
 <dom-module id="cer-app">
     <template>
@@ -77,10 +78,6 @@
             .drawer-list a.iron-selected {
                 color: var(--app-accent-color);
             }
-
-            .badge {
-                --paper-badge-background: var(--paper-light-blue-300);
-            }
         </style>
 
         <firebase-app
@@ -103,10 +100,8 @@
                     </div>
 
                     <paper-icon-button icon="icons:print"></paper-icon-button>
-
                     <paper-icon-button icon="search"></paper-icon-button>
-
-                    <a name="mensagens" href="/painel/mensagens">
+                    <a name="mensagens" href="/painel/painel">
                         <paper-icon-button style="color: white" id="number" icon="communication:email" alt="inbox"></paper-icon-button> 
                     </a>
                 </paper-toolbar>
@@ -124,7 +119,7 @@
                         <a name="frequencia" href="/frequencia/listar">
                             <iron-icon icon="notification:event-note"></iron-icon>
                             Controle de Frequência</a>
-                        <a name="eventos" href="/eventos">
+                        <a name="eventos" href="/eventos/listar">
                             <iron-icon icon="event"></iron-icon>
                             Eventos</a>
                         <a name="funcionarios" href="/funcionarios/listar">
@@ -136,13 +131,13 @@
                         <a name="fornecedores" href="/fornecedores/listar">
                             <iron-icon icon="maps:local-shipping"></iron-icon>
                             Fornecedores</a>
-                        <a name="fichaDeTriagem" href="/triagem/listar">
+                        <a name="triagem" href="/triagem/listar">
                             <iron-icon icon="editor:format-align-justify"></iron-icon>
                             Ficha de Triagem</a>
-                        <a name="estoque" href="/estoque">
+                        <a name="estoque" href="/estoque/listar">
                             <iron-icon icon="maps:local-grocery-store"></iron-icon>
                             Controle de Estoque</a>
-                        <a name="bancoDeHoras" href="/bancoDeHoras">
+                        <a name="banco-de-horas" href="/banco-de-horas/listar">
                             <iron-icon icon="icons:schedule"></iron-icon>
                             Banco de Horas</a>
                         <a name="usuarios" href="/usuarios/listar">
@@ -153,10 +148,13 @@
 
                 <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
                     <cer-painel name="painel"></cer-painel>
+                    <cer-banco-de-horas name="banco-de-horas" route="[[route]]"></cer-banco-de-horas>
+                    <cer-estoque name="estoque" route="[[route]]"></cer-estoque>
                     <cer-eventos name="eventos" route="[[route]]"></cer-eventos>
                     <cer-fornecedores name="fornecedores" route="[[route]]"></cer-fornecedores>
                     <cer-frequencia name="frequencia" route="[[route]]"></cer-frequencia>
                     <cer-funcionarios name="funcionarios" route="[[route]]"></cer-funcionarios>
+                    <cer-login name="login"></cer-login>
                     <cer-participantes name="participantes" route="[[route]]"></cer-participantes>
                     <cer-triagem name="triagem" route="[[route]]"></cer-triagem>
                     <cer-usuarios name="usuarios" route="[[route]]"></cer-usuarios>

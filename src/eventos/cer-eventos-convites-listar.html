@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../cer-shared-styles.html">
+
+<dom-module id="cer-eventos-convites-listar">
+    <template>
+        <style include="cer-shared-styles">
+            :host {
+                display: block;
+                padding: 0px;
+            }
+
+            paper-card {
+                padding: 0;
+            }
+        </style>
+
+        <iron-ajax auto url="/data/convites.json" handle-as="json" last-response="{{_convites}}"></iron-ajax>
+
+        <paper-card heading="Distribuição de Convites">
+            <vaadin-grid id="grid" items="{{_convites}}">
+                <table>
+                    <colgroup>
+                        <col name="vendedor">
+                        <col name="convitesPendentes">
+                        <col name="convitesVendidos">
+                    </colgroup>
+                </table>
+            </vaadin-grid>
+        </paper-card>
+
+        <a href="/eventos/convites-adicionar">
+            <paper-fab icon="add"></paper-fab>
+        </a>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-eventos-convites-listar'
+        });
+    </script>
+</dom-module>

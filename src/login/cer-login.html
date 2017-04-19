@@ -1,34 +1,39 @@
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
 
 <dom-module id="cer-login">
     <template>
-        <style include="iron-flex iron-positioning paper-styles">
-            paper-material {
-                background-color: white;
-                margin: 24px;
-                padding: 16px;
+        <style>
+            iron-icon{
+                color:#C0C0C0;
+                padding-right: 5px;
+            }
+
+            paper-dialog{
+                padding: 15px;
+            }
+
+            paper-button {
+                padding-top: 20px;
             }
         </style>
 
         <paper-dialog opened>
             <h2>Login</h2>
             <paper-input label="E-mail">
-                <iron-icon icon="mail" prefix style="color:#C0C0C0; padding-right:5px"></iron-icon>
+                <iron-icon icon="mail" prefix></iron-icon>
             </paper-input>
+            
             <paper-input label="Senha" type="password">
-                <iron-icon icon="lock" prefix style="color:#C0C0C0; padding-right:5px"></iron-icon>
+                <iron-icon icon="lock" prefix></iron-icon>
             </paper-input>
+
             <div class="buttons">
                 <paper-button>Esqueceu a senha?</paper-button>
                 <paper-button autofocus>Entrar</paper-button>
             </div>
         </paper-dialog>
-
-        <paper-fab icon="add"></paper-fab>
-
-
     </template>
     <script>
         Polymer({

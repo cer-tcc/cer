@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../cer-shared-styles.html">
+
+<dom-module id="cer-eventos-resumo">
+    <template>
+        <style include="cer-shared-styles">
+            :host {
+                display: block;
+                padding: 0px;
+            }
+
+            paper-card {
+                padding: 0;
+            }
+        </style>
+
+
+        <paper-card heading="{{evento.nome}}">
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-eventos-resumo',
+
+            properties: {
+                evento: Object
+            }
+        });
+    </script>
+</dom-module>

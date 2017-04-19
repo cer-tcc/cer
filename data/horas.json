@@ -1,41 +1,41 @@
 [
   {
-    "nomeDoFuncionario": "Adalberto Junior",
+    "funcionario": "Adalberto Junior",
     "totalDeHoras": "10"
   },
 
   {
-    "nomeDoFuncionario": "Flávio Mocca",
+    "funcionario": "Flávio Mocca",
     "totalDeHoras": "0"
   },
 
   {
-    "nomeDoFuncionario": "Jose Alberto",
+    "funcionario": "Jose Alberto",
     "totalDeHoras": "1"
   },
 
   {
-    "nomeDoFuncionario": "Laura Amorin",
+    "funcionario": "Laura Amorin",
     "totalDeHoras": "2"
   },
 
   {
-    "nomeDoFuncionario": "Maria Joana",
+    "funcionario": "Maria Joana",
     "totalDeHoras": "24"
   },
 
   {
-    "nomeDoFuncionario": "Marcio Andrade",
+    "funcionario": "Marcio Andrade",
     "totalDeHoras": "20"
   },
 
   {
-    "nomeDoFuncionario": "Nelci Laverne",
+    "funcionario": "Nelci Laverne",
     "totalDeHoras": "2"
   },
 
   {
-    "nomeDoFuncionario": "Zilda Nielsen",
+    "funcionario": "Zilda Nielsen",
     "totalDeHoras": "3"
   }
 ]

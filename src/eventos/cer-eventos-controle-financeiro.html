@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../cer-shared-styles.html">
+
+<dom-module id="cer-eventos-controle-financeiro">
+    <template>
+        <style include="cer-shared-styles">
+            :host {
+                display: block;
+                padding: 0px;
+            }
+
+            paper-card {
+                padding: 0;
+            }
+        </style>
+
+        <iron-ajax auto url="/data/financeiro.json" handle-as="json" last-response="{{_registros}}"></iron-ajax>
+
+        <paper-card heading="Controle financeiro">
+            <vaadin-grid id="grid" items="{{_registros}}">
+                <table>
+                    <colgroup>
+                        <col name="data">
+                        <col name="descricao">
+                        <col name="valor">
+                    </colgroup>
+                </table>
+            </vaadin-grid>
+        </paper-card>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-eventos-controle-financeiro'
+        });
+    </script>
+</dom-module>

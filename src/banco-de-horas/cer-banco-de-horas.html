@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="cer-banco-de-horas">
+    <template>
+        <app-route route="{{route}}" pattern="/banco-de-horas/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+        <iron-pages selected="[[_page]]" attr-for-selected="name">
+            <cer-banco-de-horas-adicionar name="adicionar" route="[[subroute]]"></cer-banco-de-horas-adicionar>
+            <cer-banco-de-horas-listar name="listar" route="[[subroute]]"></cer-banco-de-horas-listar>
+            <cer-banco-de-horas-visualizar name="visualizar" route="[[subroute]]"></cer-banco-de-horas-visualizar>
+        </iron-pages>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'cer-banco-de-horas',
+            
+            properties: {
+                route: Object,
+                _page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                }
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)',
+            ],
+
+            _routePageChanged: function (page) {
+                this._page = page || 'listar';
+            },
+
+            _pageChanged: function (page) {
+                var resolvedPageUrl = this.resolveUrl('cer-banco-de-horas-' + page + '.html');
+
+                this.importHref(resolvedPageUrl, null, null, true);
+            }
+        });
+    </script>
+</dom-module>
