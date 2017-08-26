@@ -2,18 +2,26 @@
   "entrypoint": "index.html",
   "shell": "src/cer-app.html",
   "fragments": [
-    "src/my-view1.html",
-    "src/my-view2.html",
-    "src/my-view3.html",
-    "src/my-view404.html"
+    "src/cer-404.html",
+    "src/painel/cer-painel.html",
+    "src/usuarios/cer-usuarios-adicionar.html",
+    "src/usuarios/cer-usuarios-editar.html",
+    "src/usuarios/cer-usuarios-listar.html",
+    "src/usuarios/cer-usuarios.html"
   ],
   "sourceGlobs": [
-   "src/**/*",
-   "images/**/*",
-   "bower.json"
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
   ],
   "includeDependencies": [
     "manifest.json",
-    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
-  ]
+    "bower_components/webcomponentsjs/*.js"
+  ],
+  "builds": [{
+    "addServiceWorker": false,
+    "js": { "minify": false },
+    "css": { "minify": false },
+    "html": { "minify": false }
+  }]
 }

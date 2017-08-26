@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../cer-shared-styles.html">
 
 <dom-module id="cer-usuarios-listar">
@@ -11,6 +12,8 @@
                 padding: 0;
             }
         </style>
+
+        <app-location route="{{location}}"></app-location>
 
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
 
@@ -44,11 +47,15 @@
             _select: function () {
                 var selected = this.$.grid.selection.selected();
 
-                if (selected.length == 1) {
-                    var usuario = this._usuarios[selected[0]];
-
-                    window.location = '/usuarios/editar/' + usuario.$key;
+                if (selected.length < 1) {
+                    return;
                 }
+
+                var usuario = this._usuarios[selected[0]];
+                
+                this.$.grid.selection.clear();
+
+                this.set('location.path', '/usuarios/editar/' + usuario.$key);
             }
         });
     </script>

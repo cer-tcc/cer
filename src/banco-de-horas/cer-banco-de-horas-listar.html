@@ -13,7 +13,7 @@
                 padding: 0;
             }
         </style>
-        
+
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
         <iron-ajax auto url="/../data/horas.json" handle-as="json" last-response="{{_horas}}"></iron-ajax>
 

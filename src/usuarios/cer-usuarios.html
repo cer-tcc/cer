@@ -4,7 +4,7 @@
 
 <dom-module id="cer-usuarios">
     <template>
-        <app-route route="{{route}}" pattern="/usuarios/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+        <app-route route="[[route]]" pattern="/usuarios/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
         <iron-pages selected="[[_page]]" attr-for-selected="name">
             <cer-usuarios-listar name="listar" route="[[subroute]]"></cer-usuarios-listar>
@@ -30,8 +30,8 @@
                 '_routePageChanged(routeData.page)',
             ],
 
-            _routePageChanged: function (page) {
-                this._page = page || 'listar';
+            _routePageChanged: function (routePage) {
+                this._page = routePage || 'listar';
             },
 
             _pageChanged: function (page) {

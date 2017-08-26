@@ -1,28 +1,34 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
+<link rel="import" href="../../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="../../bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
-<link rel="import" href="../cer-shared-styles.html"> <!--Style-->
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../cer-shared-styles.html">
 
 <dom-module id="cer-fornecedores-listar">
     <template>
         <style include="cer-shared-styles">
-            paper-card{
+            paper-card {
                 padding: 0;
             }
         </style>
 
+        <app-location route="{{location}}"></app-location>
+
         <app-route route="[[route]]" pattern="/:id" data="{{_routeData}}"></app-route>
-        <iron-ajax auto url="/../data/fornecedores.json" handle-as="json" last-response="{{_fornecedores}}"></iron-ajax>
+
+        <firebase-query
+            log
+            id="query"
+            path="/fornecedores"
+            data="{{_fornecedores}}">
+        </firebase-query>
 
         <paper-card heading="Fornecedores">
-            <vaadin-grid id="grid" class="flex" items="{{_fornecedores}}" on-selected-items-changed="_select">
+            <vaadin-grid id="grid" items="[[_fornecedores]]" on-selected-items-changed="_select">
                 <table>
                     <colgroup>
-                        <col name="nomeFantasia">
-                        <col name="tipo">
+                        <col name="nome">
                         <col name="telefone">
                         <col name="email">
                     </colgroup>
@@ -39,12 +45,18 @@
         Polymer({
             is: 'cer-fornecedores-listar',
 
-            _select: function () {
+            _select: function (e) {
                 var selected = this.$.grid.selection.selected();
 
-                if (selected.length == 1) {
-                    window.location = '/fornecedores/visualizar/' + selected[0];
+                if (selected.length < 1) {
+                    return;
                 }
+
+                var item = this._fornecedores[selected[0]];
+                
+                this.$.grid.selection.clear();
+
+                this.set('location.path', '/fornecedores/editar/' + item.$key);
             }
         });
     </script>
