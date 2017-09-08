@@ -30,9 +30,10 @@
     "paper-date-picker": "polymer-paper-datepicker#^1.2.0",
     "paper-card": "PolymerElements/paper-card#^1.1.4",
     "neon-animation": "PolymerElements/neon-animation#^1.2.4",
-    "br-elements": "patriciapds/br-elements#^1.1.1",
+    "br-elements": "patriciapds/br-elements#^1.6.0",
     "polymerfire": "firebase/polymerfire#^0.11.0",
-    "iron-form": "^1.1.5"
+    "iron-form": "^1.1.5",
+    "paper-toast": "PolymerElements/paper-toast#^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-elements/paper-elements.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../../bower_components/gold-email-input/gold-email-input.html">
 <link rel="import" href="../../bower_components/br-elements/br-elements.html">
 <link rel="import" href="../../bower_components/vaadin-combo-box/vaadin-combo-box.html">
@@ -24,9 +25,9 @@
                     <section>
                         <paper-input name="nome" label="Nome Fantasia" maxlength="200"></paper-input>
                         <paper-input label="Razão Social" maxlength="200"></paper-input>
-                        <br-cnpj-input></br-cnpj-input>
+                        <br-cnpj-input auto-validate></br-cnpj-input>
                         <paper-input label="Inscrição Estadual" maxlength="100"></paper-input>
-                        <gold-email-input name="email" auto-validate label="E-mail"></gold-email-input>
+                        <gold-email-input name="email" label="E-mail" auto-validate></gold-email-input>
                         <paper-input label="Descrição do Fornecedor" maxlength="500"></paper-input>
                         <br-tel-input name="telefone"></br-tel-input>
                         <br-cel-input></br-cel-input>
@@ -43,6 +44,8 @@
                     </section>
                 </div>  
     
+                <paper-toast id="toast" text="{{_mensagem}}"></paper-toast>
+
                 <div class="card-actions">
                     <paper-button type="submit" autofocus on-tap="_submit">Adicionar</paper-button>
                     <a href="/fornecedores/listar">

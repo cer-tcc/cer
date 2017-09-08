@@ -50,7 +50,7 @@
 
             _submit: function () {
                 if (this.password !== this.confirmPassword) {
-                    this.$.confirm.errorMessage = "As senhas são diferentes";
+                    this.$.confirm.errorMessage = "As senhas devem ser iguais";
                     this.$.confirm.invalid = true;
 
                     return;

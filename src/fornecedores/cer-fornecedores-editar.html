@@ -26,12 +26,12 @@
                     <section>
                         <paper-input name="nome" label="Nome Fantasia" value="[[_fornecedor.nome]]" maxlength="200"></paper-input>
                         <paper-input label="Razão Social" maxlength="200"></paper-input>
-                        <br-cnpj-input></br-cnpj-input>
+                        <br-cnpj-input auto-validate></br-cnpj-input>
                         <paper-input label="Inscrição Estadual" maxlength="100"></paper-input>
                         <gold-email-input auto-validate label="E-mail" name="email" value="[[_fornecedor.email]]"></gold-email-input>
                         <paper-input label="Descrição do Fornecedor" maxlength="500"></paper-input>
                         <br-tel-input name="telefone" value="[[_fornecedor.telefone]]"></br-tel-input>
-                        <br-cel-input></br-cel-input>
+                        <br-cel-input name="celular" value="[[_fornecedor.celular]]"></br-cel-input>
                     </section>
 
                     <section>
@@ -41,7 +41,7 @@
                         <paper-input label="Complemento" maxlength="500"></paper-input>
                         <paper-input label="Bairro" maxlength="500"></paper-input>
                         <vaadin-combo-box label="Estado"></vaadin-combo-box>
-                        <vaadin-combo-box label="Cidade"></vaadin-combo-box>
+                        <vaadin-combo-box label="Cidade"</vaadin-combo-box>
                     </section>
                 </div>  
 
