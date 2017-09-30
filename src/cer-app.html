@@ -18,6 +18,7 @@
 <link rel="import" href="../bower_components/paper-drawer/paper-drawer.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="cer-404.html">
 
@@ -82,6 +83,17 @@
       iron-pages {
         height: 100%;
       }
+
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;        
+      }
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -92,7 +104,7 @@
       data="{{_routeData}}"
       tail="{{_subroute}}">
     </app-route>
-    
+
     <firebase-app
       auth-domain="cer-app-a5f10.firebaseapp.com"
       database-url="https://cer-app-a5f10.firebaseio.com/"
@@ -103,7 +115,9 @@
     </firebase-auth>
 
     <dom-if if="[[!_statusKnown]]">
-      <template>Autenticando...</template>
+      <template>
+        <div class="loading-overlay"><paper-spinner active></paper-spinner></div>
+      </template>
     </dom-if>
 
     <dom-if if="[[_shouldDisplayLogin(_statusKnown, _user)]]">
@@ -180,10 +194,10 @@
             </iron-pages>
           </app-drawer-layout>
         </app-header-layout>
-    
-        <paper-toast id="toast"></paper-toast>
       </template>
     </dom-if>
+
+    <paper-toast id="toast"></paper-toast>
   </template>
 
   <script>
