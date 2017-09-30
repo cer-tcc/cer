@@ -13,6 +13,7 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<!-- <link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html"> -->
 
 <dom-module id="cer-funcionarios">
   <template>
@@ -70,19 +71,37 @@
     <paper-fab icon="add" elevation="5" on-click="_adicionar"></paper-fab>
     <paper-toast id="toast"></paper-toast>
 
-    <vaadin-dialog id="dialog" opened="[[_funcionario]]" no-close-on-outside-click no-close-on-esc>
+    <vaadin-dialog id="dialog" opened="[[_funcionario]]">
       <template>
         <paper-card heading="Funcionário">
           <div class="card-content">
             <iron-form id="form">
               <form>
                 <vaadin-form-layout>
-                  <paper-input label="Nome" name="nome" value="[[_funcionario.nome]]" required></paper-input>
-                  <paper-input label="Sobrenome" name="sobrenome" value="[[_funcionario.sobrenome]]" required></paper-input>
-                  <paper-input label="CPF" name="cpf" value="[[_funcionario.cpf]]" required></paper-input>
-                  <paper-input label="Endereço" name="endereco" value="[[_funcionario.endereco]]" required></paper-input>
-                  <paper-input label="Telefone" name="telefone" value="[[_funcionario.telefone]]" required></paper-input>
-                  <paper-input type="email" label="E-mail" name="email" value="[[_funcionario.email]]" required></paper-input>
+                  <paper-input label="Nome" name="nome" value="[[_funcionario.nome]]"></paper-input>
+                  <paper-input label="Sobrenome" name="sobrenome" value="[[_funcionario.sobrenome]]"></paper-input>
+                  <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_funcionario.dataNascimento]]" type="date"></paper-input>
+                  <!-- <br-cpf-input name="cpf" value="[[_funcionario.cpf]]" auto-validate></br-cpf-input> -->
+                  <paper-input label="RG" name="rg" value="[[_funcionario.rg]]" maxlength="30"></paper-input>
+                  <!-- <vaadin-combo-box label="Estado Cívil"></vaadin-combo-box> -->
+                  <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
+
+                  <!-- <vaadin-combo-box label="Sexo"></vaadin-combo-box> -->
+                  <!--Opções: Feminino / Masculino -->
+
+                  <!-- <br-cep-input name="cep" value="[[_funcionario.cep]]"></br-cep-input> -->
+                  <paper-input label="Rua" name "rua" value="[[_funcionario.rua]]" maxlength="500"></paper-input>
+                  <paper-input label="Número" name="numero" value="[[_funcionario.numero]]" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
+                  <paper-input label="Complemento" name="complemento" value="[[_funcionario.complemento]]" maxlength="500"></paper-input>
+                  <paper-input label="Formação" name="formacao" value="[[_funcionario.formacao]]" allowed-pattern="[A-Za-z\-]"></paper-input>
+                  <paper-input label="Função" name="funcao" value="[[_funcionario.funcao]]" allowed-pattern="[A-Za-z\-]"></paper-input>
+                  <!-- <br-tel-input name="telefone" value="[[_funcionario.telefone]]"></br-tel-input>
+                  <br-cel-input name="celular" value="[[_funcionario.celular]]"></br-cel-input> -->
+                  <paper-input label="E-mail" type="email" name="email" value="[[_funcionario.email]]" auto-validate></paper-input>
+                  <paper-input label="Data da Admissão" name="dataAdmissao" value="[[_funcionario.dataAdmissao]]" type="date"></paper-input>
+                  <paper-input label="Bairro" name="bairro" value="[[_funcionario.bairro]]" maxlength="500"></paper-input>
+                  <paper-input label="Estado" name="estado" value="[[_funcionario.estado]]"></paper-input>
+                  <paper-input label="Cidade" name="cidade" value="[[_funcionario.cidade]]"></paper-input>
                 </vaadin-form-layout>
               </form>
             </iron-form>
