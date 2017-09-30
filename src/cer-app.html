@@ -1,0 +1,256 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../bower_components/iron-icons/social-icons.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-drawer/paper-drawer.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
+<link rel="import" href="cer-404.html">
+
+<link rel="lazy-import" href="cer-home.html">
+<link rel="lazy-import" href="cer-funcionarios.html">
+<link rel="lazy-import" href="cer-voluntarios.html">
+<link rel="lazy-import" href="cer-fornecedores.html">
+<link rel="lazy-import" href="cer-usuarios.html">
+
+<dom-module id="cer-app">
+  <template>
+    <style>
+      :host {
+        --app-primary-color: var(--paper-blue-grey-600);
+        --app-secondary-color: var(--light-theme-secondary-color);
+        --app-accent-color: var(--paper-blue-grey-600);
+
+        display: block;
+      }
+
+      app-header {
+        color: #fff;
+        background-color: var(--app-primary-color);
+      }
+
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+
+      .logo {
+        width: 80px;
+        vertical-align: middle;
+      }
+
+      .drawer-list {
+        display: block;
+        margin: 5px 0;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 0 16px;
+        text-decoration: none;
+        color: var(--app-secondary-color);
+        line-height: 40px;
+        font-size: 14px;     
+      }
+
+      .drawer-list a:hover {
+        background-color: rgba(158,158,158,0.2);
+      }
+
+      .drawer-list a.iron-selected {
+        color: var(--app-accent-color);
+        font-weight: bold;
+      }
+
+      app-drawer-layout {
+        height: 100%;
+      }
+
+      iron-pages {
+        height: 100%;
+      }
+    </style>
+
+    <firebase-app
+      auth-domain="cer-app-a5f10.firebaseapp.com"
+      database-url="https://cer-app-a5f10.firebaseio.com/"
+      api-key="AIzaSyDXX4CZ1gw8qdnhjOG_I_JrTKAaCiIllwg">
+    </firebase-app>
+
+    <firebase-auth id="auth" user="{{_user}}" provider="google" on-error="_onAuthError" status-known="{{_statusKnown}}">
+    </firebase-auth>
+
+    <dom-if if="[[!_statusKnown]]">
+      <template>Autenticando...</template>
+    </dom-if>
+
+    <dom-if if="[[_shouldDisplayLogin(_statusKnown, _user)]]">
+      <template>
+        <vaadin-dialog opened>
+          <template><paper-button on-tap="_login">Login</paper-button></template>
+        </vaadin-dialog>
+      </template>
+    </dom-if>
+
+    <dom-if if="[[_user]]">
+      <template>
+        <app-location route="{{route}}"></app-location>
+        <app-route
+          route="{{route}}"
+          pattern="/:page"
+          data="{{_routeData}}"
+          tail="{{_subroute}}">
+        </app-route>
+    
+        <app-header-layout fullbleed has-scrolling-region>
+          <!-- Header -->
+          <app-header slot="header" condenses reveals effects="waterfall">
+            <app-toolbar>
+              <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+              <div main-title>
+                <img class="logo" src="/images/logo.png" alt="CER">
+              </div>
+            </app-toolbar>
+          </app-header>
+    
+          <app-drawer-layout narrow="{{narrow}}">
+            <!-- Drawer content -->
+            <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+              <app-toolbar>Menu</app-toolbar>
+              <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                <a name="home" href="/">
+                  <iron-icon icon="home"></iron-icon>
+                  Página inicial
+                </a>
+                <a name="participantes" href="/participantes">
+                  <iron-icon icon="face"></iron-icon>
+                  Participantes
+                </a>
+                <a name="eventos" href="/eventos">
+                  <iron-icon icon="event"></iron-icon>
+                  Eventos
+                </a>
+                <a name="estoque" href="/estoque">
+                  <iron-icon icon="maps:local-grocery-store"></iron-icon>
+                  Estoque
+                </a>
+                <a name="funcionarios" href="/funcionarios">
+                  <iron-icon icon="work"></iron-icon>
+                  Funcionários
+                </a>
+                <a name="voluntarios" href="/voluntarios">
+                  <iron-icon icon="icons:favorite-border"></iron-icon>
+                  Voluntários
+                </a>
+                <a name="fornecedores" href="/fornecedores">
+                  <iron-icon icon="maps:local-shipping"></iron-icon>
+                  Fornecedores
+                </a>
+                <a name="usuarios" href="/usuarios">
+                  <iron-icon icon="social:group"></iron-icon>
+                  Usuários
+                </a>
+              </iron-selector>
+            </app-drawer>
+    
+            <paper-drawer></paper-drawer>
+    
+            <!-- Main content -->
+            <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
+              <cer-home name="home"></cer-home>
+              <cer-funcionarios name="funcionarios"></cer-funcionarios>
+              <cer-voluntarios name="voluntarios"></cer-voluntarios>
+              <cer-fornecedores name="fornecedores"></cer-fornecedores>
+              <cer-usuarios name="usuarios"></cer-usuarios>
+              <cer-404 name="404"></cer-404>
+            </iron-pages>
+          </app-drawer-layout>
+        </app-header-layout>
+    
+        <paper-toast id="toast"></paper-toast>
+      </template>
+    </dom-if>
+  </template>
+
+  <script>
+    class App extends Polymer.Element {
+      static get is() { return 'cer-app'; }
+
+      ready() {
+        super.ready();
+        
+        // Listen for toasts
+        this.addEventListener('toast', e => this.$.toast.show(e.detail));
+      }
+
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            observer: '_pageChanged',
+          },
+          _routeData: Object,
+          _subroute: String,
+        };
+      }
+
+      static get observers() {
+        return [
+          '_routePageChanged(_routeData.page)',
+        ];
+      }
+
+      _routePageChanged(page) {
+        console.log(page);
+        // If no page was found in the route data, page will be an empty string.
+        // Deault to 'home' in that case.
+        this.page = page || 'home';
+
+        // Close a non-persistent drawer when the page & route are changed.
+        // if (!this.$.drawer.persistent) {
+        //   this.$.drawer.close();
+        // }
+      }
+
+      _pageChanged(page) {
+        console.log(page);
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('cer-' + page + '.html');
+        
+        Polymer.importHref(resolvedPageUrl, null, this._showPage404.bind(this), true);
+      }
+
+      _showPage404() {
+        this.page = '404';
+      }
+
+      _shouldDisplayLogin(statusKnown, user) {
+        return statusKnown && !user;
+      }
+
+      _login() {
+        this.$.auth.signInWithPopup();
+      }
+
+      _onAuthError(e) {
+        console.log(e);
+      }
+    }
+
+    window.customElements.define(App.is, App);
+  </script>
+</dom-module>
