@@ -84,6 +84,15 @@
       }
     </style>
 
+    <app-location route="{{route}}"></app-location>
+
+    <app-route
+      route="{{route}}"
+      pattern="/:page"
+      data="{{_routeData}}"
+      tail="{{_subroute}}">
+    </app-route>
+    
     <firebase-app
       auth-domain="cer-app-a5f10.firebaseapp.com"
       database-url="https://cer-app-a5f10.firebaseio.com/"
@@ -107,14 +116,6 @@
 
     <dom-if if="[[_user]]">
       <template>
-        <app-location route="{{route}}"></app-location>
-        <app-route
-          route="{{route}}"
-          pattern="/:page"
-          data="{{_routeData}}"
-          tail="{{_subroute}}">
-        </app-route>
-    
         <app-header-layout fullbleed has-scrolling-region>
           <!-- Header -->
           <app-header slot="header" condenses reveals effects="waterfall">
