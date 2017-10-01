@@ -21,7 +21,12 @@
 <link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/paper-password-input/paper-password-input.html">
+<link rel="import" href="../elements/google-button.html">
 <link rel="import" href="cer-404.html">
+<link rel="import" href="components/google-button.html">
+<link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
 
 <link rel="lazy-import" href="cer-home.html">
 <link rel="lazy-import" href="cer-funcionarios.html">
@@ -32,7 +37,7 @@
 <dom-module id="cer-app">
   <template>
     <style>
-      :host {
+       :host {
         --app-primary-color: var(--paper-blue-grey-600);
         --app-secondary-color: var(--light-theme-secondary-color);
         --app-accent-color: var(--paper-blue-grey-600);
@@ -65,11 +70,11 @@
         text-decoration: none;
         color: var(--app-secondary-color);
         line-height: 40px;
-        font-size: 14px;     
+        font-size: 14px;
       }
 
       .drawer-list a:hover {
-        background-color: rgba(158,158,158,0.2);
+        background-color: rgba(158, 158, 158, 0.2);
       }
 
       .drawer-list a.iron-selected {
@@ -93,23 +98,31 @@
         right: 0;
         display: flex;
         align-items: center;
-        justify-content: center;        
+        justify-content: center;
+      }
+
+      .btn-login {
+        @apply --paper-font-button;
+        background-color: var(--paper-indigo-500);
+        color: white;
+      }
+
+      paper-dialog {
+        width: 500px;
+      }
+
+      google-button {
+        @apply --paper-font-button;
+        padding-top: 20px;
       }
     </style>
 
     <app-location route="{{route}}"></app-location>
 
-    <app-route
-      route="{{route}}"
-      pattern="/:page"
-      data="{{_routeData}}"
-      tail="{{_subroute}}">
+    <app-route route="{{route}}" pattern="/:page" data="{{_routeData}}" tail="{{_subroute}}">
     </app-route>
 
-    <firebase-app
-      auth-domain="cer-app-a5f10.firebaseapp.com"
-      database-url="https://cer-app-a5f10.firebaseio.com/"
-      api-key="AIzaSyDXX4CZ1gw8qdnhjOG_I_JrTKAaCiIllwg">
+    <firebase-app auth-domain="cer-app-a5f10.firebaseapp.com" database-url="https://cer-app-a5f10.firebaseio.com/" api-key="AIzaSyDXX4CZ1gw8qdnhjOG_I_JrTKAaCiIllwg">
     </firebase-app>
 
     <firebase-auth id="auth" user="{{_user}}" provider="google" on-error="_onAuthError" status-known="{{_statusKnown}}">
@@ -117,12 +130,23 @@
 
     <dom-if if="[[!_statusKnown]]">
       <template>
-        <div class="loading-overlay"><paper-spinner active></paper-spinner></div>
+        <div class="loading-overlay">
+          <paper-spinner active></paper-spinner>
+        </div>
       </template>
     </dom-if>
 
-    <paper-dialog opened="[[_shouldDisplayLogin(_statusKnown, _user)]]" no-cancel-on-esc-key no-cancel-on-outside-click>
-      <paper-button on-tap="_login">Login</paper-button>
+    <paper-dialog class="login" opened="[[_shouldDisplayLogin(_statusKnown, _user)]]" no-cancel-on-esc-key no-cancel-on-outside-click>
+      <vaadin-form-layout>
+        <paper-input label="Usuário"></paper-input><br>
+
+        <paper-password-input label="Senha" auto-validate auto-focus>
+        </paper-password-input><br>
+
+        <paper-button class="btn-login">Entrar</paper-button>
+        
+        <google-button on-tap="_googleLogin"></google-button>
+      </vaadin-form-layout>
     </paper-dialog>
 
     <dom-if if="[[_user]]">
@@ -139,7 +163,7 @@
               <paper-icon-button icon="exit-to-app" on-tap="_logout"></paper-icon-button>
             </app-toolbar>
           </app-header>
-    
+
           <app-drawer-layout narrow="{{narrow}}">
             <!-- Drawer content -->
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
@@ -175,9 +199,9 @@
                 </a>
               </iron-selector>
             </app-drawer>
-    
+
             <paper-drawer></paper-drawer>
-    
+
             <!-- Main content -->
             <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
               <cer-home name="home"></cer-home>
@@ -201,7 +225,7 @@
 
       ready() {
         super.ready();
-        
+
         // Listen for toasts
         this.addEventListener('toast', e => this.$.toast.show(e.detail));
       }
@@ -238,7 +262,7 @@
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('cer-' + page + '.html');
-        
+
         Polymer.importHref(resolvedPageUrl, null, this._showPage404.bind(this), true);
       }
 
@@ -250,7 +274,7 @@
         return statusKnown && !user;
       }
 
-      _login() {
+      _googleLogin() {
         this.$.auth.signInWithPopup();
       }
 
