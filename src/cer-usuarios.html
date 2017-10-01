@@ -13,6 +13,8 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-password-input/paper-password-input.html">
+<link rel="import" href="../bower_components/paper-password-input/match-passwords-validator.html">
 
 <dom-module id="cer-usuarios">
   <template>
@@ -68,28 +70,32 @@
     </paper-card>
 
     <paper-fab icon="add" elevation="5" on-click="_adicionar"></paper-fab>
-    <paper-toast id="toast"></paper-toast>
 
-    <vaadin-dialog id="dialog" opened="[[_usuario]]" no-close-on-outside-click no-close-on-esc>
+    <vaadin-dialog id="dialog" opened="{{_usuario}}">
       <template>
         <paper-card heading="Usuario">
-          <div class="card-content">
-            <iron-form id="form">
-              <form>
-                <vaadin-form-layout>
-                  <paper-input label="Nome" name="nome" value="[[_usuario.nome]]" required></paper-input>
-                  <paper-input label="Sobrenome" name="sobrenome" value="[[_usuario.sobrenome]]" required></paper-input>
-                  <paper-input type="email" label="E-mail" name="email" value="[[_usuario.email]]" required></paper-input>
-                  <paper-input label="Senha" name="senha" type="password" value="{{password}}"></paper-input>
-                  <paper-input id="confirm" label="Confirmar Senha" name="confirmarSenha" type="password" value="{{confirmPassword}}"></paper-input>
-                </vaadin-form-layout>
-              </form>
-            </iron-form>
-          </div>
+          <dom-if if="[[_usuario]]" restamp>
+            <template>
+              <iron-form id="form" class="card-content">
+                <match-passwords-validator id="match-passwords-validator" password="[[password]]"></match-passwords-validator>
+                <form>
+                  <vaadin-form-layout>
+                    <paper-input label="Nome" name="nome" value="[[_usuario.nome]]" required></paper-input>
+                    <paper-input label="Sobrenome" name="sobrenome" value="[[_usuario.sobrenome]]" required></paper-input>
+                    <paper-input type="email" label="E-mail" name="email" value="[[_usuario.email]]" required></paper-input>
+                    <br>
+
+                    <paper-password-input name="senha" label="Senha" required></paper-password-input>
+                    <paper-password-input label="Confirmar senha" required auto-validate validator="match-passwords-validator" error-message="As senhas não coincidem"></paper-password-input>
+                  </vaadin-form-layout>
+                </form>
+              </iron-form>
+            </template>
+          </dom-if>
 
           <div class="card-actions layout horizontal justified">
             <span>
-                <paper-button class="red" on-tap="_excluir" hidden="[[!_usuario.$key]]">Excluir</paper-button>
+              <paper-button class="red" on-tap="_excluir" hidden="[[!_usuario.$key]]">Excluir</paper-button>
             </span>
 
             <span>
@@ -106,36 +112,59 @@
     class UsuariosPage extends Polymer.Element {
       static get is() { return 'cer-usuarios'; }
 
-      _cancelar(event) {
-        this._usuario = null;
-      }
-
       _adicionar(event) {
         this._usuario = {};
       }
 
-      _salvar(event) {
-        const data  = this.$.dialog.$.overlay.$.content.querySelector('#form').serializeForm();
-        const ref   = this.$.query.ref;
-        const toast = this.$.toast;
+      _cancelar(event) {
+        this._usuario = null;
+      }
 
-        if (this._usuario.$key) {
-          ref.child(this._usuario.$key).update(data).then(() => this._toast('Usuário atualizado com sucesso!'))
+      _salvar(event) {
+        const form = this._getForm();
+
+        if (! form.validate()) {
+          return;
+        }
+
+        const formData = form.serializeForm();
+        const key      = this._usuario.$key;
+        const ref      = this.$.query.ref;
+
+        const usuario  = {
+          nome: formData.nome || null,
+          sobrenome: formData.sobrenome || null,
+          email: formData.email || null,
+        };
+
+        if (formData.senha) {
+          usuario.senha = formData.senha;
+        }
+
+        if (key) {
+          ref.child(key).update(usuario).then(() => this._toast('Usuário atualizado com sucesso!'))
         } else {
-          ref.push(data).then(() => this._toast('Usuario adicionado com sucesso!'))
+          ref.push(usuario).then(() => this._toast('Usuario adicionado com sucesso!'))
         }
 
         this._usuario = null;
       }
 
       _excluir(event) {
-        this.$.query.ref.child(this._usuario.$key).set(null).then(() => this._toast('Usuário excluído com sucesso!'));
+        const key  = this._usuario.$key;
+        const ref  = this.$.query.ref;
+
+        ref.child(key).set(null).then(() => this._toast('Usuário excluído com sucesso!'));
 
         this._usuario = null;
       }
 
       _toast(text) {
         this.dispatchEvent(new CustomEvent('toast', {bubbles: true, composed: true, detail: {text}}))
+      }
+
+      _getForm() {
+        return this.$.dialog.$.overlay.$.content.querySelector('#form');
       }
     }
 

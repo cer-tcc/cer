@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/vaadin-valo-theme/vaadin-form-layout.html">
 
 <dom-module id="cer-vaadin-overlay-theme" theme-for="vaadin-overlay">
   <template>
@@ -12,6 +13,10 @@
 
       paper-button {
         @apply --paper-font-button;
+      }
+
+      paper-card {
+        max-width: 800px;
       }
 
       paper-button.green {
