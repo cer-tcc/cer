@@ -18,6 +18,7 @@
 <link rel="import" href="../bower_components/paper-drawer/paper-drawer.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="cer-404.html">
@@ -120,13 +121,9 @@
       </template>
     </dom-if>
 
-    <dom-if if="[[_shouldDisplayLogin(_statusKnown, _user)]]">
-      <template>
-        <vaadin-dialog opened>
-          <template><paper-button on-tap="_login">Login</paper-button></template>
-        </vaadin-dialog>
-      </template>
-    </dom-if>
+    <paper-dialog opened="[[_shouldDisplayLogin(_statusKnown, _user)]]" no-cancel-on-esc-key no-cancel-on-outside-click>
+      <paper-button on-tap="_login">Login</paper-button>
+    </paper-dialog>
 
     <dom-if if="[[_user]]">
       <template>
@@ -138,6 +135,8 @@
               <div main-title>
                 <img class="logo" src="/images/logo.png" alt="CER">
               </div>
+
+              <paper-icon-button icon="exit-to-app" on-tap="_logout"></paper-icon-button>
             </app-toolbar>
           </app-header>
     
@@ -226,7 +225,6 @@
       }
 
       _routePageChanged(page) {
-        console.log(page);
         // If no page was found in the route data, page will be an empty string.
         // Deault to 'home' in that case.
         this.page = page || 'home';
@@ -238,7 +236,6 @@
       }
 
       _pageChanged(page) {
-        console.log(page);
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('cer-' + page + '.html');
         
@@ -255,6 +252,10 @@
 
       _login() {
         this.$.auth.signInWithPopup();
+      }
+
+      _logout() {
+        this.$.auth.signOut();
       }
 
       _onAuthError(e) {

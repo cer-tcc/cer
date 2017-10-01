@@ -30,7 +30,9 @@
     "paper-fab": "PolymerElements/paper-fab#^2.0.0",
     "paper-toast": "PolymerElements/paper-toast#^2.0.0",
     "vaadin-material-theme": "vaadin/vaadin-material-theme#^0.3.0",
-    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0"
+    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
+    "paper-dialog": "PolymerElements/paper-dialog#^2.0.0",
+    "paper-password-input": "^2.2.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"
