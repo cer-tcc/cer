@@ -1,0 +1,56 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="google-button">
+  <template>
+    <style>
+      :host {
+      }
+
+      paper-button {
+        color: white;
+        background-color: red;
+        width: 100%;
+      }
+    </style>
+
+  <paper-button>
+      <div style="width:15px; height:15px; padding: 0 8px 0 2px;">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 123.3 126.2" style="enable-background:new 0 0 123.3 126.2;" xml:space="preserve">
+          <style type="text/css">
+              .st0{clip-path:url(#SVGID_2_);fill:#FFF;}
+              .st1{clip-path:url(#SVGID_4_);fill:#FFF;}
+              .st2{clip-path:url(#SVGID_6_);fill:#FFF;}
+              .st3{clip-path:url(#SVGID_8_);fill:#FFF;}
+          </style><g><g><defs>
+              <path id="SVGID_1_" d="M121.9,51.6h-7.2H91.2H63.1V76H97c-3.2,15.5-16.4,24.4-33.8,24.4c-20.7,0-37.3-16.6-37.3-37.3
+                  s16.6-37.3,37.3-37.3c8.9,0,16.9,3.2,23.2,8.3l18.4-18.4C93.5,6,79.2,0,63.1,0C28.1,0,0,28.1,0,63.1s28.1,63.1,63.1,63.1
+                  c31.6,0,60.2-22.9,60.2-63.1C123.3,59.4,122.8,55.4,121.9,51.6z"/>
+              </defs><clipPath id="SVGID_2_"><use xlink:href="#SVGID_1_" style="overflow:visible;"/></clipPath><polygon class="st0" points="-5.7,100.4 -5.7,25.8 43,63.1 "/></g><g><defs>
+              <path id="SVGID_3_" d="M121.9,51.6h-7.2H91.2H63.1V76H97c-3.2,15.5-16.4,24.4-33.8,24.4c-20.7,0-37.3-16.6-37.3-37.3
+                  s16.6-37.3,37.3-37.3c8.9,0,16.9,3.2,23.2,8.3l18.4-18.4C93.5,6,79.2,0,63.1,0C28.1,0,0,28.1,0,63.1s28.1,63.1,63.1,63.1
+                  c31.6,0,60.2-22.9,60.2-63.1C123.3,59.4,122.8,55.4,121.9,51.6z"/>
+              </defs><clipPath id="SVGID_4_"><use xlink:href="#SVGID_3_" style="overflow:visible;"/></clipPath><polygon class="st1" points="-5.7,25.8 43,63.1 63.1,45.6 132,34.4 132,-5.7 -5.7,-5.7"/></g><g><defs>
+              <path id="SVGID_5_" d="M121.9,51.6h-7.2H91.2H63.1V76H97c-3.2,15.5-16.4,24.4-33.8,24.4c-20.7,0-37.3-16.6-37.3-37.3
+                  s16.6-37.3,37.3-37.3c8.9,0,16.9,3.2,23.2,8.3l18.4-18.4C93.5,6,79.2,0,63.1,0C28.1,0,0,28.1,0,63.1s28.1,63.1,63.1,63.1
+                  c31.6,0,60.2-22.9,60.2-63.1C123.3,59.4,122.8,55.4,121.9,51.6z"/>
+              </defs><clipPath id="SVGID_6_"><use xlink:href="#SVGID_5_"  style="overflow:visible;"/></clipPath><polygon class="st2" points="-5.7,100.4 80.3,34.4 103,37.3 132,-5.7 132,132 -5.7,132"/></g><g><defs>
+                  <path id="SVGID_7_" d="M121.9,51.6h-7.2H91.2H63.1V76H97c-3.2,15.5-16.4,24.4-33.8,24.4c-20.7,0-37.3-16.6-37.3-37.3
+                  s16.6-37.3,37.3-37.3c8.9,0,16.9,3.2,23.2,8.3l18.4-18.4C93.5,6,79.2,0,63.1,0C28.1,0,0,28.1,0,63.1s28.1,63.1,63.1,63.1
+                  c31.6,0,60.2-22.9,60.2-63.1C123.3,59.4,122.8,55.4,121.9,51.6z"/>
+              </defs><clipPath id="SVGID_8_"><use xlink:href="#SVGID_7_"  style="overflow:visible;"/></clipPath><polygon class="st3" points="132,132 43,63.1 31.6,54.5 132,25.8"/></g></g>
+          </svg>
+      </div> Logar com o Google
+  </paper-button>
+
+  </template>
+
+  <script>
+    class GoogleButton extends Polymer.Element {
+      static get is() { return 'google-button'; }
+    }
+
+    window.customElements.define(GoogleButton.is, GoogleButton);
+  </script>
+</dom-module>
