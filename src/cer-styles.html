@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/vaadin-material-theme/vaadin-grid.html">
 <link rel="import" href="../bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/vaadin-valo-theme/vaadin-form-layout.html">
@@ -30,7 +31,7 @@
       paper-card {
         max-width: 800px;
       }
-
+      
       paper-button.primary {
         background-color: var(--paper-blue-700);
         color: white;
@@ -53,15 +54,16 @@
     <style>
       :host {
         display: block;
-        padding: 16dpi;
+        padding-top: 48px;
         display: flex;
+        justify-content: center;
       }
 
       paper-card {
-        margin: 50px;
         width: 100%;
+        max-width: 936px;
       }
-      
+
       paper-fab {
         position: absolute;
         background-color: var(--paper-blue-grey-800);

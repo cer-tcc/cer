@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="cer-styles.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
@@ -153,7 +154,7 @@
       <template>
         <app-header-layout fullbleed has-scrolling-region>
           <!-- Header -->
-          <app-header slot="header" condenses reveals effects="waterfall">
+          <app-header slot="header" fixed shadow>
             <app-toolbar>
               <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
               <div main-title>
