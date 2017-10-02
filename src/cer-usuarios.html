@@ -1,7 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/vaadin-valo-theme/vaadin-grid.html">
+<link rel="import" href="../bower_components/vaadin-material-theme/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-sorter.html">
@@ -77,16 +77,16 @@
           <dom-if if="[[_usuario]]" restamp>
             <template>
               <iron-form id="form" class="card-content">
-                <match-passwords-validator id="match-passwords-validator" password="[[password]]"></match-passwords-validator>
                 <form>
                   <vaadin-form-layout>
                     <paper-input label="Nome" name="nome" value="[[_usuario.nome]]" required></paper-input>
                     <paper-input label="Sobrenome" name="sobrenome" value="[[_usuario.sobrenome]]" required></paper-input>
-                    <paper-input type="email" label="E-mail" name="email" value="[[_usuario.email]]" required></paper-input>
+                    <paper-input type="email" label="E-mail" name="email" value="[[_usuario.email]]" required auto-validate></paper-input>
                     <br>
 
-                    <paper-password-input name="senha" label="Senha" required></paper-password-input>
+                    <paper-password-input name="senha" label="Senha" value="{{password}}" required></paper-password-input>
                     <paper-password-input label="Confirmar senha" required auto-validate validator="match-passwords-validator" error-message="As senhas não coincidem"></paper-password-input>
+                    <match-passwords-validator id="match-passwords-validator" password="[[password]]"></match-passwords-validator>
                   </vaadin-form-layout>
                 </form>
               </iron-form>
