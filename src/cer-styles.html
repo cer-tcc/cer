@@ -3,6 +3,16 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/vaadin-valo-theme/vaadin-form-layout.html">
 
+<dom-module id="cer-vaadin-grid-theme" theme-for="vaadin-grid">
+  <template>
+    <style>
+      :host {
+        border: 0;
+      }
+    </style>
+  </template>
+</dom-module>
+
 <dom-module id="cer-vaadin-overlay-theme" theme-for="vaadin-overlay">
   <template>
     <style include="iron-flex iron-flex-alignment">
@@ -13,6 +23,8 @@
 
       paper-button {
         @apply --paper-font-button;
+        margin: 10px 0;
+        height: 36px;
       }
 
       paper-card {
@@ -20,12 +32,12 @@
       }
 
       paper-button.green {
-        background-color: var(--paper-green-500);
+        background-color: var(--paper-green-600);
         color: white;
       }
 
       paper-button.red {
-        background-color: var(--paper-red-500);
+        background-color: var(--paper-red-700);
         color: white;
       }
 
