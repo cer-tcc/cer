@@ -61,9 +61,9 @@
               <iron-form id="form" class="card-content">
                 <form>
                   <vaadin-form-layout>
-                    <paper-input label="Nome" name="nome" value="[[_usuario.nome]]" required></paper-input>
-                    <paper-input label="Sobrenome" name="sobrenome" value="[[_usuario.sobrenome]]" required></paper-input>
-                    <paper-input type="email" label="E-mail" name="email" value="[[_usuario.email]]" required auto-validate></paper-input>
+                    <paper-input label="Nome" name="nome" value="[[_usuario.nome]]" tabindex="1" required></paper-input>
+                    <paper-input label="Sobrenome" name="sobrenome" value="[[_usuario.sobrenome]]" tabindex="2" required></paper-input>
+                    <paper-input type="email" label="E-mail" name="email" value="[[_usuario.email]]" tabindex="3" required auto-validate></paper-input>
                     <br>
 
                     <paper-password-input name="senha" label="Senha" value="{{password}}" required></paper-password-input>

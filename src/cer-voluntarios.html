@@ -57,32 +57,32 @@
               <iron-form id="form" class="card-content">
                 <form>
                   <vaadin-form-layout>
-                    <paper-input label="Nome" name="nome" value="[[_voluntario.nome]]" required></paper-input>
-                    <paper-input label="Sobrenome" name="sobrenome" value="[[_voluntario.sobrenome]]" required></paper-input>
-                    <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_voluntario.dataNascimento]]" type="date"></paper-input>
-                    <!-- <vaadin-combo-box label="Sexo" name="sexo" value="[[_voluntario.sexo]]"></vaadin-combo-box> -->
+                    <paper-input label="Nome" name="nome" value="[[_voluntario.nome]]" required tabindex="1"></paper-input>
+                    <paper-input label="Sobrenome" name="sobrenome" value="[[_voluntario.sobrenome]]" required tabindex="2"></paper-input>
+                    <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_voluntario.dataNascimento]]" type="date" tabindex="3"></paper-input>
+                    <!-- <vaadin-combo-box label="Sexo" name="sexo" value="[[_voluntario.sexo]]" tabindex="2"></vaadin-combo-box> -->
                     <!--Opções: Feminino / Masculino -->
 
-                    <!-- <br-cpf-input auto-validate name="cpf" value="[[_voluntario.cpf]]"></br-cpf-input> -->
-                    <paper-input label="RG" name="rg" value="[[_voluntario.rg]]"></paper-input>
-                    <!-- <vaadin-combo-box label="Estado Cívil" name="estadoCivil" value="[[_voluntario.estadoCivil]]"></vaadin-combo-box> -->
+                    <!-- <br-cpf-input auto-validate name="cpf" value="[[_voluntario.cpf]]" tabindex="2"></br-cpf-input> -->
+                    <paper-input label="RG" name="rg" value="[[_voluntario.rg]]" tabindex="4"></paper-input>
+                    <!-- <vaadin-combo-box label="Estado Cívil" name="estadoCivil" value="[[_voluntario.estadoCivil]]" tabindex="2"></vaadin-combo-box> -->
                     <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
 
-                    <paper-input label="Departamento Associado" name="departamentoAssociado" value="[[_voluntario.departamentoAssociado]]" maxlength="500"></paper-input>
+                    <paper-input label="Departamento Associado" name="departamentoAssociado" value="[[_voluntario.departamentoAssociado]]" maxlength="500" tabindex="5"></paper-input>
                     <paper-input label="Descrição do Trabalho Voluntário" name="descricaoVoluntariado" value="[[_voluntario.descricaoVoluntariado]]"
-                      maxlength="500"></paper-input>
-                    <!-- <br-tel-input name="telefone" value="[[_voluntario.telefone]]"></br-tel-input>
-                  <br-cel-input name="celular" value="[[_voluntario.celular]]"></br-cel-input> -->
+                      maxlength="500" tabindex="6"></paper-input>
+                    <!-- <br-tel-input name="telefone" value="[[_voluntario.telefone]]" tabindex="2"></br-tel-input>
+                  <br-cel-input name="celular" value="[[_voluntario.celular]]" tabindex="2"></br-cel-input> -->
                     <paper-input label="Data do Início do Trabalho Voluntário" name="dataInicioVoluntariado" value="[[_voluntario.dataInicioVoluntariado]]"
-                      type="date"></paper-input>
-                    <paper-input label="E-mail" type="email" name="email" value="[[_voluntario.email]]" auto-validate></paper-input>
-                    <!-- <br-cep-input name="cep" value="[[_voluntario.cep]]"></br-cep-input> -->
-                    <paper-input label="Rua" name="rua" maxlength="500" value="[[_voluntario.rua]]"></paper-input>
-                    <paper-input label="Número" name="numero" allowed-pattern="[0-9\-]" maxlength="10" value="[[_voluntario.numero]]"></paper-input>
-                    <paper-input label="Complemento" name="complemento" maxlength="500" value="[[_voluntario.complemento]]"></paper-input>
-                    <paper-input label="Bairro" name="bairro" maxlength="500" value="[[_voluntario.bairro]]"></paper-input>
-                    <paper-input label="Estado" name="estado" value="[[_voluntario.estado]]"></paper-input>
-                    <paper-input label="Cidade" name="cidade" value="[[_voluntario.cidade]]"></paper-input>
+                      type="date" tabindex="7"></paper-input>
+                    <paper-input label="E-mail" type="email" name="email" value="[[_voluntario.email]]" auto-validate tabindex="8"></paper-input>
+                    <!-- <br-cep-input name="cep" value="[[_voluntario.cep]]" tabindex="2"></br-cep-input> -->
+                    <paper-input label="Rua" name="rua" maxlength="500" value="[[_voluntario.rua]]" tabindex="9"></paper-input>
+                    <paper-input label="Número" name="numero" allowed-pattern="[0-9\-]" maxlength="10" value="[[_voluntario.numero]]" tabindex="10"></paper-input>
+                    <paper-input label="Complemento" name="complemento" maxlength="500" value="[[_voluntario.complemento]]" tabindex="11"></paper-input>
+                    <paper-input label="Bairro" name="bairro" maxlength="500" value="[[_voluntario.bairro]]" tabindex="12"></paper-input>
+                    <paper-input label="Estado" name="estado" value="[[_voluntario.estado]]" tabindex="13"></paper-input>
+                    <paper-input label="Cidade" name="cidade" value="[[_voluntario.cidade]]" tabindex="14"></paper-input>
                   </vaadin-form-layout>
                 </form>
               </iron-form>

@@ -58,30 +58,33 @@
               <iron-form id="form" class="card-content">
                 <form>
                   <vaadin-form-layout>
-                    <paper-input label="Nome" name="nome" value="[[_funcionario.nome]]"></paper-input>
-                    <paper-input label="Sobrenome" name="sobrenome" value="[[_funcionario.sobrenome]]"></paper-input>
-                    <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_funcionario.dataNascimento]]" type="date"></paper-input>
-                    <!-- <br-cpf-input name="cpf" value="[[_funcionario.cpf]]" auto-validate></br-cpf-input> -->
-                    <paper-input label="RG" name="rg" value="[[_funcionario.rg]]" maxlength="30"></paper-input>
-                    <!-- <vaadin-combo-box label="Estado Cívil"></vaadin-combo-box> -->
+                    <paper-input label="Nome" name="nome" value="[[_funcionario.nome]]" tabindex="1"></paper-input>
+                    <paper-input label="Sobrenome" name="sobrenome" value="[[_funcionario.sobrenome]]" tabindex="2"></paper-input>
+                    <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_funcionario.dataNascimento]]" type="date" tabindex="3"></paper-input>
+                    <!-- <br-cpf-input name="cpf" value="[[_funcionario.cpf]]" auto-validate tabindex="2"></br-cpf-input> -->
+                    <paper-input label="CPF" name="cpf" value="[[_funcionario.cpf]]" tabindex="4"></paper-input>
+                    <paper-input label="RG" name="rg" value="[[_funcionario.rg]]" maxlength="30" tabindex="5"></paper-input>
+                    <paper-input label="E-mail" type="email" name="email" value="[[_funcionario.email]]" auto-validate tabindex="6"></paper-input>
+                    <!-- <vaadin-combo-box label="Estado Cívil" tabindex="2"></vaadin-combo-box> -->
                     <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
 
-                    <!-- <vaadin-combo-box label="Sexo"></vaadin-combo-box> -->
+                    <!-- <vaadin-combo-box label="Sexo" tabindex="2"></vaadin-combo-box> -->
                     <!--Opções: Feminino / Masculino -->
 
-                    <!-- <br-cep-input name="cep" value="[[_funcionario.cep]]"></br-cep-input> -->
-                    <paper-input label="Rua" name "rua" value="[[_funcionario.rua]]" maxlength="500"></paper-input>
-                    <paper-input label="Número" name="numero" value="[[_funcionario.numero]]" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
-                    <paper-input label="Complemento" name="complemento" value="[[_funcionario.complemento]]" maxlength="500"></paper-input>
-                    <paper-input label="Formação" name="formacao" value="[[_funcionario.formacao]]"></paper-input>
-                    <paper-input label="Função" name="funcao" value="[[_funcionario.funcao]]"></paper-input>
-                    <!-- <br-tel-input name="telefone" value="[[_funcionario.telefone]]"></br-tel-input>
-                  <br-cel-input name="celular" value="[[_funcionario.celular]]"></br-cel-input> -->
-                    <paper-input label="E-mail" type="email" name="email" value="[[_funcionario.email]]" auto-validate></paper-input>
-                    <paper-input label="Data da Admissão" name="dataAdmissao" value="[[_funcionario.dataAdmissao]]" type="date"></paper-input>
-                    <paper-input label="Bairro" name="bairro" value="[[_funcionario.bairro]]" maxlength="500"></paper-input>
-                    <paper-input label="Estado" name="estado" value="[[_funcionario.estado]]"></paper-input>
-                    <paper-input label="Cidade" name="cidade" value="[[_funcionario.cidade]]"></paper-input>
+                    <!-- <br-cep-input name="cep" value="[[_funcionario.cep]]" tabindex="2"></br-cep-input> -->
+              
+                    <paper-input label="Formação" name="formacao" value="[[_funcionario.formacao]]" tabindex="7"></paper-input>
+                    <paper-input label="Função" name="funcao" value="[[_funcionario.funcao]]" tabindex="8"></paper-input>
+                    <!-- <br-tel-input name="telefone" value="[[_funcionario.telefone]]" tabindex="2"></br-tel-input>
+                    <br-cel-input name="celular" value="[[_funcionario.celular]]" tabindex="2"></br-cel-input> -->
+                    <paper-input label="Data da Admissão" name="dataAdmissao" value="[[_funcionario.dataAdmissao]]" type="date" tabindex="9"></paper-input>
+                    <paper-input label="CEP" name="cep" value="[[_funcionario.cep]]" maxlength="500" tabindex="10"></paper-input>
+                    <paper-input label="Rua" name="rua" value="[[_funcionario.rua]]" maxlength="500" tabindex="11"></paper-input>
+                    <paper-input label="Número" name="numero" value="[[_funcionario.numero]]" allowed-pattern="[0-9\-]" maxlength="10" tabindex="12"></paper-input>
+                    <paper-input label="Bairro" name="bairro" value="[[_funcionario.bairro]]" maxlength="500" tabindex="13"></paper-input>
+                    <paper-input label="Complemento" name="complemento" value="[[_funcionario.complemento]]" maxlength="500" tabindex="14"></paper-input>
+                    <paper-input label="Estado" name="estado" value="[[_funcionario.estado]]" tabindex="15"></paper-input>
+                    <paper-input label="Cidade" name="cidade" value="[[_funcionario.cidade]]" tabindex="16"></paper-input>
                   </vaadin-form-layout>
                 </form>
               </iron-form>
