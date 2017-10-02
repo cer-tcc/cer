@@ -23,7 +23,6 @@
 <link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/paper-password-input/paper-password-input.html">
-<link rel="import" href="../elements/google-button.html">
 <link rel="import" href="cer-404.html">
 <link rel="import" href="components/google-button.html">
 <link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
@@ -103,6 +102,7 @@
 
       .btn-login {
         @apply --paper-font-button;
+        margin-top: 12px;
         background-color: var(--paper-indigo-500);
         color: white;
       }
@@ -141,7 +141,7 @@
         <paper-input label="Usuário"></paper-input><br>
 
         <paper-password-input label="Senha" auto-validate auto-focus>
-        </paper-password-input><br>
+        </paper-password-input>
 
         <paper-button class="btn-login">Entrar</paper-button>
         
