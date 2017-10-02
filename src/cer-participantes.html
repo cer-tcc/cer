@@ -1,0 +1,238 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/vaadin-material-theme/vaadin-grid.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-column.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-sorter.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="cer-styles.html">
+<link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
+<link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="../bower_components/paper-password-input/paper-password-input.html">
+<link rel="import" href="../bower_components/paper-password-input/match-passwords-validator.html">
+
+<dom-module id="cer-participantes">
+  <template>
+    <style include="cer-page-styles">
+      :host {
+        padding: 0;
+        display: block;
+      }
+
+      paper-tabs {
+        width: 100%;
+        background-color: var(--paper-blue-grey-500);
+        color: white;
+        --paper-tabs-selection-bar-color: white;
+      }
+
+      paper-tab {
+        --paper-tab-ink: white;
+      }
+
+      iron-pages {
+        margin-top: 48px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+
+    <firebase-query
+      id="fichasDeTriagemQuery"
+      path="/fichas-de-triagem"
+      data="{{_fichasDeTriagem}}">
+    </firebase-query>
+
+    <firebase-query
+      id="participantesQuery"
+      path="/participantes"
+      data="{{_participantes}}">
+    </firebase-query>
+
+    <paper-tabs selected="0">
+      <paper-tab>Fila de espera</paper-tab>
+      <paper-tab>Matriculados</paper-tab>
+    </paper-tabs>
+
+    <iron-pages selected="fila-de-espera" attr-for-selected="name">
+      <paper-card heading="Fila de espera" name="fila-de-espera">
+        <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_fichasDeTriagem]]" active-item="{{_fichaDeTriagem}}">
+          <vaadin-grid-column>
+            <template class="header">
+              <vaadin-grid-sorter path="nome">Candidato</vaadin-grid-sorter>
+            </template>
+            <template>[[item.nome]] [[item.sobrenome]]</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">
+              <vaadin-grid-sorter path="sobrenome">Responsável</vaadin-grid-sorter>
+            </template>
+            <template>[[item.nomeResponsavel]]</template>
+          </vaadin-grid-column> 
+
+          <vaadin-grid-column>
+            <template class="header">
+              <vaadin-grid-sorter path="status">Data da entrevista</vaadin-grid-sorter>
+            </template>
+            <template>[[item.dataAgendamento]]</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">
+                <vaadin-grid-sorter path="status">Situação</vaadin-grid-sorter>
+            </template>
+            <template>[[item.status]]</template>
+          </vaadin-grid-column>
+        </vaadin-grid>
+      </paper-card>
+    </iron-pages>
+
+    <paper-fab icon="add" elevation="5" on-click="_novaFichaDeTriagem"></paper-fab>
+
+    <vaadin-dialog id="fichaDeTriagemDialog" opened="{{_fichaDeTriagem}}">
+      <template>
+        <paper-card heading="Ficha de triagem">
+          <dom-if if="[[_fichaDeTriagem]]" restamp>
+            <template>
+              <iron-form id="form" class="card-content">
+                <form>
+                  <vaadin-form-layout>
+                    <paper-input colspan="2" name="nomeResponsavel" label="Nome completo do responsável" value="[[_fichaDeTriagem.nomeResponsavel]]" tabindex="1" required></paper-input>  
+
+                    <paper-input name="nome" label="Nome" value="[[_fichaDeTriagem.nome]]" tabindex="2" required></paper-input>
+                    <paper-input name="sobrenome" label="Sobrenome" value="[[_fichaDeTriagem.sobrenome]]" tabindex="3" required></paper-input>
+                    <paper-input name="dataDeNascimento" label="Data de Nascimento" type="date" value="[[_fichaDeTriagem.dataDeNascimento]]" tabindex="4" required></paper-input>
+                    <paper-input name="escola" label="Escola" value="[[_fichaDeTriagem.escola]]" tabindex="5" required></paper-input>
+
+                    <paper-input name="rua" label="Rua" value="[[_fichaDeTriagem.rua]]" tabindex="6"></paper-input>
+                    <paper-input name="numero" type="number" label="Número" value="[[_fichaDeTriagem.numero]]" tabindex="7"></paper-input>
+                    <paper-input name="complemento" label="Complemento" value="[[_fichaDeTriagem.complemento]]" tabindex="8"></paper-input>
+                    <paper-input name="bairro" label="Bairro" value="[[_fichaDeTriagem.bairro]]" tabindex="9"></paper-input>
+                    <paper-input name="estado" label="Estado" value="[[_fichaDeTriagem.estado]]" tabindex="10"></paper-input> 
+                    <paper-input name="cidade" label="Cidade" value="[[_fichaDeTriagem.cidade]]" tabindex="11"></paper-input>
+                    <paper-input name="telefone" label="Telefone" value="[[_fichaDeTriagem.telefone]]" tabindex="12"></paper-input>
+                    <paper-input name="celular" label="Celular" value="[[_fichaDeTriagem.celular]]" tabindex="13"></paper-input>
+
+                    <paper-input name="dataAgendamento" label="Agendamento com assistente social" type="date" value="[[_fichaDeTriagem.dataAgendamento]]" tabindex="14" required></paper-input>
+                  </vaadin-form-layout>
+                </form>
+              </iron-form>
+            </template>
+          </dom-if>
+
+          <div class="card-actions layout horizontal justified">
+            <span>
+              <span hidden="[[!_isEmAnalise(_fichaDeTriagem)]]">
+                <paper-button class="green" on-tap="_aprovar">Aprovar</paper-button>
+                <paper-button class="red" on-tap="_reprovar">Reprovar</paper-button>                
+              </span>
+
+              <span hidden="[[!_isAguardandoMatricula(_fichaDeTriagem)]]">
+                <paper-button class="green" on-tap="_matricular">Matricular</paper-button>
+              </span>
+            </span>
+
+            <span>
+              <paper-button on-tap="_fecharFichaDeTriagem">Cancelar</paper-button>
+              <paper-button class="primary" autofocus raised on-tap="_salvarFichaDeTriagem">Salvar</paper-button>
+            </span>
+          </div>
+        </paper-card>        
+      </template>
+    </vaadin-dialog>
+  </template>
+
+  <script>
+    class PaticipantesPage extends Polymer.Element {
+      static get is() { return 'cer-participantes'; }
+
+      _novaFichaDeTriagem(event) {
+        this._fichaDeTriagem = {};
+      }
+
+      _fecharFichaDeTriagem() {
+        this._fichaDeTriagem = null;
+      }
+
+      _salvarFichaDeTriagem(event) {
+        const form = this._getForm();
+
+        if (! form.validate()) {
+          return;
+        }
+
+        const formData = form.serializeForm();
+        const key      = this._fichaDeTriagem.$key;
+        const ref      = this.$.fichasDeTriagemQuery.ref;
+
+        const fichaDeTriagem  = {
+          nomeResponsavel: formData.nomeResponsavel,
+          nome: formData.nome,
+          sobrenome: formData.sobrenome,
+          dataDeNascimento: formData.dataDeNascimento,
+          escola: formData.escola,
+          dataAgendamento: formData.dataAgendamento,
+          status: this._fichaDeTriagem.status || 'Em análise',
+        };
+
+        if (key) {
+          ref.child(key).update(fichaDeTriagem).then(() => this._toast('Ficha de triagem atualizada com sucesso!'))
+        } else {
+          ref.push(fichaDeTriagem).then(() => this._toast('Entrevista com a assistente social agendada!'))
+        }
+
+        this._fecharFichaDeTriagem();
+      }
+
+      _toast(text) {
+        this.dispatchEvent(new CustomEvent('toast', {bubbles: true, composed: true, detail: {text}}))
+      }
+
+      _getForm() {
+        return this.$.fichaDeTriagemDialog.$.overlay.$.content.querySelector('#form');
+      }
+
+      _isEmAnalise(fichaDeTriagem) {
+        return fichaDeTriagem && fichaDeTriagem.status == 'Em análise';
+      }
+
+      _isAguardandoMatricula(fichaDeTriagem) {
+        return fichaDeTriagem && fichaDeTriagem.status == 'Aguardando matrícula';
+      }
+
+      _aprovar() {
+        const key = this._fichaDeTriagem.$key;
+        const ref = this.$.fichasDeTriagemQuery.ref;
+
+        ref.child(key).update({status: 'Aguardando matrícula'}).then(() => this._toast('Ficha aprovada com sucesso!'));
+
+        this._fecharFichaDeTriagem();
+      }
+
+      _reprovar() {
+        const key  = this._fichaDeTriagem.$key;
+        const ref  = this.$.fichasDeTriagemQuery.ref;
+
+        ref.child(key).set(null).then(() => this._toast('Ficha reprovada com sucesso!'));
+
+        this._fecharFichaDeTriagem();
+      }
+
+      _matricular() {
+        this._fecharFichaDeTriagem();
+      }
+    }
+
+    window.customElements.define(PaticipantesPage.is, PaticipantesPage);
+  </script>
+</dom-module>

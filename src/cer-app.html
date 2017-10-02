@@ -29,6 +29,7 @@
 <link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
 
 <link rel="lazy-import" href="cer-home.html">
+<link rel="lazy-import" href="cer-participantes.html">
 <link rel="lazy-import" href="cer-funcionarios.html">
 <link rel="lazy-import" href="cer-voluntarios.html">
 <link rel="lazy-import" href="cer-fornecedores.html">
@@ -178,10 +179,6 @@
                   <iron-icon icon="face"></iron-icon>
                   Participantes
                 </a>
-                <a name="eventos" href="/eventos">
-                  <iron-icon icon="event"></iron-icon>
-                  Eventos
-                </a>
                 <a name="funcionarios" href="/funcionarios">
                   <iron-icon icon="work"></iron-icon>
                   Funcionários
@@ -206,6 +203,7 @@
             <!-- Main content -->
             <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
               <cer-home name="home"></cer-home>
+              <cer-participantes name="participantes"></cer-participantes>
               <cer-funcionarios name="funcionarios"></cer-funcionarios>
               <cer-voluntarios name="voluntarios"></cer-voluntarios>
               <cer-fornecedores name="fornecedores"></cer-fornecedores>
@@ -252,7 +250,7 @@
       _routePageChanged(page) {
         // If no page was found in the route data, page will be an empty string.
         // Deault to 'home' in that case.
-        this.page = page || 'home';
+        this.page = page || 'participantes';
 
         // Close a non-persistent drawer when the page & route are changed.
         // if (!this.$.drawer.persistent) {
