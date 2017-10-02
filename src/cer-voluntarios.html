@@ -13,29 +13,10 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-<!-- <link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html"> -->
 
 <dom-module id="cer-voluntarios">
   <template>
-    <style>
-       :host {
-        display: block;
-        padding: 16dpi;
-        display: flex;
-      }
-
-      paper-card {
-        margin: 50px;
-        width: 100%;
-      }
-
-      paper-fab {
-        position: absolute;
-        background-color: var(--paper-blue-grey-800);
-        bottom: 25px;
-        right: 25px;
-      }
-    </style>
+    <style include="cer-page-styles"></style>
 
     <firebase-query id="query" path="/voluntarios" data="{{_voluntarios}}">
     </firebase-query>

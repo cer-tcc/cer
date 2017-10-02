@@ -17,25 +17,7 @@
 
 <dom-module id="cer-funcionarios">
   <template>
-    <style>
-       :host {
-        display: block;
-        padding: 16dpi;
-        display: flex;
-      }
-
-      paper-card {
-        margin: 50px;
-        width: 100%;
-      }
-
-      paper-fab {
-        position: absolute;
-        background-color: var(--paper-blue-grey-800);
-        bottom: 25px;
-        right: 25px;
-      }
-    </style>
+    <style include="cer-page-styles"></style>
 
     <firebase-query id="query" path="/funcionarios" data="{{_funcionarios}}">
     </firebase-query>
