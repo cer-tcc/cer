@@ -17,7 +17,7 @@
 <dom-module id="cer-fornecedores">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
         padding: 16dpi;
         display: flex;
@@ -36,10 +36,7 @@
       }
     </style>
 
-    <firebase-query
-      id="query"
-      path="/fornecedores"
-      data="{{_fornecedores}}">
+    <firebase-query id="query" path="/fornecedores" data="{{_fornecedores}}">
     </firebase-query>
 
     <paper-card heading="Fornecedores">
@@ -53,7 +50,7 @@
 
         <vaadin-grid-column>
           <template class="header">
-              <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
           </template>
           <template>[[item.email]]</template>
         </vaadin-grid-column>
@@ -66,29 +63,31 @@
     <vaadin-dialog id="dialog" opened="[[_fornecedor]]">
       <template>
         <paper-card heading="Fornecedor">
-          <div class="card-content">
-            <iron-form id="form">
-              <form>
-                <vaadin-form-layout>
-                  <paper-input label="Nome Fantasia" name="nome" value="[[_fornecedor.nome]]"></paper-input>
-                  <paper-input label="Razão Social" name="razaoSocial" value="[[_fornecedor.razaoSocial]]"></paper-input>
-                  <!-- <br-cnpj-input name="cnpj" auto-validate value="[[_fornecedor.cnpj]]"></br-cnpj-input> -->
-                  <paper-input label="Inscrição Estadual" name="inscricaoEstadual" value="[[_fornecedor.inscricaoEstadual]]"></paper-input>
-                  <paper-input label="E-mail" type="email" name="email" value="[[_fornecedor.email]]" auto-validate></paper-input>
-                  <paper-input label="Descrição do Fornecedor" name="descricaoFornecedor" value="[[_fornecedor.descricaoFornecedor]]"></paper-input>
-                  <!-- <br-tel-input name="telefone" value="[[_fornecedor.telefone]]"></br-tel-input>
+          <dom-if if="[[_fornecedor]]" restamp>
+            <template>
+              <iron-form id="form" class="card-content">
+                <form>
+                  <vaadin-form-layout>
+                    <paper-input label="Nome Fantasia" name="nome" value="[[_fornecedor.nome]]"></paper-input>
+                    <paper-input label="Razão Social" name="razaoSocial" value="[[_fornecedor.razaoSocial]]"></paper-input>
+                    <!-- <br-cnpj-input name="cnpj" auto-validate value="[[_fornecedor.cnpj]]"></br-cnpj-input> -->
+                    <paper-input label="Inscrição Estadual" name="inscricaoEstadual" value="[[_fornecedor.inscricaoEstadual]]"></paper-input>
+                    <paper-input label="E-mail" type="email" name="email" value="[[_fornecedor.email]]" auto-validate></paper-input>
+                    <paper-input label="Descrição do Fornecedor" name="descricaoFornecedor" value="[[_fornecedor.descricaoFornecedor]]"></paper-input>
+                    <!-- <br-tel-input name="telefone" value="[[_fornecedor.telefone]]"></br-tel-input>
                   <br-cel-input name="celular" value="[[_fornecedor.celular]]"></br-cel-input>
                   <br-cep-input name="cep" value="[[_fornecedor.cep]]"></br-cep-input> -->
-                  <paper-input label="Rua" name="rua"  value="[[_fornecedor.rua]]"></paper-input>
-                  <paper-input label="Número" allowed-pattern="[0-9\-]" name="numero" value="[[_fornecedor.numero]]"></paper-input>
-                  <paper-input label="Complemento" name="complemento"  value="[[_fornecedor.complemento]]"></paper-input>
-                  <paper-input label="Bairro" name="bairro" value="[[_fornecedor.bairro]]"></paper-input>
-                  <paper-input label="Estado" name="estado" value="[[_fornecedor.estado]]"></paper-input>
-                  <paper-input label="Cidade" name="cidade" value="[[_fornecedor.cidade]]"></paper-input>
-                </vaadin-form-layout>
-              </form>
-            </iron-form>
-          </div>
+                    <paper-input label="Rua" name="rua" value="[[_fornecedor.rua]]"></paper-input>
+                    <paper-input label="Número" allowed-pattern="[0-9\-]" name="numero" value="[[_fornecedor.numero]]"></paper-input>
+                    <paper-input label="Complemento" name="complemento" value="[[_fornecedor.complemento]]"></paper-input>
+                    <paper-input label="Bairro" name="bairro" value="[[_fornecedor.bairro]]"></paper-input>
+                    <paper-input label="Estado" name="estado" value="[[_fornecedor.estado]]"></paper-input>
+                    <paper-input label="Cidade" name="cidade" value="[[_fornecedor.cidade]]"></paper-input>
+                  </vaadin-form-layout>
+                </form>
+              </iron-form>
+            </template>
+          </dom-if>
 
           <div class="card-actions layout horizontal justified">
             <span>
@@ -100,7 +99,7 @@
               <paper-button class="green" autofocus raised on-tap="_salvar">Salvar</paper-button>
             </span>
           </div>
-        </paper-card>        
+        </paper-card>
       </template>
     </vaadin-dialog>
   </template>
@@ -118,16 +117,39 @@
       }
 
       _salvar(event) {
-        const data  = this.$.dialog.$.overlay.$.content.querySelector('#form').serializeForm();
-        const ref   = this.$.query.ref;
-        const toast = this.$.toast;
+        const form = this._getForm();
 
-        if (this._fornecedor.$key) {
-          ref.child(this._fornecedor.$key).update(data).then(() => this._toast('Fornecedor atualizado com sucesso!'))
-        } else {
-          ref.push(data).then(() => this._toast('Fornecedor adicionado com sucesso!'))
+        if (!form.validate()) {
+          return;
         }
 
+        const formData = form.serializeForm();
+        const key = this._fornecedor.$key;
+        const ref = this.$.query.ref;
+        
+        const fornecedor  = {
+          nome: formData.nome || null,
+          razaoSocial: formData.razaoSocial || null,
+          cnpj: formData.cnpj || null,
+          inscricaoEstadual: formData.inscricaoEstadual || null,
+          email: formData.email || null,
+          descricaoFornecedor: formData.descricaoFornecedor || null,
+          telefone: formData.telefone || null,
+          celular: formData.celular || null,
+          cep: formData.cep || null,
+          rua: formData.rua || null,
+          numero: formData.numero || null,
+          complemento: formData.complemento || null,
+          bairro: formData.bairro || null,
+          estado: formData.estado || null,
+          cidade: formData.cidade || null,
+        };
+
+        if (key) {
+          ref.child(key).update(fornecedor).then(() => this._toast('Fornecedor atualizado com sucesso!'))
+        } else {
+          ref.push(fornecedor).then(() => this._toast('Fornecedor adicionado com sucesso!'))
+        }
         this._fornecedor = null;
       }
 
@@ -138,7 +160,11 @@
       }
 
       _toast(text) {
-        this.dispatchEvent(new CustomEvent('toast', {bubbles: true, composed: true, detail: {text}}))
+        this.dispatchEvent(new CustomEvent('toast', { bubbles: true, composed: true, detail: { text } }))
+      }
+
+      _getForm() {
+        return this.$.dialog.$.overlay.$.content.querySelector('#form');
       }
     }
 

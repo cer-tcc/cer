@@ -18,7 +18,7 @@
 <dom-module id="cer-funcionarios">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
         padding: 16dpi;
         display: flex;
@@ -37,10 +37,7 @@
       }
     </style>
 
-    <firebase-query
-      id="query"
-      path="/funcionarios"
-      data="{{_funcionarios}}">
+    <firebase-query id="query" path="/funcionarios" data="{{_funcionarios}}">
     </firebase-query>
 
     <paper-card heading="Funcionários">
@@ -53,15 +50,15 @@
         </vaadin-grid-column>
 
         <vaadin-grid-column>
-            <template class="header">
-                <vaadin-grid-sorter path="sobrenome">Sobrenome</vaadin-grid-sorter>
-            </template>
-            <template>[[item.sobrenome]]</template>
-        </vaadin-grid-column>    
+          <template class="header">
+            <vaadin-grid-sorter path="sobrenome">Sobrenome</vaadin-grid-sorter>
+          </template>
+          <template>[[item.sobrenome]]</template>
+        </vaadin-grid-column>
 
         <vaadin-grid-column>
           <template class="header">
-              <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
           </template>
           <template>[[item.email]]</template>
         </vaadin-grid-column>
@@ -74,38 +71,40 @@
     <vaadin-dialog id="dialog" opened="[[_funcionario]]">
       <template>
         <paper-card heading="Funcionário">
-          <div class="card-content">
-            <iron-form id="form">
-              <form>
-                <vaadin-form-layout>
-                  <paper-input label="Nome" name="nome" value="[[_funcionario.nome]]"></paper-input>
-                  <paper-input label="Sobrenome" name="sobrenome" value="[[_funcionario.sobrenome]]"></paper-input>
-                  <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_funcionario.dataNascimento]]" type="date"></paper-input>
-                  <!-- <br-cpf-input name="cpf" value="[[_funcionario.cpf]]" auto-validate></br-cpf-input> -->
-                  <paper-input label="RG" name="rg" value="[[_funcionario.rg]]" maxlength="30"></paper-input>
-                  <!-- <vaadin-combo-box label="Estado Cívil"></vaadin-combo-box> -->
-                  <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
+          <dom-if if="[[_funcionario]]" restamp>
+            <template>
+              <iron-form id="form" class="card-content">
+                <form>
+                  <vaadin-form-layout>
+                    <paper-input label="Nome" name="nome" value="[[_funcionario.nome]]"></paper-input>
+                    <paper-input label="Sobrenome" name="sobrenome" value="[[_funcionario.sobrenome]]"></paper-input>
+                    <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_funcionario.dataNascimento]]" type="date"></paper-input>
+                    <!-- <br-cpf-input name="cpf" value="[[_funcionario.cpf]]" auto-validate></br-cpf-input> -->
+                    <paper-input label="RG" name="rg" value="[[_funcionario.rg]]" maxlength="30"></paper-input>
+                    <!-- <vaadin-combo-box label="Estado Cívil"></vaadin-combo-box> -->
+                    <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
 
-                  <!-- <vaadin-combo-box label="Sexo"></vaadin-combo-box> -->
-                  <!--Opções: Feminino / Masculino -->
+                    <!-- <vaadin-combo-box label="Sexo"></vaadin-combo-box> -->
+                    <!--Opções: Feminino / Masculino -->
 
-                  <!-- <br-cep-input name="cep" value="[[_funcionario.cep]]"></br-cep-input> -->
-                  <paper-input label="Rua" name "rua" value="[[_funcionario.rua]]" maxlength="500"></paper-input>
-                  <paper-input label="Número" name="numero" value="[[_funcionario.numero]]" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
-                  <paper-input label="Complemento" name="complemento" value="[[_funcionario.complemento]]" maxlength="500"></paper-input>
-                  <paper-input label="Formação" name="formacao" value="[[_funcionario.formacao]]" allowed-pattern="[A-Za-z\-]"></paper-input>
-                  <paper-input label="Função" name="funcao" value="[[_funcionario.funcao]]" allowed-pattern="[A-Za-z\-]"></paper-input>
-                  <!-- <br-tel-input name="telefone" value="[[_funcionario.telefone]]"></br-tel-input>
+                    <!-- <br-cep-input name="cep" value="[[_funcionario.cep]]"></br-cep-input> -->
+                    <paper-input label="Rua" name "rua" value="[[_funcionario.rua]]" maxlength="500"></paper-input>
+                    <paper-input label="Número" name="numero" value="[[_funcionario.numero]]" allowed-pattern="[0-9\-]" maxlength="10"></paper-input>
+                    <paper-input label="Complemento" name="complemento" value="[[_funcionario.complemento]]" maxlength="500"></paper-input>
+                    <paper-input label="Formação" name="formacao" value="[[_funcionario.formacao]]"></paper-input>
+                    <paper-input label="Função" name="funcao" value="[[_funcionario.funcao]]"></paper-input>
+                    <!-- <br-tel-input name="telefone" value="[[_funcionario.telefone]]"></br-tel-input>
                   <br-cel-input name="celular" value="[[_funcionario.celular]]"></br-cel-input> -->
-                  <paper-input label="E-mail" type="email" name="email" value="[[_funcionario.email]]" auto-validate></paper-input>
-                  <paper-input label="Data da Admissão" name="dataAdmissao" value="[[_funcionario.dataAdmissao]]" type="date"></paper-input>
-                  <paper-input label="Bairro" name="bairro" value="[[_funcionario.bairro]]" maxlength="500"></paper-input>
-                  <paper-input label="Estado" name="estado" value="[[_funcionario.estado]]"></paper-input>
-                  <paper-input label="Cidade" name="cidade" value="[[_funcionario.cidade]]"></paper-input>
-                </vaadin-form-layout>
-              </form>
-            </iron-form>
-          </div>
+                    <paper-input label="E-mail" type="email" name="email" value="[[_funcionario.email]]" auto-validate></paper-input>
+                    <paper-input label="Data da Admissão" name="dataAdmissao" value="[[_funcionario.dataAdmissao]]" type="date"></paper-input>
+                    <paper-input label="Bairro" name="bairro" value="[[_funcionario.bairro]]" maxlength="500"></paper-input>
+                    <paper-input label="Estado" name="estado" value="[[_funcionario.estado]]"></paper-input>
+                    <paper-input label="Cidade" name="cidade" value="[[_funcionario.cidade]]"></paper-input>
+                  </vaadin-form-layout>
+                </form>
+              </iron-form>
+            </template>
+          </dom-if>
 
           <div class="card-actions layout horizontal justified">
             <span>
@@ -117,7 +116,7 @@
               <paper-button class="green" autofocus raised on-tap="_salvar">Salvar</paper-button>
             </span>
           </div>
-        </paper-card>        
+        </paper-card>
       </template>
     </vaadin-dialog>
   </template>
@@ -135,14 +134,41 @@
       }
 
       _salvar(event) {
-        const data  = this.$.dialog.$.overlay.$.content.querySelector('#form').serializeForm();
-        const ref   = this.$.query.ref;
-        const toast = this.$.toast;
+        const form = this._getForm();
 
-        if (this._funcionario.$key) {
-          ref.child(this._funcionario.$key).update(data).then(() => this._toast('Funcionário atualizado com sucesso!'))
+        if (!form.validate()) {
+          return;
+        }
+
+        const formData = form.serializeForm();
+        const key = this._funcionario.$key;
+        const ref = this.$.query.ref;
+
+        const funcionario = {
+          nome: formData.nome || null,
+          sobrenome: formData.sobrenome || null,
+          dataNascimento: formData.dataNascimento || null,
+          cpf: formData.cpf || null,
+          rg: formData.rg || null,
+          cep: formData.cep || null,
+          rua: formData.rua || null,
+          numero: formData.numero || null,
+          complemento: formData.complemento || null,
+          formacao: formData.formacao || null,
+          funcao: formData.funcao || null,
+          telefone: formData.telefone || null,
+          celular: formData.celular || null,
+          email: formData.email || null,
+          dataAdmissao: formData.dataAdmissao || null,
+          bairro: formData.bairro || null,
+          estado: formData.estado || null,
+          cidade: formData.cidade || null,
+        };
+
+        if (key) {
+          ref.child(key).update(funcionario).then(() => this._toast('Usuário atualizado com sucesso!'))
         } else {
-          ref.push(data).then(() => this._toast('Funcionário adicionado com sucesso!'))
+          ref.push(funcionario).then(() => this._toast('Usuario adicionado com sucesso!'))
         }
 
         this._funcionario = null;
@@ -155,7 +181,11 @@
       }
 
       _toast(text) {
-        this.dispatchEvent(new CustomEvent('toast', {bubbles: true, composed: true, detail: {text}}))
+        this.dispatchEvent(new CustomEvent('toast', { bubbles: true, composed: true, detail: { text } }))
+      }
+
+      _getForm() {
+        return this.$.dialog.$.overlay.$.content.querySelector('#form');
       }
     }
 

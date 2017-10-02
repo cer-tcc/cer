@@ -18,7 +18,7 @@
 <dom-module id="cer-voluntarios">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
         padding: 16dpi;
         display: flex;
@@ -37,10 +37,7 @@
       }
     </style>
 
-    <firebase-query
-      id="query"
-      path="/voluntarios"
-      data="{{_voluntarios}}">
+    <firebase-query id="query" path="/voluntarios" data="{{_voluntarios}}">
     </firebase-query>
 
     <paper-card heading="Voluntários">
@@ -53,15 +50,15 @@
         </vaadin-grid-column>
 
         <vaadin-grid-column>
-            <template class="header">
-                <vaadin-grid-sorter path="sobrenome">Sobrenome</vaadin-grid-sorter>
-            </template>
-            <template>[[item.sobrenome]]</template>
-        </vaadin-grid-column>    
+          <template class="header">
+            <vaadin-grid-sorter path="sobrenome">Sobrenome</vaadin-grid-sorter>
+          </template>
+          <template>[[item.sobrenome]]</template>
+        </vaadin-grid-column>
 
         <vaadin-grid-column>
           <template class="header">
-              <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
           </template>
           <template>[[item.email]]</template>
         </vaadin-grid-column>
@@ -74,40 +71,42 @@
     <vaadin-dialog id="dialog" opened="[[_voluntario]]">
       <template>
         <paper-card heading="Voluntário">
-          <div class="card-content">
-            <iron-form id="form">
-              <form>
-                <vaadin-form-layout>
-                  <paper-input label="Nome" name="nome" value="[[_voluntario.nome]]" required></paper-input>
-                  <paper-input label="Sobrenome" name="sobrenome" value="[[_voluntario.sobrenome]]" required></paper-input>
-                  <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_voluntario.dataNascimento]]" type="date"></paper-input>
-                  <!-- <vaadin-combo-box label="Sexo" name="sexo" value="[[_voluntario.sexo]]"></vaadin-combo-box> -->
-                  <!--Opções: Feminino / Masculino -->
+          <dom-if if="[[_voluntario]]" restamp>
+            <template>
+              <iron-form id="form" class="card-content">
+                <form>
+                  <vaadin-form-layout>
+                    <paper-input label="Nome" name="nome" value="[[_voluntario.nome]]" required></paper-input>
+                    <paper-input label="Sobrenome" name="sobrenome" value="[[_voluntario.sobrenome]]" required></paper-input>
+                    <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_voluntario.dataNascimento]]" type="date"></paper-input>
+                    <!-- <vaadin-combo-box label="Sexo" name="sexo" value="[[_voluntario.sexo]]"></vaadin-combo-box> -->
+                    <!--Opções: Feminino / Masculino -->
 
-                  <!-- <br-cpf-input auto-validate name="cpf" value="[[_voluntario.cpf]]"></br-cpf-input> -->
-                  <paper-input label="RG" name="rg" value="[[_voluntario.rg]]"></paper-input>
-                  <!-- <vaadin-combo-box label="Estado Cívil" name="estadoCivil" value="[[_voluntario.estadoCivil]]"></vaadin-combo-box> -->
-                  <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
+                    <!-- <br-cpf-input auto-validate name="cpf" value="[[_voluntario.cpf]]"></br-cpf-input> -->
+                    <paper-input label="RG" name="rg" value="[[_voluntario.rg]]"></paper-input>
+                    <!-- <vaadin-combo-box label="Estado Cívil" name="estadoCivil" value="[[_voluntario.estadoCivil]]"></vaadin-combo-box> -->
+                    <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
 
-                  <paper-input label="Departamento Associado" name="departamentoAssociado" value="[[_voluntario.departamentoAssociado]]" maxlength="500"></paper-input>
-                  <paper-input label="Descrição do Trabalho Voluntário" name="descricaoVoluntariado" value="[[_voluntario.descricaoVoluntariado]]"
+                    <paper-input label="Departamento Associado" name="departamentoAssociado" value="[[_voluntario.departamentoAssociado]]" maxlength="500"></paper-input>
+                    <paper-input label="Descrição do Trabalho Voluntário" name="descricaoVoluntariado" value="[[_voluntario.descricaoVoluntariado]]"
                       maxlength="500"></paper-input>
-                  <!-- <br-tel-input name="telefone" value="[[_voluntario.telefone]]"></br-tel-input>
+                    <!-- <br-tel-input name="telefone" value="[[_voluntario.telefone]]"></br-tel-input>
                   <br-cel-input name="celular" value="[[_voluntario.celular]]"></br-cel-input> -->
-                  <paper-input label="Data do Início do Trabalho Voluntário" name="dataInicioVoluntariado" value="[[_voluntario.dataInicioVoluntariado]]"
+                    <paper-input label="Data do Início do Trabalho Voluntário" name="dataInicioVoluntariado" value="[[_voluntario.dataInicioVoluntariado]]"
                       type="date"></paper-input>
-                      <paper-input label="E-mail" type="email" name="email" value="[[_voluntario.email]]" auto-validate></paper-input>
-                  <!-- <br-cep-input name="cep" value="[[_voluntario.cep]]"></br-cep-input> -->
-                  <paper-input label="Rua" name="rua" maxlength="500" value="[[_voluntario.rua]]"></paper-input>
-                  <paper-input label="Número" name="numero" allowed-pattern="[0-9\-]" maxlength="10" value="[[_voluntario.numero]]"></paper-input>
-                  <paper-input label="Complemento" name="complemento" maxlength="500" value="[[_voluntario.complemento]]"></paper-input>
-                  <paper-input label="Bairro" name="bairro" maxlength="500" value="[[_voluntario.bairro]]"></paper-input>
-                  <paper-input label="Estado" name="estado" value="[[_voluntario.estado]]"></paper-input>
-                  <paper-input label="Cidade" name="cidade" value="[[_voluntario.cidade]]"></paper-input>
-                </vaadin-form-layout>
-              </form>
-            </iron-form>
-          </div>
+                    <paper-input label="E-mail" type="email" name="email" value="[[_voluntario.email]]" auto-validate></paper-input>
+                    <!-- <br-cep-input name="cep" value="[[_voluntario.cep]]"></br-cep-input> -->
+                    <paper-input label="Rua" name="rua" maxlength="500" value="[[_voluntario.rua]]"></paper-input>
+                    <paper-input label="Número" name="numero" allowed-pattern="[0-9\-]" maxlength="10" value="[[_voluntario.numero]]"></paper-input>
+                    <paper-input label="Complemento" name="complemento" maxlength="500" value="[[_voluntario.complemento]]"></paper-input>
+                    <paper-input label="Bairro" name="bairro" maxlength="500" value="[[_voluntario.bairro]]"></paper-input>
+                    <paper-input label="Estado" name="estado" value="[[_voluntario.estado]]"></paper-input>
+                    <paper-input label="Cidade" name="cidade" value="[[_voluntario.cidade]]"></paper-input>
+                  </vaadin-form-layout>
+                </form>
+              </iron-form>
+            </template>
+          </dom-if>
 
           <div class="card-actions layout horizontal justified">
             <span>
@@ -119,7 +118,7 @@
               <paper-button class="green" autofocus raised on-tap="_salvar">Salvar</paper-button>
             </span>
           </div>
-        </paper-card>        
+        </paper-card>
       </template>
     </vaadin-dialog>
   </template>
@@ -137,14 +136,41 @@
       }
 
       _salvar(event) {
-        const data  = this.$.dialog.$.overlay.$.content.querySelector('#form').serializeForm();
-        const ref   = this.$.query.ref;
-        const toast = this.$.toast;
+        const form = this._getForm();
 
-        if (this._voluntario.$key) {
-          ref.child(this._voluntario.$key).update(data).then(() => this._toast('Voluntário atualizado com sucesso!'))
+        if (!form.validate()) {
+          return;
+        }
+
+        const formData = form.serializeForm();
+        const key = this._voluntario.$key;
+        const ref = this.$.query.ref;
+
+        const voluntario = {
+          nome: formData.nome || null,
+          sobrenome: formData.sobrenome || null,
+          dataNascimento: formData.dataNascimento || null,
+          cpf: formData.cpf || null,
+          rg: formData.rg || null,
+          departamentoAssociado: formData.departamentoAssociado || null,
+          descricaoVoluntariado: formData.descricaoVoluntariado || null,
+          telefone: formData.telefone || null,
+          celular: formData.celular || null,
+          dataInicioVoluntariado: formData.dataInicioVoluntariado || null,
+          email: formData.email || null,
+          cep: formData.cep || null,
+          rua: formData.rua || null,
+          numero: formData.numero || null,
+          complemento: formData.complemento || null,
+          bairro: formData.bairro || null,
+          estado: formData.estado || null,
+          cidade: formData.cidade || null,
+        };
+
+        if (key) {
+          ref.child(key).update(voluntario).then(() => this._toast('Usuário atualizado com sucesso!'))
         } else {
-          ref.push(data).then(() => this._toast('Voluntário adicionado com sucesso!'))
+          ref.push(voluntario).then(() => this._toast('Usuario adicionado com sucesso!'))
         }
 
         this._voluntario = null;
@@ -157,7 +183,11 @@
       }
 
       _toast(text) {
-        this.dispatchEvent(new CustomEvent('toast', {bubbles: true, composed: true, detail: {text}}))
+        this.dispatchEvent(new CustomEvent('toast', { bubbles: true, composed: true, detail: { text } }))
+      }
+
+      _getForm() {
+        return this.$.dialog.$.overlay.$.content.querySelector('#form');
       }
     }
 
