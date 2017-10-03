@@ -108,21 +108,18 @@
                 <form>
                   <vaadin-form-layout>
                     <paper-input colspan="2" name="nomeResponsavel" label="Nome completo do responsável" value="[[_fichaDeTriagem.nomeResponsavel]]" tabindex="1" required></paper-input>  
-
                     <paper-input name="nome" label="Nome" value="[[_fichaDeTriagem.nome]]" tabindex="2" required></paper-input>
                     <paper-input name="sobrenome" label="Sobrenome" value="[[_fichaDeTriagem.sobrenome]]" tabindex="3" required></paper-input>
                     <paper-input name="dataDeNascimento" label="Data de Nascimento" type="date" value="[[_fichaDeTriagem.dataDeNascimento]]" tabindex="4" required></paper-input>
                     <paper-input name="escola" label="Escola" value="[[_fichaDeTriagem.escola]]" tabindex="5" required></paper-input>
-
                     <paper-input name="rua" label="Rua" value="[[_fichaDeTriagem.rua]]" tabindex="6"></paper-input>
                     <paper-input name="numero" type="number" label="Número" value="[[_fichaDeTriagem.numero]]" tabindex="7"></paper-input>
                     <paper-input name="complemento" label="Complemento" value="[[_fichaDeTriagem.complemento]]" tabindex="8"></paper-input>
                     <paper-input name="bairro" label="Bairro" value="[[_fichaDeTriagem.bairro]]" tabindex="9"></paper-input>
-                    <paper-input name="estado" label="Estado" value="[[_fichaDeTriagem.estado]]" tabindex="10"></paper-input> 
-                    <paper-input name="cidade" label="Cidade" value="[[_fichaDeTriagem.cidade]]" tabindex="11"></paper-input>
+                    <paper-input name="cidade" label="Cidade" value="[[_fichaDeTriagem.cidade]]" tabindex="10"></paper-input>
+                    <paper-input name="estado" label="Estado" value="[[_fichaDeTriagem.estado]]" tabindex="11"></paper-input> 
                     <paper-input name="telefone" label="Telefone" value="[[_fichaDeTriagem.telefone]]" tabindex="12"></paper-input>
                     <paper-input name="celular" label="Celular" value="[[_fichaDeTriagem.celular]]" tabindex="13"></paper-input>
-
                     <paper-input name="dataAgendamento" label="Agendamento com assistente social" type="date" value="[[_fichaDeTriagem.dataAgendamento]]" tabindex="14" required></paper-input>
                   </vaadin-form-layout>
                 </form>
@@ -182,6 +179,15 @@
           dataDeNascimento: formData.dataDeNascimento,
           escola: formData.escola,
           dataAgendamento: formData.dataAgendamento,
+          rua: formData.rua,
+          numero: formData.numero,
+          complemento: formData.complemento,
+          bairro: formData.bairro,
+          estado: formData.estado,
+          cidade: formData.cidade,
+          telefone: formData.telefone,
+          celular: formData.celular,
+
           status: this._fichaDeTriagem.status || 'Em análise',
         };
 

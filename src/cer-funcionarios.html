@@ -40,6 +40,13 @@
 
         <vaadin-grid-column>
           <template class="header">
+            <vaadin-grid-sorter path="funcao">Função</vaadin-grid-sorter>
+          </template>
+          <template>[[item.funcao]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">
             <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
           </template>
           <template>[[item.email]]</template>
