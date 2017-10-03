@@ -58,13 +58,13 @@
       data="{{_participantes}}">
     </firebase-query>
 
-    <paper-tabs selected="0">
+    <paper-tabs selected="{{selectedTab}}">
       <paper-tab>Fila de espera</paper-tab>
       <paper-tab>Matriculados</paper-tab>
     </paper-tabs>
 
-    <iron-pages selected="fila-de-espera" attr-for-selected="name">
-      <paper-card heading="Fila de espera" name="fila-de-espera">
+    <iron-pages selected="[[selectedTab]]">
+      <paper-card heading="Fila de espera">
         <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_fichasDeTriagem]]" active-item="{{_fichaDeTriagem}}">
           <vaadin-grid-column>
             <template class="header">
@@ -93,6 +93,24 @@
             </template>
             <template>[[item.status]]</template>
           </vaadin-grid-column>
+        </vaadin-grid>
+      </paper-card>
+
+      <paper-card heading="Matriculados">
+        <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_participantes]]" active-item="{{_participante}}">
+          <vaadin-grid-column>
+            <template class="header">
+              <vaadin-grid-sorter path="nome">Nome</vaadin-grid-sorter>
+            </template>
+            <template>[[item.nome]]</template>
+          </vaadin-grid-column>
+
+          <vaadin-grid-column>
+            <template class="header">
+              <vaadin-grid-sorter path="sobrenome">Sobrenome</vaadin-grid-sorter>
+            </template>
+            <template>[[item.sobrenome]]</template>
+          </vaadin-grid-column> 
         </vaadin-grid>
       </paper-card>
     </iron-pages>
@@ -141,17 +159,64 @@
 
             <span>
               <paper-button on-tap="_fecharFichaDeTriagem">Cancelar</paper-button>
-              <paper-button class="primary" autofocus raised on-tap="_salvarFichaDeTriagem">Salvar</paper-button>
+              <paper-button class="primary" raised on-tap="_salvarFichaDeTriagem">Salvar</paper-button>
             </span>
           </div>
         </paper-card>        
       </template>
     </vaadin-dialog>
+
+    <vaadin-dialog id="participanteDialog" opened="{{_participante}}">
+      <template>
+        <paper-card heading="Participante">
+          <dom-if if="[[_participante]]" restamp>
+            <template>
+              <iron-form id="form" class="card-content">
+                <form>
+                  <vaadin-form-layout>
+                    <paper-input colspan="2" name="nomeResponsavel" label="Nome completo do responsável" value="[[_participante.nomeResponsavel]]" tabindex="1" required></paper-input>  
+
+                    <paper-input name="nome" label="Nome" value="[[_participante.nome]]" tabindex="2" required></paper-input>
+                    <paper-input name="sobrenome" label="Sobrenome" value="[[_participante.sobrenome]]" tabindex="3" required></paper-input>
+                    <paper-input name="dataDeNascimento" label="Data de Nascimento" type="date" value="[[_participante.dataDeNascimento]]" tabindex="4" required></paper-input>
+                    <paper-input name="escola" label="Escola" value="[[_participante.escola]]" tabindex="5" required></paper-input>
+
+                    <paper-input name="rua" label="Rua" value="[[_participante.rua]]" tabindex="6"></paper-input>
+                    <paper-input name="numero" type="number" label="Número" value="[[_participante.numero]]" tabindex="7"></paper-input>
+                    <paper-input name="complemento" label="Complemento" value="[[_participante.complemento]]" tabindex="8"></paper-input>
+                    <paper-input name="bairro" label="Bairro" value="[[_participante.bairro]]" tabindex="9"></paper-input>
+                    <paper-input name="estado" label="Estado" value="[[_participante.estado]]" tabindex="10"></paper-input> 
+                    <paper-input name="cidade" label="Cidade" value="[[_participante.cidade]]" tabindex="11"></paper-input>
+                    <paper-input name="telefone" label="Telefone" value="[[_participante.telefone]]" tabindex="12"></paper-input>
+                    <paper-input name="celular" label="Celular" value="[[_participante.celular]]" tabindex="13"></paper-input>
+                  </vaadin-form-layout>
+                </form>
+              </iron-form>
+            </template>
+          </dom-if>
+
+          <div class="card-actions layout horizontal justified">
+            <span><!-- Botões esquerda --></span>
+
+            <span>
+              <paper-button on-tap="_fecharParticipante">Cancelar</paper-button>
+              <paper-button class="primary" raised on-tap="_salvarParticipante">Salvar</paper-button>
+            </span>
+          </div>
+        </paper-card>        
+      </template>
+    </vaadin-dialog>    
   </template>
 
   <script>
     class PaticipantesPage extends Polymer.Element {
       static get is() { return 'cer-participantes'; }
+
+      static get properties() {
+        return {
+          selectedTab: {type: Number, value: 0}
+        }
+      }
 
       _novaFichaDeTriagem(event) {
         this._fichaDeTriagem = {};
@@ -162,7 +227,7 @@
       }
 
       _salvarFichaDeTriagem(event) {
-        const form = this._getForm();
+        const form = this._getFichaDeTriagemForm();
 
         if (! form.validate()) {
           return;
@@ -204,7 +269,7 @@
         this.dispatchEvent(new CustomEvent('toast', {bubbles: true, composed: true, detail: {text}}))
       }
 
-      _getForm() {
+      _getFichaDeTriagemForm() {
         return this.$.fichaDeTriagemDialog.$.overlay.$.content.querySelector('#form');
       }
 
@@ -235,8 +300,61 @@
       }
 
       _matricular() {
+        const participante = {
+          idFichaDeTriagem: this._fichaDeTriagem.$key,
+          nomeResponsavel: this._fichaDeTriagem.nomeResponsavel,
+          nome: this._fichaDeTriagem.nome,
+          sobrenome: this._fichaDeTriagem.sobrenome,
+          dataDeNascimento: this._fichaDeTriagem.dataDeNascimento,
+          escola: this._fichaDeTriagem.escola,
+          dataAgendamento: this._fichaDeTriagem.dataAgendamento,
+          status: this._fichaDeTriagem.status || 'Em análise',
+        };
+        
+        this.selectedTab = 1;
+
         this._fecharFichaDeTriagem();
+        this._participante = participante;
       }
+
+      _fecharParticipante() {
+        this._participante = null;
+      }
+
+      _salvarParticipante() {
+        const form = this._getParticipanteForm();
+
+        if (! form.validate()) {
+          return;
+        }
+
+        const formData = form.serializeForm();
+        const key      = this._participante.$key;
+        const ref      = this.$.participantesQuery.ref;
+
+        const participante  = {
+          idFichaDeTriagem: this._participante.idFichaDeTriagem || null,
+          nomeResponsavel: formData.nomeResponsavel,
+          nome: formData.nome,
+          sobrenome: formData.sobrenome,
+          dataDeNascimento: formData.dataDeNascimento,
+          escola: formData.escola,
+        };
+
+        if (key) {
+          ref.child(key).update(participante).then(() => this._toast('Matrícula atualizada com sucesso!'))
+        } else {
+          ref.push(participante)
+            .then(() => this.$.fichasDeTriagemQuery.ref.child(participante.idFichaDeTriagem).set(null))
+            .then(() => this._toast('Participante matriculado com sucesso!'))
+        }
+
+        this._fecharParticipante();
+      }
+
+      _getParticipanteForm() {
+        return this.$.participanteDialog.$.overlay.$.content.querySelector('#form');
+      }      
     }
 
     window.customElements.define(PaticipantesPage.is, PaticipantesPage);
