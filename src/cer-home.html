@@ -1,9 +1,29 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="cer-styles.html">
+<link rel="import" href="./components/cer-timeline.html">
+<link rel="import" href="./components/cer-grafico-frequencia.html">
 
 <dom-module id="cer-home">
   <template>
-    <style include="cer-page-styles"></style>
+    <style>
+      :host {
+        display: block;
+        padding-top: 24px;
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+
+      h1 {
+        @apply --paper-font-display1;
+        
+        text-align: left;
+        color: #424242;
+      }
+    </style>
+
+    <h1>Boa noite, Daniel!</h1>
+    <cer-grafico-frequencia></cer-grafico-frequencia>
+    <cer-timeline></cer-timeline>
   </template>
 
   <script>

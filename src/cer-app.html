@@ -89,7 +89,7 @@
       }
 
       _onRoutePageChanged(routePage) {
-        this.page = routePage || 'participantes';
+        this.page = routePage || 'home';
 
         // Load page import on demand. Show 404 page if fails
         const resolvedPageUrl = this.resolveUrl('cer-' + this.page + '.html');

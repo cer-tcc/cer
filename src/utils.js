@@ -9,8 +9,7 @@ export const createTimelineRecord = (date, title, description) => {
 export const createDataProvider = (queryFactory) => (params, callback) => {
   const query = queryFactory(params);
 
-  query.onSnapshot((snapshot) => callback(
-    snapshot.docs.map(getDocDataWithId),
-    snapshot.size
-  ));
+  query.onSnapshot((snapshot) => {
+    callback(snapshot.docs.map(getDocDataWithId), snapshot.size)
+  });
 };

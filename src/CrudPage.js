@@ -1,4 +1,4 @@
-import { getDocDataWithId, createDataProvider } from './utils.js';
+import {createDataProvider } from './utils.js';
 
 export const CrudPage = (superClass) => class extends superClass {
   ready() {

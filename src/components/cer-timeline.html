@@ -1,0 +1,116 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="cer-timeline">
+  <template>
+    <style>
+      :host {
+        line-height: 1.3em;
+        min-width: 920px;
+      }
+
+      h2 {
+        @apply --paper-font-subhead;
+
+        font-size: 20px;
+        color: #616161;
+      }
+
+      .history-tl-container {
+        font-family: "Roboto", sans-serif;
+        width:50%;
+        display:block;
+        position:relative;
+      }
+
+      .history-tl-container ul.tl {
+        margin:20px 0;
+        padding:0;
+        display:inline-block;
+      }
+
+      .history-tl-container ul.tl li {
+        list-style: none;
+        margin:auto;
+        margin-left:200px;
+        min-height:50px;
+        /*background: rgba(255,255,0,0.1);*/
+        border-left:1px dashed #86D6FF;
+        padding:0 0 50px 30px;
+        position:relative;
+      }
+
+      .history-tl-container ul.tl li:last-child { border-left:0; }
+
+      .history-tl-container ul.tl li::before {
+        position: absolute;
+        left: -18px;
+        top: -5px;
+        content: " ";
+        border: 8px solid rgba(255, 255, 255, 0.74);
+        border-radius: 500%;
+        background: #258CC7;
+        height: 20px;
+        width: 20px;
+        transition: all 500ms ease-in-out;
+      }
+
+      .history-tl-container ul.tl li:hover::before {
+        border-color:  #258CC7;
+        transition: all 1000ms ease-in-out;
+      }
+
+      ul.tl li .item-title {
+      }
+
+      ul.tl li .item-detail {
+        color:rgba(0,0,0,0.5);
+        font-size:12px;
+      }
+
+      ul.tl li .timestamp {
+        color: #8D8D8D;
+        position: absolute;
+        width:100px;
+        left: -50%;
+        text-align: right;
+        font-size: 12px;
+      }        
+    </style>
+
+    <h2>Linha do tempo</h2>
+
+    <div class="history-tl-container">
+      <ul class="tl">
+        <li class="tl-item">
+          <div class="timestamp">
+            07 de Novembro<br> 19:13
+          </div>
+          <div class="item-title">Participante Patricia Pereira matriculado</div>
+          <div class="item-detail">Por Daniel Gimenes</div>
+        </li>
+        <li class="tl-item">
+          <div class="timestamp">
+            07 de Novembro<br> 19:06
+          </div>
+          <div class="item-title">Funcionário José Rodrigues admitido</div>
+          <div class="item-detail">Por Gabriel Coradelli</div>
+        </li>
+        <li class="tl-item">
+          <div class="timestamp">
+            06 de Novembro<br> 18:57
+          </div>
+          <div class="item-title">Usuário Daniel Gimenes adicionado</div>
+          <div class="item-detail">Por Administrador</div>
+        </li>
+      </ul>
+    </div>
+  </template>
+
+  <script>
+    class CerTimeline extends Polymer.Element {
+      static get is() { return 'cer-timeline'; }
+    }
+
+    window.customElements.define(CerTimeline.is, CerTimeline);
+  </script>
+</dom-module>
