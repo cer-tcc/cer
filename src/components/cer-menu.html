@@ -1,0 +1,78 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-shared-styles.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
+
+
+<dom-module id="cer-menu">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      a {
+        @apply --paper-font-body1;
+        outline: none;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      iron-icon {
+        color: rgba(0, 0, 0, 0.54);
+      }   
+    </style>
+
+    <paper-listbox selected="[[page]]" attr-for-selected="home">
+      <a href="/" name="home">
+        <paper-icon-item>
+          <iron-icon icon="home" slot="item-icon"></iron-icon>
+          Página inicial
+        </paper-icon-item>
+      </a>
+      <a href="/participantes" name="participantes">
+        <paper-icon-item>
+          <iron-icon icon="face" slot="item-icon"></iron-icon>
+          Participantes
+        </paper-icon-item>
+      </a>
+      <a href="/funcionarios" name="funcionarios">
+        <paper-icon-item>
+          <iron-icon icon="work" slot="item-icon"></iron-icon>
+          Funcionários
+        </paper-icon-item>
+      </a>
+      <a href="/voluntarios" name="voluntarios">
+        <paper-icon-item>
+          <iron-icon icon="icons:favorite-border" slot="item-icon"></iron-icon>
+          Voluntários
+        </paper-icon-item>
+      </a>
+      <a href="/fornecedores" name="fornecedores">
+        <paper-icon-item>
+          <iron-icon icon="maps:local-shipping" slot="item-icon"></iron-icon>
+          Fornecedores
+        </paper-icon-item>
+      </a>
+      <a href="/usuarios" name="usuarios">
+        <paper-icon-item>
+          <iron-icon icon="social:group" slot="item-icon"></iron-icon>
+          Usuários
+        </paper-icon-item>
+      </a>
+    </paper-listbox>
+  </template>
+
+  <script>
+    class CerMenu extends Polymer.Element {
+      static get is() { return 'cer-menu'; }
+    }
+
+    window.customElements.define(CerMenu.is, CerMenu);
+  </script>
+</dom-module>

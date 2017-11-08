@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/vaadin-material-theme/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
@@ -19,12 +18,6 @@
 <dom-module id="cer-usuarios">
   <template>
     <style include="cer-page-styles"></style>
-
-    <firebase-query
-      id="query"
-      path="/usuarios"
-      data="{{_usuarios}}">
-    </firebase-query>
 
     <paper-card heading="Usuários">
       <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_usuarios]]" active-item="{{_usuario}}">

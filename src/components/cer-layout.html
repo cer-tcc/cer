@@ -1,0 +1,90 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../cer-styles.html">
+<link rel="import" href="./cer-menu.html">
+
+<dom-module id="cer-layout">
+  <template>
+    <style>
+       :host {
+        --app-primary-color: var(--paper-blue-grey-600);
+        --app-secondary-color: var(--light-theme-secondary-color);
+        --app-accent-color: var(--paper-blue-grey-600);
+
+        display: block;
+        height: 100vh; 
+      }
+
+      app-drawer-layout, iron-pages {
+        height: 100%;
+      }
+
+      app-header {
+        color: #fff;
+        background-color: var(--app-primary-color);
+
+        --paper-icon-button-ink-color: white;
+      }
+
+      .logo {
+        width: 80px;
+        margin: 16px;
+        vertical-align: middle;
+      }
+
+      app-drawer {
+        border-right: 1px solid #e4e4e4;
+      }
+    </style>
+
+    <app-header-layout fullbleed has-scrolling-region>
+      <!-- Header -->
+      <app-header slot="header" fixed shadow>
+      <app-toolbar>
+        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+        <div main-title>
+        <img class="logo" src="/images/logo2.png" alt="CER">
+        </div>
+
+        <paper-icon-button icon="exit-to-app" on-tap="logout"></paper-icon-button>
+      </app-toolbar>
+      </app-header>
+
+      <app-drawer-layout narrow="{{narrow}}">
+      <!-- Drawer content -->
+      <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+        <app-toolbar></app-toolbar>
+        <cer-menu></cer-menu>
+      </app-drawer>
+
+      <!-- Main content -->
+      <iron-pages selected="[[page]]" attr-for-selected="name" role="main">
+        <slot></slot>
+      </iron-pages>
+      </app-drawer-layout>
+    </app-header-layout>
+  </template>
+
+  <script>
+    class CerLayout extends Polymer.Element {
+      static get is() { return 'cer-layout'; }
+
+      static get properties() {
+        return { page: String };
+      }
+
+      logout() {
+        firebase.auth().signOut();
+      }
+    }
+
+    window.customElements.define(CerLayout.is, CerLayout);
+  </script>
+</dom-module>

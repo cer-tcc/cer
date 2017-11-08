@@ -1,0 +1,52 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-password-input/paper-password-input.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../../bower_components/vaadin-form-layout/vaadin-form-layout.html">
+<link rel="import" href="./cer-google-login.html">
+
+<dom-module id="cer-login">
+  <template>
+    <style>
+      paper-dialog {
+        width: 500px;
+      }
+
+      .btn-login {
+        @apply --paper-font-button;
+        margin-top: 12px;
+        background-color: var(--paper-blue-700);
+        color: white;
+      }
+
+      cer-google-login {
+        padding-top: 20px;
+      }
+    </style>
+
+    <paper-dialog id="login" opened="[[opened]]" no-cancel-on-esc-key no-cancel-on-outside-click>
+      <vaadin-form-layout>
+        <paper-input label="Usuário"></paper-input><br>
+
+        <paper-password-input label="Senha" auto-validate auto-focus>
+        </paper-password-input>
+
+        <paper-button class="btn-login">Entrar</paper-button>
+
+        <cer-google-login></cer-google-login>
+      </vaadin-form-layout>
+    </paper-dialog>
+  </template>
+
+  <script>
+    class CerLogin extends Polymer.Element {
+      static get is() { return 'cer-login'; }
+      static get properties() {
+        opened: Boolean
+      };
+    }
+
+    window.customElements.define(CerLogin.is, CerLogin);
+  </script>
+</dom-module>

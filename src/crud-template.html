@@ -12,13 +12,13 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="cer-styles.html">
 
-<dom-module id="cer-voluntarios">
+<dom-module id="cer-fornecedores">
   <template>
     <style include="cer-page-styles"></style>
 
     <paper-fab id="fab" icon="add" elevation="5"></paper-fab>
 
-    <paper-card heading="Voluntários">
+    <paper-card heading="Fornecedores">
       <vaadin-grid id="grid" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
@@ -29,30 +29,23 @@
 
         <vaadin-grid-column>
           <template class="header">
-            <vaadin-grid-sorter path="email">E-mail</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="funcao">Função</vaadin-grid-sorter>
           </template>
-          <template>[[item.email]]</template>
+          <template>[[item.funcao]]</template>
         </vaadin-grid-column>
 
         <vaadin-grid-column>
           <template class="header">
-            <vaadin-grid-sorter path="telefone">Telefone</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="dataAdmissao">Data de admissão</vaadin-grid-sorter>
           </template>
-          <template>[[item.telefone]]</template>
+          <template>[[item.dataAdmissao]]</template>
         </vaadin-grid-column>
-
-        <vaadin-grid-column>
-            <template class="header">
-              <vaadin-grid-sorter path="cidade">Cidade</vaadin-grid-sorter>
-            </template>
-            <template>[[item.cidade]]</template>
-          </vaadin-grid-column>        
       </vaadin-grid>
     </paper-card>
 
     <vaadin-dialog id="dialog" opened="{{dialogOpened}}">
       <template>
-        <paper-card heading="Voluntário">
+        <paper-card heading="Fornecedor">
           <dom-if if="{{dialogOpened}}" restamp>
             <template>
               <iron-form id="form" class="card-content">
@@ -60,35 +53,37 @@
                   <vaadin-form-layout>
                     <paper-input label="Nome" value="{{document.nome}}" required tabindex="1"></paper-input>
                     <paper-input label="Sobrenome" value="{{document.sobrenome}}" required tabindex="2"></paper-input>
+                    <paper-input label="Função" value="{{document.funcao}}" required tabindex="3"></paper-input>
 
-                    <!-- Todo: Categoria (select) -->
+                    <!-- Todo: Data de admissão (datepicker) -->
+                    <paper-input label="Data de admissão" value="{{document.dataAdmissao}}" type="date" required tabindex="4"></paper-input>
 
                     <!-- Todo: Sexo (radio) -->
 
-                    <paper-input label="Data de Nascimento" value="{{document.dataNascimento}}" type="date" tabindex="3"></paper-input>                    
+                    <paper-input label="Data de Nascimento" value="{{document.dataNascimento}}" type="date" tabindex="5"></paper-input>
 
                     <!-- Todo: CPF (mask) -->
-                    <paper-input label="CPF" value="{{document.cpf}}" tabindex="4"></paper-input>
+                    <paper-input label="CPF" value="{{document.cpf}}" tabindex="6"></paper-input>
                     
                     <!-- Todo: Estado civil (select) -->
 
-                    <paper-input label="E-mail" value="{{document.email}}" type="email" auto-validate required tabindex="5"></paper-input>
+                    <paper-input label="E-mail" value="{{document.email}}" type="email" auto-validate required tabindex="7"></paper-input>
 
                     <!-- Todo: Telefone (mask) -->
-                    <paper-input label="Telefone" value="{{document.telefone}}" required tabindex="6"></paper-input>
-                    
-                    <!-- Todo: Data do início do trabalho voluntário (datepicker) -->
+                    <paper-input label="Telefone" value="{{document.telefone}}" required tabindex="8"></paper-input>
+
+                    <paper-input label="Formação" value="{{document.formacao}}" tabindex="9"></paper-input>
 
                     <!-- Todo: CEP (mask + carregar endereço) -->
-                    <paper-input label="CEP" value="{{document.cep}}" tabindex="8"></paper-input>
-                    <paper-input label="Logradouro" value="{{document.logradouro}}" tabindex="9"></paper-input>
-                    <paper-input label="Número" value="{{document.numero}}" type="number" tabindex="10"></paper-input>
-                    <paper-input label="Complemento" value="{{document.complemento}}" tabindex="11"></paper-input>
-                    <paper-input label="Bairro" value="{{document.bairro}}" tabindex="12"></paper-input>
-                    <paper-input label="Estado" value="{{document.estado}}" tabindex="13"></paper-input>
-                    <paper-input label="Cidade" value="{{document.cidade}}" required tabindex="14"></paper-input>
+                    <paper-input label="CEP" value="{{document.cep}}" tabindex="10"></paper-input>
+                    <paper-input label="Logradouro" value="{{document.logradouro}}" tabindex="11"></paper-input>
+                    <paper-input label="Número" value="{{document.numero}}" type="number" tabindex="12"></paper-input>
+                    <paper-input label="Complemento" value="{{document.complemento}}" tabindex="13"></paper-input>
+                    <paper-input label="Bairro" value="{{document.bairro}}" tabindex="14"></paper-input>
+                    <paper-input label="Estado" value="{{document.estado}}" tabindex="15"></paper-input>
+                    <paper-input label="Cidade" value="{{document.cidade}}" tabindex="16"></paper-input>
 
-                    <paper-textarea label="Observações" value="{{document.observacoes}}" tabindex="15"></paper-textarea>
+                    <paper-textarea label="Observações" value="{{document.observacoes}}" tabindex="17"></paper-textarea>
                   </vaadin-form-layout>
                 </form>
               </iron-form>
@@ -111,29 +106,29 @@
   </template>
 
   <script type="module">
-      import { CrudPage } from './CrudPage.js';
-  
-      class VoluntariosPage extends CrudPage(Polymer.Element) {
-        static get is() { return 'cer-voluntarios'; }
-  
-        constructor() {
-          super();
-  
-          this.collection   = firebase.firestore().collection('voluntarios');
-          this.queryFactory = (params) => this.collection;
-        }
-  
-        ready() {
-          super.ready();
-  
-          const getNome = (e) => `${e.detail.data.nome} ${e.detail.data.sobrenome}`;
-  
-          this.addEventListener('document-added', e => this._log(`Voluntário ${getNome(e)} adicionado`));
-          this.addEventListener('document-updated', e => this._log(`Voluntário ${getNome(e)} atualizado`));
-          this.addEventListener('document-deleted', e => this._log(`Voluntário ${getNome(e)} excluído`));
-        }
+    import { CrudPage } from './CrudPage.js';
+
+    class FornecedoresPage extends CrudPage(Polymer.Element) {
+      static get is() { return 'cer-fornecedores'; }
+
+      constructor() {
+        super();
+
+        this.collection   = firebase.firestore().collection('fornecedores');
+        this.queryFactory = (params) => this.collection;
       }
-  
-      window.customElements.define(VoluntariosPage.is, VoluntariosPage);
-    </script>
+
+      ready() {
+        super.ready();
+
+        const getNome = (e) => e.detail.data.nomeFantasia;
+
+        this.addEventListener('document-added', e => this._log(`Fornecedor ${getNome(e)} adicionado`));
+        this.addEventListener('document-updated', e => this._log(`Fornecedor ${getNome(e)} atualizado`));
+        this.addEventListener('document-deleted', e => this._log(`Fornecedor ${getNome(e)} removido`));
+      }
+    }
+
+    window.customElements.define(FornecedoresPage.is, FornecedoresPage);
+  </script>
 </dom-module>

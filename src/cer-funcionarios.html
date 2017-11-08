@@ -1,41 +1,30 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/vaadin-valo-theme/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="cer-styles.html">
 <link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
 <link rel="import" href="../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-<!-- <link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box.html"> -->
+<link rel="import" href="cer-styles.html">
 
 <dom-module id="cer-funcionarios">
   <template>
     <style include="cer-page-styles"></style>
 
-    <firebase-query id="query" path="/funcionarios" data="{{_funcionarios}}">
-    </firebase-query>
+    <paper-fab id="fab" icon="add" elevation="5"></paper-fab>
 
     <paper-card heading="Funcionários">
-      <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_funcionarios]]" active-item="{{_funcionario}}">
+      <vaadin-grid id="grid" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
-            <vaadin-grid-sorter path="nome">Nome</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="nomeCompleto">Nome</vaadin-grid-sorter>
           </template>
-          <template>[[item.nome]]</template>
-        </vaadin-grid-column>
-
-        <vaadin-grid-column>
-          <template class="header">
-            <vaadin-grid-sorter path="sobrenome">Sobrenome</vaadin-grid-sorter>
-          </template>
-          <template>[[item.sobrenome]]</template>
+          <template>[[item.nome]] [[item.sobrenome]]</template>
         </vaadin-grid-column>
 
         <vaadin-grid-column>
@@ -47,51 +36,54 @@
 
         <vaadin-grid-column>
           <template class="header">
-            <vaadin-grid-sorter path="email">Email</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="dataAdmissao">Data de admissão</vaadin-grid-sorter>
           </template>
-          <template>[[item.email]]</template>
+          <template>[[item.dataAdmissao]]</template>
         </vaadin-grid-column>
       </vaadin-grid>
     </paper-card>
 
-    <paper-fab icon="add" elevation="5" on-click="_adicionar"></paper-fab>
-    <paper-toast id="toast"></paper-toast>
-
-    <vaadin-dialog id="dialog" opened="[[_funcionario]]">
+    <vaadin-dialog id="dialog" opened="{{dialogOpened}}">
       <template>
         <paper-card heading="Funcionário">
-          <dom-if if="[[_funcionario]]" restamp>
+          <dom-if if="{{dialogOpened}}" restamp>
             <template>
               <iron-form id="form" class="card-content">
                 <form>
                   <vaadin-form-layout>
-                    <paper-input label="Nome" name="nome" value="[[_funcionario.nome]]" tabindex="1"></paper-input>
-                    <paper-input label="Sobrenome" name="sobrenome" value="[[_funcionario.sobrenome]]" tabindex="2"></paper-input>
-                    <paper-input label="Data de Nascimento" name="dataNascimento" value="[[_funcionario.dataNascimento]]" type="date" tabindex="3"></paper-input>
-                    <!-- <br-cpf-input name="cpf" value="[[_funcionario.cpf]]" auto-validate tabindex="2"></br-cpf-input> -->
-                    <paper-input label="CPF" name="cpf" value="[[_funcionario.cpf]]" tabindex="4"></paper-input>
-                    <paper-input label="RG" name="rg" value="[[_funcionario.rg]]" maxlength="30" tabindex="5"></paper-input>
-                    <paper-input label="E-mail" type="email" name="email" value="[[_funcionario.email]]" auto-validate tabindex="6"></paper-input>
-                    <!-- <vaadin-combo-box label="Estado Cívil" tabindex="2"></vaadin-combo-box> -->
-                    <!--Opções: Solteiro(a) / Casado(a) / Separado(a) / Divorciado(a) / Viúvo(a)-->
+                    <paper-input label="Nome" value="{{document.nome}}" required tabindex="1"></paper-input>
+                    <paper-input label="Sobrenome" value="{{document.sobrenome}}" required tabindex="2"></paper-input>
+                    <paper-input label="Função" value="{{document.funcao}}" required tabindex="3"></paper-input>
 
-                    <!-- <vaadin-combo-box label="Sexo" tabindex="2"></vaadin-combo-box> -->
-                    <!--Opções: Feminino / Masculino -->
+                    <!-- Todo: Data de admissão (datepicker) -->
+                    <paper-input label="Data de admissão" value="{{document.dataAdmissao}}" type="date" required tabindex="4"></paper-input>
 
-                    <!-- <br-cep-input name="cep" value="[[_funcionario.cep]]" tabindex="2"></br-cep-input> -->
-              
-                    <paper-input label="Formação" name="formacao" value="[[_funcionario.formacao]]" tabindex="7"></paper-input>
-                    <paper-input label="Função" name="funcao" value="[[_funcionario.funcao]]" tabindex="8"></paper-input>
-                    <!-- <br-tel-input name="telefone" value="[[_funcionario.telefone]]" tabindex="2"></br-tel-input>
-                    <br-cel-input name="celular" value="[[_funcionario.celular]]" tabindex="2"></br-cel-input> -->
-                    <paper-input label="Data da Admissão" name="dataAdmissao" value="[[_funcionario.dataAdmissao]]" type="date" tabindex="9"></paper-input>
-                    <paper-input label="CEP" name="cep" value="[[_funcionario.cep]]" maxlength="500" tabindex="10"></paper-input>
-                    <paper-input label="Rua" name="rua" value="[[_funcionario.rua]]" maxlength="500" tabindex="11"></paper-input>
-                    <paper-input label="Número" name="numero" value="[[_funcionario.numero]]" allowed-pattern="[0-9\-]" maxlength="10" tabindex="12"></paper-input>
-                    <paper-input label="Bairro" name="bairro" value="[[_funcionario.bairro]]" maxlength="500" tabindex="13"></paper-input>
-                    <paper-input label="Complemento" name="complemento" value="[[_funcionario.complemento]]" maxlength="500" tabindex="14"></paper-input>
-                    <paper-input label="Estado" name="estado" value="[[_funcionario.estado]]" tabindex="15"></paper-input>
-                    <paper-input label="Cidade" name="cidade" value="[[_funcionario.cidade]]" tabindex="16"></paper-input>
+                    <!-- Todo: Sexo (radio) -->
+
+                    <paper-input label="Data de Nascimento" value="{{document.dataNascimento}}" type="date" tabindex="5"></paper-input>
+
+                    <!-- Todo: CPF (mask) -->
+                    <paper-input label="CPF" value="{{document.cpf}}" tabindex="6"></paper-input>
+                    
+                    <!-- Todo: Estado civil (select) -->
+
+                    <paper-input label="E-mail" value="{{document.email}}" type="email" auto-validate required tabindex="7"></paper-input>
+
+                    <!-- Todo: Telefone (mask) -->
+                    <paper-input label="Telefone" value="{{document.telefone}}" required tabindex="8"></paper-input>
+
+                    <paper-input label="Formação" value="{{document.formacao}}" tabindex="9"></paper-input>
+
+                    <!-- Todo: CEP (mask + carregar endereço) -->
+                    <paper-input label="CEP" value="{{document.cep}}" tabindex="10"></paper-input>
+                    <paper-input label="Logradouro" value="{{document.logradouro}}" tabindex="11"></paper-input>
+                    <paper-input label="Número" value="{{document.numero}}" type="number" tabindex="12"></paper-input>
+                    <paper-input label="Complemento" value="{{document.complemento}}" tabindex="13"></paper-input>
+                    <paper-input label="Bairro" value="{{document.bairro}}" tabindex="14"></paper-input>
+                    <paper-input label="Estado" value="{{document.estado}}" tabindex="15"></paper-input>
+                    <paper-input label="Cidade" value="{{document.cidade}}" tabindex="16"></paper-input>
+
+                    <paper-textarea label="Observações" value="{{document.observacoes}}" tabindex="17"></paper-textarea>
                   </vaadin-form-layout>
                 </form>
               </iron-form>
@@ -100,11 +92,11 @@
 
           <div class="card-actions layout horizontal justified">
             <span>
-                <paper-button class="red" on-tap="_excluir" hidden="[[!_funcionario.$key]]">Excluir</paper-button>
+              <paper-button class="red" on-tap="_excluir" hidden="[[!document.id]]">Excluir</paper-button>
             </span>
 
             <span>
-              <paper-button on-tap="_cancelar">Cancelar</paper-button>
+              <paper-button on-tap="_closeDialog">Cancelar</paper-button>
               <paper-button class="primary" autofocus raised on-tap="_salvar">Salvar</paper-button>
             </span>
           </div>
@@ -113,71 +105,27 @@
     </vaadin-dialog>
   </template>
 
-  <script>
-    class FuncionariosPage extends Polymer.Element {
+  <script type="module">
+    import { CrudPage } from './CrudPage.js';
+
+    class FuncionariosPage extends CrudPage(Polymer.Element) {
       static get is() { return 'cer-funcionarios'; }
 
-      _cancelar(event) {
-        this._funcionario = null;
+      constructor() {
+        super();
+
+        this.collection   = firebase.firestore().collection('funcionarios');
+        this.queryFactory = (params) => this.collection;
       }
 
-      _adicionar(event) {
-        this._funcionario = {};
-      }
+      ready() {
+        super.ready();
 
-      _salvar(event) {
-        const form = this._getForm();
+        const getNome = (e) => `${e.detail.data.nome} ${e.detail.data.sobrenome}`;
 
-        if (!form.validate()) {
-          return;
-        }
-
-        const formData = form.serializeForm();
-        const key = this._funcionario.$key;
-        const ref = this.$.query.ref;
-
-        const funcionario = {
-          nome: formData.nome || null,
-          sobrenome: formData.sobrenome || null,
-          dataNascimento: formData.dataNascimento || null,
-          cpf: formData.cpf || null,
-          rg: formData.rg || null,
-          cep: formData.cep || null,
-          rua: formData.rua || null,
-          numero: formData.numero || null,
-          complemento: formData.complemento || null,
-          formacao: formData.formacao || null,
-          funcao: formData.funcao || null,
-          telefone: formData.telefone || null,
-          celular: formData.celular || null,
-          email: formData.email || null,
-          dataAdmissao: formData.dataAdmissao || null,
-          bairro: formData.bairro || null,
-          estado: formData.estado || null,
-          cidade: formData.cidade || null,
-        };
-
-        if (key) {
-          ref.child(key).update(funcionario).then(() => this._toast('Usuário atualizado com sucesso!'))
-        } else {
-          ref.push(funcionario).then(() => this._toast('Usuario adicionado com sucesso!'))
-        }
-
-        this._funcionario = null;
-      }
-
-      _excluir(event) {
-        this.$.query.ref.child(this._funcionario.$key).set(null).then(() => this._toast('Funcionário excluído com sucesso!'));
-
-        this._funcionario = null;
-      }
-
-      _toast(text) {
-        this.dispatchEvent(new CustomEvent('toast', { bubbles: true, composed: true, detail: { text } }))
-      }
-
-      _getForm() {
-        return this.$.dialog.$.overlay.$.content.querySelector('#form');
+        this.addEventListener('document-added', e => this._log(`Funcionário ${getNome(e)} adicionado`));
+        this.addEventListener('document-updated', e => this._log(`Funcionário ${getNome(e)} atualizado`));
+        this.addEventListener('document-deleted', e => this._log(`Funcionário ${getNome(e)} excluído`));
       }
     }
 

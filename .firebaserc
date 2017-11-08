@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "dev": "cer-dev",
+    "prod": "cer-prod",
+    "old": "cer-app-a5f10"
+  }
+}

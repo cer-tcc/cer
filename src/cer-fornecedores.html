@@ -1,33 +1,29 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/vaadin-valo-theme/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-sorter.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="cer-styles.html">
 <link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
 <link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
 <link rel="import" href="../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="cer-styles.html">
 
 <dom-module id="cer-fornecedores">
   <template>
     <style include="cer-page-styles"></style>
 
-    <firebase-query id="query" path="/fornecedores" data="{{_fornecedores}}">
-    </firebase-query>
+    <paper-fab id="fab" icon="add" elevation="5"></paper-fab>
 
     <paper-card heading="Fornecedores">
-      <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_fornecedores]]" active-item="{{_fornecedor}}">
+      <vaadin-grid id="grid" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
-            <vaadin-grid-sorter path="nome">Nome</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="nome">Nome fantasia</vaadin-grid-sorter>
           </template>
-          <template>[[item.nome]]</template>
+          <template>[[item.nomeFantasia]]</template>
         </vaadin-grid-column>
 
         <vaadin-grid-column>
@@ -37,46 +33,39 @@
           <template>[[item.email]]</template>
         </vaadin-grid-column>
 
-
         <vaadin-grid-column>
           <template class="header">
-            <vaadin-grid-sorter path="descricaoFornecedor">Descrição</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="cidade">Cidade</vaadin-grid-sorter>
           </template>
-          <template>[[item.descricaoFornecedor]]</template>
+          <template>[[item.cidade]]</template>
         </vaadin-grid-column>
       </vaadin-grid>
     </paper-card>
 
-    <paper-fab icon="add" elevation="5" on-click="_adicionar"></paper-fab>
-    <paper-toast id="toast"></paper-toast>
-
-    <vaadin-dialog id="dialog" opened="[[_fornecedor]]">
+    <vaadin-dialog id="dialog" opened="{{dialogOpened}}">
       <template>
         <paper-card heading="Fornecedor">
-          <dom-if if="[[_fornecedor]]" restamp>
+          <dom-if if="{{dialogOpened}}" restamp>
             <template>
               <iron-form id="form" class="card-content">
                 <form>
                   <vaadin-form-layout>
-                    <paper-input label="Nome Fantasia" name="nome" value="[[_fornecedor.nome]]" tabindex="1"></paper-input>
-                    <paper-input label="Razão Social" name="razaoSocial" value="[[_fornecedor.razaoSocial]]" tabindex="2"></paper-input>
-                    <!-- <br-cnpj-input name="cnpj" auto-validate value="[[_fornecedor.cnpj]]"  tabindex="2"></br-cnpj-input> -->
-                    <paper-input label="Inscrição Estadual" name="inscricaoEstadual" value="[[_fornecedor.inscricaoEstadual]]" tabindex="3"></paper-input>
-                    <paper-input label="E-mail" type="email" name="email" value="[[_fornecedor.email]]" auto-validate tabindex="4"></paper-input>
-                    <paper-input label="Descrição do Fornecedor" name="descricaoFornecedor" value="[[_fornecedor.descricaoFornecedor]]" tabindex="5"></paper-input>
-                    <paper-input label="Telefone" name="telefone" value="[[_fornecedor.telefone]]" tabindex="6"></paper-input>
-                    <paper-input label="Celular" name="celular" value="[[_fornecedor.celular]]" tabindex="7"></paper-input>
-                    <paper-input label="CEP" name="cep" value="[[_fornecedor.cep]]" tabindex="8"></paper-input>
+                    <paper-input label="Nome Fantasia" value="{{document.nomeFantasia}}" required tabindex="1"></paper-input>
+                    <paper-input label="Razão Social" value="{{document.razaoSocial}}" required tabindex="2"></paper-input>                    
+                    <paper-input label="CNPJ" value="{{document.cnpj}}" tabindex="3"></paper-input>
+                    <paper-input label="Inscrição Estadual" value="{{document.inscricaoEstadual}}" tabindex="4"></paper-input>
+                    
+                    <paper-input label="E-mail" value="{{document.email}}" type="email" auto-validate required tabindex="5"></paper-input>
+                    <paper-input label="Telefone" value="{{document.telefone}}" tabindex="6"></paper-input>
+                    <paper-input label="Celular" value="{{document.celular}}" tabindex="7"></paper-input>
 
-                    <!-- <br-tel-input name="telefone" value="[[_fornecedor.telefone]]"  tabindex="2"></br-tel-input>
-                  <br-cel-input name="celular" value="[[_fornecedor.celular]]"  tabindex="2"></br-cel-input>
-                  <br-cep-input name="cep" value="[[_fornecedor.cep]]"  tabindex="2"></br-cep-input> -->
-                    <paper-input label="Rua" name="rua" value="[[_fornecedor.rua]]" tabindex="9"></paper-input>
-                    <paper-input label="Número" allowed-pattern="[0-9\-]" name="numero" value="[[_fornecedor.numero]]" tabindex="10"></paper-input>
-                    <paper-input label="Complemento" name="complemento" value="[[_fornecedor.complemento]]" tabindex="11"></paper-input>
-                    <paper-input label="Bairro" name="bairro" value="[[_fornecedor.bairro]]" tabindex="12"></paper-input>
-                    <paper-input label="Estado" name="estado" value="[[_fornecedor.estado]]" tabindex="13"></paper-input>
-                    <paper-input label="Cidade" name="cidade" value="[[_fornecedor.cidade]]" tabindex="14"></paper-input>
+                    <paper-input label="CEP" value="{{document.cep}}" tabindex="8"></paper-input>
+                    <paper-input label="Logradouro" value="{{document.logradouro}}" tabindex="9"></paper-input>
+                    <paper-input label="Número" value="{{document.numero}}" type="number" tabindex="10"></paper-input>
+                    <paper-input label="Complemento" value="{{document.complemento}}" tabindex="11"></paper-input>
+                    <paper-input label="Bairro" value="{{document.bairro}}" tabindex="12"></paper-input>
+                    <paper-input label="Estado" value="{{document.estado}}" tabindex="13"></paper-input>
+                    <paper-input label="Cidade" value="{{document.cidade}}" required tabindex="14"></paper-input>
                   </vaadin-form-layout>
                 </form>
               </iron-form>
@@ -85,11 +74,11 @@
 
           <div class="card-actions layout horizontal justified">
             <span>
-                <paper-button class="red" on-tap="_excluir" hidden="[[!_fornecedor.$key]]">Excluir</paper-button>
+              <paper-button class="red" on-tap="_excluir" hidden="[[!document.id]]">Excluir</paper-button>
             </span>
 
             <span>
-              <paper-button on-tap="_cancelar">Cancelar</paper-button>
+              <paper-button on-tap="_closeDialog">Cancelar</paper-button>
               <paper-button class="primary" autofocus raised on-tap="_salvar">Salvar</paper-button>
             </span>
           </div>
@@ -98,67 +87,27 @@
     </vaadin-dialog>
   </template>
 
-  <script>
-    class FornecedoresPage extends Polymer.Element {
+  <script type="module">
+    import { CrudPage } from './CrudPage.js';
+
+    class FornecedoresPage extends CrudPage(Polymer.Element) {
       static get is() { return 'cer-fornecedores'; }
 
-      _cancelar(event) {
-        this._fornecedor = null;
+      constructor() {
+        super();
+
+        this.collection   = firebase.firestore().collection('fornecedores');
+        this.queryFactory = (params) => this.collection;
       }
 
-      _adicionar(event) {
-        this._fornecedor = {};
-      }
+      ready() {
+        super.ready();
 
-      _salvar(event) {
-        const form = this._getForm();
+        const getNome = (e) => e.detail.data.nomeFantasia;
 
-        if (!form.validate()) {
-          return;
-        }
-
-        const formData = form.serializeForm();
-        const key = this._fornecedor.$key;
-        const ref = this.$.query.ref;
-
-        const fornecedor = {
-          nome: formData.nome || null,
-          razaoSocial: formData.razaoSocial || null,
-          cnpj: formData.cnpj || null,
-          inscricaoEstadual: formData.inscricaoEstadual || null,
-          email: formData.email || null,
-          descricaoFornecedor: formData.descricaoFornecedor || null,
-          telefone: formData.telefone || null,
-          celular: formData.celular || null,
-          cep: formData.cep || null,
-          rua: formData.rua || null,
-          numero: formData.numero || null,
-          complemento: formData.complemento || null,
-          bairro: formData.bairro || null,
-          estado: formData.estado || null,
-          cidade: formData.cidade || null,
-        };
-
-        if (key) {
-          ref.child(key).update(fornecedor).then(() => this._toast('Fornecedor atualizado com sucesso!'))
-        } else {
-          ref.push(fornecedor).then(() => this._toast('Fornecedor adicionado com sucesso!'))
-        }
-        this._fornecedor = null;
-      }
-
-      _excluir(event) {
-        this.$.query.ref.child(this._fornecedor.$key).set(null).then(() => this._toast('Fornecedor excluído com sucesso!'));
-
-        this._fornecedor = null;
-      }
-
-      _toast(text) {
-        this.dispatchEvent(new CustomEvent('toast', { bubbles: true, composed: true, detail: { text } }))
-      }
-
-      _getForm() {
-        return this.$.dialog.$.overlay.$.content.querySelector('#form');
+        this.addEventListener('document-added', e => this._log(`Fornecedor ${getNome(e)} adicionado`));
+        this.addEventListener('document-updated', e => this._log(`Fornecedor ${getNome(e)} atualizado`));
+        this.addEventListener('document-deleted', e => this._log(`Fornecedor ${getNome(e)} excluído`));
       }
     }
 

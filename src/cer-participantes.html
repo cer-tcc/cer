@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/vaadin-material-theme/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
@@ -46,18 +45,6 @@
       }
     </style>
 
-    <firebase-query
-      id="fichasDeTriagemQuery"
-      path="/fichas-de-triagem"
-      data="{{_fichasDeTriagem}}">
-    </firebase-query>
-
-    <firebase-query
-      id="participantesQuery"
-      path="/participantes"
-      data="{{_participantes}}">
-    </firebase-query>
-
     <paper-tabs selected="{{selectedTab}}">
       <paper-tab>Fila de espera</paper-tab>
       <paper-tab>Matriculados</paper-tab>
@@ -65,7 +52,7 @@
 
     <iron-pages selected="[[selectedTab]]">
       <paper-card heading="Fila de espera">
-        <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_fichasDeTriagem]]" active-item="{{_fichaDeTriagem}}">
+        <vaadin-grid id="gridFilaDeEspera" theme="borderless row-dividers" active-item="{{_fichaDeTriagem}}">
           <vaadin-grid-column>
             <template class="header">
               <vaadin-grid-sorter path="nome">Candidato</vaadin-grid-sorter>
@@ -97,7 +84,7 @@
       </paper-card>
 
       <paper-card heading="Matriculados">
-        <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_participantes]]" active-item="{{_participante}}">
+        <vaadin-grid id="gridMatriculados" theme="borderless row-dividers" items="[[_participantes]]" active-item="{{_participante}}">
           <vaadin-grid-column>
             <template class="header">
               <vaadin-grid-sorter path="nome">Nome</vaadin-grid-sorter>
@@ -208,7 +195,9 @@
     </vaadin-dialog>    
   </template>
 
-  <script>
+  <script type="module">
+    import { createDataProvider } from './utils.js';
+
     class PaticipantesPage extends Polymer.Element {
       static get is() { return 'cer-participantes'; }
 
@@ -216,6 +205,15 @@
         return {
           selectedTab: {type: Number, value: 0}
         }
+      }
+
+      ready() {
+        super.ready();
+        
+        const db = firebase.firestore();
+
+        this.$.gridFilaDeEspera.dataProvider = createDataProvider((params) => db.collection('fichasDeTriagem'));
+        this.$.gridMatriculados.dataProvider = createDataProvider((params) => db.collection('participantes'));
       }
 
       _novaFichaDeTriagem(event) {
@@ -234,8 +232,8 @@
         }
 
         const formData = form.serializeForm();
-        const key      = this._fichaDeTriagem.$key;
-        const ref      = this.$.fichasDeTriagemQuery.ref;
+        const key      = this._fichaDeTriagem.id;
+        const ref      = firebase.firestore().collection('fichasDeTriagem');
 
         const fichaDeTriagem  = {
           nomeResponsavel: formData.nomeResponsavel,
@@ -257,9 +255,13 @@
         };
 
         if (key) {
-          ref.child(key).update(fichaDeTriagem).then(() => this._toast('Ficha de triagem atualizada com sucesso!'))
+          ref.doc(key).update(fichaDeTriagem);
+          
+          this._toast('Ficha de triagem atualizada');
         } else {
-          ref.push(fichaDeTriagem).then(() => this._toast('Entrevista com a assistente social agendada!'))
+          ref.add(fichaDeTriagem);
+
+          this._toast('Entrevista com a assistente social agendada');
         }
 
         this._fecharFichaDeTriagem();
@@ -282,26 +284,30 @@
       }
 
       _aprovar() {
-        const key = this._fichaDeTriagem.$key;
-        const ref = this.$.fichasDeTriagemQuery.ref;
+        const key = this._fichaDeTriagem.id;
+        const ref = firebase.firestore().collection('fichasDeTriagem');
 
-        ref.child(key).update({status: 'Aguardando matrícula'}).then(() => this._toast('Ficha aprovada com sucesso!'));
+        ref.doc(key).update({status: 'Aguardando matrícula'});
+
+        this._toast('Ficha aprovada com sucesso!');
 
         this._fecharFichaDeTriagem();
       }
 
       _reprovar() {
-        const key  = this._fichaDeTriagem.$key;
-        const ref  = this.$.fichasDeTriagemQuery.ref;
+        const key  = this._fichaDeTriagem.id;
+        const ref = firebase.firestore().collection('fichasDeTriagem');
 
-        ref.child(key).set(null).then(() => this._toast('Ficha reprovada com sucesso!'));
+        ref.doc(key).delete();
+
+        this._toast('Ficha reprovada com sucesso!');
 
         this._fecharFichaDeTriagem();
       }
 
       _matricular() {
         const participante = {
-          idFichaDeTriagem: this._fichaDeTriagem.$key,
+          idFichaDeTriagem: this._fichaDeTriagem.id,
           nomeResponsavel: this._fichaDeTriagem.nomeResponsavel,
           nome: this._fichaDeTriagem.nome,
           sobrenome: this._fichaDeTriagem.sobrenome,
@@ -310,7 +316,7 @@
           dataAgendamento: this._fichaDeTriagem.dataAgendamento,
           status: this._fichaDeTriagem.status || 'Em análise',
         };
-        
+
         this.selectedTab = 1;
 
         this._fecharFichaDeTriagem();
@@ -329,8 +335,8 @@
         }
 
         const formData = form.serializeForm();
-        const key      = this._participante.$key;
-        const ref      = this.$.participantesQuery.ref;
+        const key      = this._participante.id;
+        const ref      = firebase.firestore().collection('participantes');
 
         const participante  = {
           idFichaDeTriagem: this._participante.idFichaDeTriagem || null,
@@ -342,11 +348,15 @@
         };
 
         if (key) {
-          ref.child(key).update(participante).then(() => this._toast('Matrícula atualizada com sucesso!'))
+          ref.doc(key).update(participante);
+          
+          this._toast('Matrícula atualizada');
         } else {
-          ref.push(participante)
-            .then(() => this.$.fichasDeTriagemQuery.ref.child(participante.idFichaDeTriagem).set(null))
-            .then(() => this._toast('Participante matriculado com sucesso!'))
+          ref.add(participante);
+
+          firebase.firestore().collection('fichasDeTriagem').doc(participante.idFichaDeTriagem).delete();
+
+          this._toast('Participante matriculado com sucesso!');
         }
 
         this._fecharParticipante();
