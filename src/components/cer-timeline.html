@@ -81,6 +81,18 @@
 
     <div class="history-tl-container">
       <ul class="tl">
+        <dom-repeat items="[[records]]">
+          <template>
+            <li class="tl-item">
+              <div class="timestamp">
+                [[item.date]]
+              </div>
+              <div class="item-title">[[item.title]]</div>
+              <div class="item-detail">[[item.description]]</div>
+            </li>
+          </template>
+        </dom-repeat>
+
         <li class="tl-item">
           <div class="timestamp">
             07 de Novembro<br> 19:13
@@ -106,9 +118,19 @@
     </div>
   </template>
 
-  <script>
+  <script type="module">
+    import { getDocDataWithId } from '../utils.js';
+
     class CerTimeline extends Polymer.Element {
       static get is() { return 'cer-timeline'; }
+
+      ready() {
+        super.ready();
+
+        firebase.firestore().collection('timeline').orderBy('datetime', 'desc').onSnapshot((snapshot) => {
+          this.records = snapshot.docs.map(getDocDataWithId);
+        });
+      }
     }
 
     window.customElements.define(CerTimeline.is, CerTimeline);

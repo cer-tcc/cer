@@ -3,7 +3,9 @@ export const getDocDataWithId = (document) => Object.assign({id: document.id}, d
 export const createTimelineRecord = (date, title, description) => {
   const collection = firebase.firestore().collection('timeline');
 
-  collection.add({date, title, description});
+  const datetime = new DateTime();
+
+  collection.add({date, title, description, datetime});
 };
 
 export const createDataProvider = (queryFactory) => (params, callback) => {

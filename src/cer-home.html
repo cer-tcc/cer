@@ -21,7 +21,7 @@
       }
     </style>
 
-    <h1>Boa noite, Daniel!</h1>
+    <h1>Boa noite, [[nome]]!</h1>
     <cer-grafico-frequencia></cer-grafico-frequencia>
     <cer-timeline></cer-timeline>
   </template>
@@ -29,6 +29,12 @@
   <script>
     class HomePage extends Polymer.Element {
       static get is() { return 'cer-home'; }
+
+      ready() {
+        super.ready();
+
+        this.nome = firebase.auth().currentUser.displayName;
+      }
     }
 
     window.customElements.define(HomePage.is, HomePage);
