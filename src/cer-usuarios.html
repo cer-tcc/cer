@@ -20,8 +20,10 @@
     <style include="cer-page-styles">
     </style>
 
+    <paper-fab id="fab" icon="add" elevation="5"></paper-fab>
+
     <paper-card heading="Usuários">
-      <vaadin-grid id="grid" theme="borderless row-dividers" items="[[_usuarios]]" active-item="{{_usuario}}">
+      <vaadin-grid id="grid" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
             <vaadin-grid-sorter path="nome">Nome</vaadin-grid-sorter>
@@ -45,24 +47,22 @@
       </vaadin-grid>
     </paper-card>
 
-    <paper-fab icon="add" elevation="5" on-click="_adicionar"></paper-fab>
-
-    <vaadin-dialog id="dialog" opened="{{_usuario}}">
+    <vaadin-dialog id="dialog" opened="{{dialogOpened}}">
       <template>
         <paper-card heading="Usuario">
-          <dom-if if="[[_usuario]]" restamp>
+          <dom-if if="{{dialogOpened}}" restamp>
             <template>
               <iron-form id="form" class="card-content">
                 <form>
                   <vaadin-form-layout>
-                    <paper-input label="Nome" name="nome" value="[[_usuario.nome]]" tabindex="1" required></paper-input>
-                    <paper-input label="Sobrenome" name="sobrenome" value="[[_usuario.sobrenome]]" tabindex="2" required></paper-input>
-                    <paper-input type="email" label="E-mail" name="email" value="[[_usuario.email]]" tabindex="3" required auto-validate></paper-input>
+                    <paper-input label="Nome" name="nome" value="{{document.nome}}" tabindex="1" required></paper-input>
+                    <paper-input label="Sobrenome" name="sobrenome" value="{{document.sobrenome}}" tabindex="2" required></paper-input>
+                    <paper-input type="email" label="E-mail" name="email" value="{{document.email}}" tabindex="3" required auto-validate></paper-input>
                     <br>
 
-                    <paper-password-input name="senha" label="Senha" value="{{password}}" required></paper-password-input>
-                    <paper-password-input label="Confirmar senha" required auto-validate validator="match-passwords-validator" error-message="As senhas não coincidem"></paper-password-input>
-                    <match-passwords-validator id="match-passwords-validator" password="[[password]]"></match-passwords-validator>
+                    <paper-password-input name="senha" label="Senha" value="{{document.password}}" required="[[!document.id]]"></paper-password-input>
+                    <paper-password-input label="Confirmar senha" auto-validate validator="match-passwords-validator" required="[[!document.id]]" error-message="As senhas não coincidem"></paper-password-input>
+                    <match-passwords-validator id="match-passwords-validator" password="[[document.password]]"></match-passwords-validator>
                   </vaadin-form-layout>
                 </form>
               </iron-form>
@@ -71,11 +71,11 @@
 
           <div class="card-actions layout horizontal justified">
             <span>
-              <paper-button class="red" on-tap="_excluir" hidden="[[!_usuario.$key]]">Excluir</paper-button>
+              <paper-button class="red" on-tap="_excluir" hidden="[[!document.id]]">Excluir</paper-button>
             </span>
 
             <span>
-              <paper-button on-tap="_cancelar">Cancelar</paper-button>
+              <paper-button on-tap="_closeDialog">Cancelar</paper-button>
               <paper-button class="primary" autofocus raised on-tap="_salvar">Salvar</paper-button>
             </span>
           </div>
@@ -84,64 +84,28 @@
     </vaadin-dialog>
   </template>
 
-  <script>
-    class UsuariosPage extends Polymer.Element {
+  <script type="module">
+    import { CrudPage } from './CrudPage.js';
+      
+    class UsuariosPage extends CrudPage(Polymer.Element) {
       static get is() { return 'cer-usuarios'; }
 
-      _adicionar(event) {
-        this._usuario = {};
+      constructor() {
+        super();
+
+        this.collection   = firebase.firestore().collection('usuarios');
+        this.queryFactory = (params) => this.collection;
       }
 
-      _cancelar(event) {
-        this._usuario = null;
-      }
+      ready() {
+        super.ready();
 
-      _salvar(event) {
-        const form = this._getForm();
+        const getNome = (e) => `${e.detail.data.nome} ${e.detail.data.sobrenome}`;
 
-        if (! form.validate()) {
-          return;
-        }
-
-        const formData = form.serializeForm();
-        const key      = this._usuario.$key;
-        const ref      = this.$.query.ref;
-
-        const usuario  = {
-          nome: formData.nome || null,
-          sobrenome: formData.sobrenome || null,
-          email: formData.email || null,
-        };
-
-        if (formData.senha) {
-          usuario.senha = formData.senha;
-        }
-
-        if (key) {
-          ref.child(key).update(usuario).then(() => this._toast('Usuário atualizado com sucesso!'))
-        } else {
-          ref.push(usuario).then(() => this._toast('Usuario adicionado com sucesso!'))
-        }
-
-        this._usuario = null;
-      }
-
-      _excluir(event) {
-        const key  = this._usuario.$key;
-        const ref  = this.$.query.ref;
-
-        ref.child(key).set(null).then(() => this._toast('Usuário excluído com sucesso!'));
-
-        this._usuario = null;
-      }
-
-      _toast(text) {
-        this.dispatchEvent(new CustomEvent('toast', {bubbles: true, composed: true, detail: {text}}))
-      }
-
-      _getForm() {
-        return this.$.dialog.$.overlay.$.content.querySelector('#form');
-      }
+        this.addEventListener('document-added', e => this._log(`Usuário ${getNome(e)} adicionado`));
+        this.addEventListener('document-updated', e => this._log(`Usuário ${getNome(e)} atualizado`));
+        this.addEventListener('document-deleted', e => this._log(`Usuário ${getNome(e)} excluído`));
+      }      
     }
 
     window.customElements.define(UsuariosPage.is, UsuariosPage);

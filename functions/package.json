@@ -1,9 +1,24 @@
 {
   "name": "functions",
+  "version": "0.0.1",
   "description": "Cloud Functions for Firebase",
-  "dependencies": {
-    "firebase-admin": "~5.4.0",
-    "firebase-functions": "^0.7.0"
+  "main": "build/index.js",
+  "private": true,
+  "scripts": {
+    "build": "npm run clear && npm run lint && tsc",
+    "clear": "rm -rf build",
+    "deploy": "npm run build && firebase deploy --only functions",
+    "lint": "tslint --project tsconfig.json --format stylish",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc --watch"
   },
-  "private": true
+  "dependencies": {
+    "firebase-admin": "^5.5.1",
+    "firebase-functions": "^0.7.3"
+  },
+  "devDependencies": {
+    "firebase-tools": "^3.15.4",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.2"
+  }
 }
