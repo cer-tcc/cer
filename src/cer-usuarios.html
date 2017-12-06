@@ -36,7 +36,7 @@
             <vaadin-grid-sorter path="sobrenome">Sobrenome</vaadin-grid-sorter>
           </template>
           <template>[[item.sobrenome]]</template>
-        </vaadin-grid-column> 
+        </vaadin-grid-column>
 
         <vaadin-grid-column>
           <template class="header">
@@ -79,14 +79,14 @@
               <paper-button class="primary" autofocus raised on-tap="_salvar">Salvar</paper-button>
             </span>
           </div>
-        </paper-card>        
+        </paper-card>
       </template>
     </vaadin-dialog>
   </template>
 
   <script type="module">
     import { CrudPage } from './CrudPage.js';
-      
+
     class UsuariosPage extends CrudPage(Polymer.Element) {
       static get is() { return 'cer-usuarios'; }
 
@@ -105,7 +105,19 @@
         this.addEventListener('document-added', e => this._log(`Usuário ${getNome(e)} adicionado`));
         this.addEventListener('document-updated', e => this._log(`Usuário ${getNome(e)} atualizado`));
         this.addEventListener('document-deleted', e => this._log(`Usuário ${getNome(e)} excluído`));
-      }      
+      }
+
+      _openDialog(document) {
+        delete document.senha;
+
+        super._openDialog(document);
+      }
+
+      _salvar() {
+        this.document.sincronizado = false;
+
+        super._salvar();
+      }
     }
 
     window.customElements.define(UsuariosPage.is, UsuariosPage);
