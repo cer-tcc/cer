@@ -1,7 +1,7 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "CER",
   "authors": [
-    "The Polymer Authors"
+    "Grupo de TCC do curso de Sistemas de Informação da Unisal - Unidade Dom Bosco de Americana/SP"
   ],
   "license": "https://polymer.github.io/LICENSE.txt",
   "dependencies": {
