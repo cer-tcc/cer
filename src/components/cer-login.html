@@ -6,7 +6,7 @@
 <link rel="import" href="../../bower_components/paper-password-input/paper-password-input.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 <link rel="import" href="../../bower_components/vaadin-form-layout/vaadin-form-layout.html">
-<link rel="import" href="./cer-google-login.html">
+<link rel="import" href="./cer-login-provider.html">
 
 <dom-module id="cer-login">
   <template>
@@ -27,19 +27,37 @@
 
       div.separator {
         text-align: center;
-        margin: 16px 0;
+        margin-top: 16px;
         color: var(--paper-grey-500);
       }
 
       div.separator .text::before,
       div.separator .text::after {
-        content: ' ';
+        content: '  ';
         white-space: pre;
       }
 
       strike::before,
       strike::after {
         content: '\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0';
+      }
+
+      .container {
+        display: block;
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 16px;
+      }
+
+      .card-providers {
+        /* border: 1px solid red; */
+        display:inline-flex;
+        text-align: center;
+        width: 100%;
+      }
+
+      cer-login-provider {
+        padding: 8px 0;
       }
     </style>
 
@@ -81,7 +99,14 @@
         <strike></strike>
       </div>
 
-      <cer-google-login></cer-google-login>
+      <div class="container">
+        <div class="card-providers">
+          <cer-login-provider provider="google" label="Entrar com o Google"></cer-login-provider>
+          <!-- <cer-login-provider provider="facebook" label="Entrar com o Facebook"></cer-login-provider> -->
+          <!-- <cer-login-provider provider="github"></cer-login-provider> -->
+          <!-- <cer-login-provider provider="twitter"></cer-login-provider> -->
+        </div>
+      </div>
 
     </paper-dialog>
   </template>
