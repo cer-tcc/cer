@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-avatar/paper-avatar.html">
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/vaadin-material-theme/vaadin-grid.html">
 <link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
@@ -24,6 +25,17 @@
 
     <paper-card heading="Usuários">
       <vaadin-grid id="grid" theme="borderless row-dividers">
+
+        <vaadin-grid-column width="64px" flex-grow="0">
+          <template class="header">
+            <div aria-label="Avatar"></div>
+          </template>
+          <template>
+            <paper-avatar label="[[_nomeCompleto(item.nome, item.sobrenome)]]" src="[[item.avatar]]" two-chars></paper-avatar>
+          </template>
+        </vaadin-grid-column>
+
+
         <vaadin-grid-column>
           <template class="header">
             <vaadin-grid-sorter path="nome">Nome</vaadin-grid-sorter>
@@ -105,6 +117,10 @@
         this.addEventListener('document-added', e => this._log(`Usuário ${getNome(e)} adicionado`));
         this.addEventListener('document-updated', e => this._log(`Usuário ${getNome(e)} atualizado`));
         this.addEventListener('document-deleted', e => this._log(`Usuário ${getNome(e)} excluído`));
+      }
+
+      _nomeCompleto(nome, sobrenome) {
+        return `${nome} ${sobrenome}`;
       }
 
       _openDialog(document) {

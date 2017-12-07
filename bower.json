@@ -33,7 +33,8 @@
     "vaadin-date-picker": "vaadin/vaadin-date-picker#^2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.0.0",
-    "paper-dropdown-menu": "^2.0.0"
+    "paper-dropdown-menu": "^2.0.0",
+    "paper-avatar": "Abe90/paper-avatar#^1.0.4"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"
