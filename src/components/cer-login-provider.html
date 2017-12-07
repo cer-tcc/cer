@@ -1,0 +1,87 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+
+<link rel="import" href="../cer-icons.html">
+
+<dom-module id="cer-login-provider">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+      }
+
+      paper-button {
+				@apply --paper-font-button;
+
+        color: white;
+        width: 100%;
+        margin: 0;
+        padding: 8px 16px;
+      }
+
+      paper-button.facebook {
+        background-color: #244992;
+      }
+
+      paper-button.google {
+        color: var(--paper-grey-700);
+        background-color: white;
+      }
+
+      .label {
+        margin-left: 8px;
+      }
+
+      paper-button.twitter {
+        background-color: white;
+      }
+    </style>
+
+    <paper-button class$="[[provider]]" on-tap="login" raised>
+      <iron-icon icon="cer-icons:[[provider]]"></iron-icon>
+      <span class="label" hidden$="[[!label]]">[[label]]</span>
+    </paper-button>
+
+  </template>
+
+  <script>
+    class CerLoginProvider extends Polymer.Element {
+			static get is() { return 'cer-login-provider'; }
+      static get properties() {
+        return {
+          provider: String,
+          label: String,
+
+          _authProvider: {
+            type: Object,
+            computed: '_computeAuthProvider(provider)',
+          },
+        };
+      }
+
+      _computeAuthProvider(provider) {
+        switch(provider) {
+          case 'facebook':
+            return new firebase.auth.FacebookAuthProvider();
+          case 'github':
+            return new firebase.auth.GithubAuthProvider();
+          case 'google':
+            return new firebase.auth.GoogleAuthProvider();
+          case 'twitter':
+            return new firebase.auth.TwitterAuthProvider();
+          default:
+            return new firebase.auth.GoogleAuthProvider();
+        }
+      }
+
+      login() {
+        firebase.auth().signInWithPopup(this._authProvider);
+      }
+    }
+
+    window.customElements.define(CerLoginProvider.is, CerLoginProvider);
+  </script>
+</dom-module>
