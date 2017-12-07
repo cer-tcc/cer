@@ -10,6 +10,9 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 <link rel="import" href="cer-styles.html">
 
 <dom-module id="cer-voluntarios">
@@ -18,8 +21,23 @@
 
     <paper-fab id="fab" icon="add" elevation="5"></paper-fab>
 
-    <paper-card heading="Voluntários">
-      <vaadin-grid id="grid" theme="borderless row-dividers">
+    <paper-card>
+      <div class="card-header">
+        <div class="card-title">Voluntários</div>
+        <paper-input class="card-search" placeholder="Pesquise por nome, email ou cidade" value="{{pesquisa}}" no-label-float>
+          <iron-icon icon="search" slot="prefix"></iron-icon>
+        </paper-input>
+
+        <paper-dropdown-menu label="Dinosaurs" no-label-float>
+          <paper-listbox slot="dropdown-content" selected="0">
+            <paper-item>Últimos 7 dias</paper-item>
+            <paper-item>Últimos 30 dias</paper-item>
+            <paper-item>Desde o começo</paper-item>
+          </paper-listbox>
+        </paper-dropdown-menu>
+      </div>
+
+      <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa)]]" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
             <vaadin-grid-sorter path="nomeCompleto">Nome</vaadin-grid-sorter>
@@ -46,7 +64,7 @@
               <vaadin-grid-sorter path="cidade">Cidade</vaadin-grid-sorter>
             </template>
             <template>[[item.cidade]]</template>
-          </vaadin-grid-column>        
+          </vaadin-grid-column>
       </vaadin-grid>
     </paper-card>
 
@@ -65,18 +83,18 @@
 
                     <!-- Todo: Sexo (radio) -->
 
-                    <paper-input label="Data de Nascimento" value="{{document.dataNascimento}}" type="date" tabindex="3"></paper-input>                    
+                    <paper-input label="Data de Nascimento" value="{{document.dataNascimento}}" type="date" tabindex="3"></paper-input>
 
                     <!-- Todo: CPF (mask) -->
                     <paper-input label="CPF" value="{{document.cpf}}" tabindex="4"></paper-input>
-                    
+
                     <!-- Todo: Estado civil (select) -->
 
                     <paper-input label="E-mail" value="{{document.email}}" type="email" auto-validate required tabindex="5"></paper-input>
 
                     <!-- Todo: Telefone (mask) -->
                     <paper-input label="Telefone" value="{{document.telefone}}" required tabindex="6"></paper-input>
-                    
+
                     <!-- Todo: Data do início do trabalho voluntário (datepicker) -->
 
                     <!-- Todo: CEP (mask + carregar endereço) -->
@@ -112,28 +130,31 @@
 
   <script type="module">
       import { CrudPage } from './CrudPage.js';
-  
+
       class VoluntariosPage extends CrudPage(Polymer.Element) {
         static get is() { return 'cer-voluntarios'; }
-  
+
         constructor() {
           super();
-  
-          this.collection   = firebase.firestore().collection('voluntarios');
-          this.queryFactory = (params) => this.collection;
+
+          this.collection = firebase.firestore().collection('voluntarios');
+          this.fuse = new Fuse([], {
+            keys: ['nome', 'sobrenome', 'email', 'cidade'],
+            threshold: 0.1,
+          });
         }
-  
+
         ready() {
           super.ready();
-  
+
           const getNome = (e) => `${e.detail.data.nome} ${e.detail.data.sobrenome}`;
-  
+
           this.addEventListener('document-added', e => this._log(`Voluntário ${getNome(e)} adicionado`));
           this.addEventListener('document-updated', e => this._log(`Voluntário ${getNome(e)} atualizado`));
           this.addEventListener('document-deleted', e => this._log(`Voluntário ${getNome(e)} excluído`));
         }
       }
-  
+
       window.customElements.define(VoluntariosPage.is, VoluntariosPage);
     </script>
 </dom-module>

@@ -1,11 +1,17 @@
-import { createTimelineRecord, createDataProvider } from './utils.js';
+import { createTimelineRecord, getDocDataWithId } from './utils.js';
 
 export const CrudPage = (superClass) => class extends superClass {
   ready() {
     super.ready();
 
-    // Setup grid data provider
-    this.$.grid.dataProvider = createDataProvider(this.queryFactory);
+    // Listen for Firestore collection snapshots
+    this.collection.onSnapshot((snapshot) => {
+      // Update internal documents list
+      this.documents = snapshot.docs.map(getDocDataWithId);
+
+      // Update fuse index
+      this.fuse.setCollection(this.documents);
+    });
 
     // Open dialog when a document is selected
     this.$.grid.addEventListener('active-item-changed', (e) => {
@@ -27,7 +33,7 @@ export const CrudPage = (superClass) => class extends superClass {
 
   _openDialog(document) {
     this.document     = Object.assign({}, document);
-    this.dialogOpened = true;          
+    this.dialogOpened = true;
   }
 
   _closeDialog() {
@@ -38,11 +44,11 @@ export const CrudPage = (superClass) => class extends superClass {
   _excluir() {
     const id   = this.document.id;
     const data = Object.assign({}, this.document);
-    
+
     this.collection.doc(id).delete();
-    
+
     this.dispatchEvent(new CustomEvent('document-deleted', { detail: { id, data } }));
-    this._closeDialog();    
+    this._closeDialog();
   }
 
   _salvar() {
@@ -64,7 +70,7 @@ export const CrudPage = (superClass) => class extends superClass {
       this.dispatchEvent(new CustomEvent('document-updated', { detail: { id, data } }));
     } else {
       this.collection.add(data);
-    
+
       this.dispatchEvent(new CustomEvent('document-added', { detail: { data } }));
     }
 
@@ -79,5 +85,13 @@ export const CrudPage = (superClass) => class extends superClass {
     this.dispatchEvent(new CustomEvent('toast', { bubbles: true, composed: true, detail: { text } }));
 
     createTimelineRecord('08 Novembro', text, 'por ' + firebase.auth().currentUser.displayName);
+  }
+
+  _pesquisar(documents, pesquisa) {
+    if (! pesquisa) {
+      return this.documents;
+    }
+
+    return this.fuse.search(pesquisa);
   }
 }

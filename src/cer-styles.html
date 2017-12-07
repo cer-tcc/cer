@@ -58,7 +58,7 @@
     <style>
       :host {
         display: block;
-        padding-top: 48px;
+        padding: 48px;
         display: flex;
         justify-content: center;
       }
@@ -77,6 +77,37 @@
         background-color: var(--paper-blue-grey-800);
         bottom: 25px;
         right: 25px;
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+
+        height: 64px;
+
+        padding-right: 14px;
+        padding-left: 24px;
+
+        --paper-input-container-underline: {
+          display: none;
+        };
+
+        --paper-input-container-underline-focus: {
+          display: none;
+        };
+
+        --paper-input-container-underline-disabled: {
+          display: none;
+        };
+      }
+
+      .card-header > .card-title {
+        font-size: 20px;
+      }
+
+      .card-header > .card-search {
+        flex: 1;
+        margin: 0 24px;
       }
     </style>
   </template>
