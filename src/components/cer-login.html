@@ -1,6 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-password-input/min-length-validator.html">
 <link rel="import" href="../../bower_components/paper-password-input/paper-password-input.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 <link rel="import" href="../../bower_components/vaadin-form-layout/vaadin-form-layout.html">
@@ -15,27 +17,72 @@
 
       .btn-login {
         @apply --paper-font-button;
-        margin-top: 12px;
+        margin-top: 24px;
+        margin-left: -1px;
         background-color: var(--paper-blue-700);
         color: white;
+        width: 100%;
       }
 
-      cer-google-login {
-        padding-top: 20px;
+      div.separator {
+        text-align: center;
+        margin: 16px 0;
+        color: var(--paper-grey-500);
       }
+
+      div.separator .text::before,
+      div.separator .text::after {
+        content: ' ';
+        white-space: pre;
+      }
+
+      strike::before,
+      strike::after {
+        content: '\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0';
+      }
+
     </style>
 
-    <paper-dialog id="login" opened="[[opened]]" no-cancel-on-esc-key no-cancel-on-outside-click>
-      <vaadin-form-layout>
-        <paper-input label="Usuário"></paper-input><br>
+    <paper-dialog id="login" opened="[[opened]]"
+        no-cancel-on-esc-key no-cancel-on-outside-click
+        on-iron-overlay-opened="_onOpenDialog"
+        on-iron-overlay-closed="_onCloseDialog">
+      <iron-form id="form">
+        <form method="get">
+          <paper-input
+            id="inputEmail"
+            type="email"
+            label="Usuário"
+            value="{{email}}"
+            auto-focus
+            auto-validate="[[_canAutoValidate(email)]]"
+            error-message="Forneça um email válido (usuario@exemplo.com)"
+            required>
+          </paper-input><br>
 
-        <paper-password-input label="Senha" auto-validate auto-focus>
-        </paper-password-input>
+          <min-length-validator id="min-length-validator" min-length="6"></min-length-validator>
+          <paper-password-input
+            label="Senha"
+            value="{{password}}"
+            auto-validate="[[_canAutoValidate(password)]]"
+            validator="min-length-validator"
+            error-message="Digite pelo menos 6 caracteres"
+            required>
+          </paper-password-input>
 
-        <paper-button class="btn-login">Entrar</paper-button>
+          <paper-button class="btn-login" on-tap="login">Entrar</paper-button>
 
-        <cer-google-login></cer-google-login>
-      </vaadin-form-layout>
+        </form>
+      </iron-form>
+
+      <div class="separator">
+        <strike></strike>
+        <span class="text">Ou</span>
+        <strike></strike>
+      </div>
+
+      <cer-google-login></cer-google-login>
+
     </paper-dialog>
   </template>
 
@@ -43,8 +90,58 @@
     class CerLogin extends Polymer.Element {
       static get is() { return 'cer-login'; }
       static get properties() {
-        opened: Boolean
-      };
+        return {
+          opened: Boolean,
+          email: String,
+          password: String,
+        };
+      }
+
+      _onOpenDialog() {
+        if (!this.email) {
+          this.$.inputEmail.focus();
+        }
+      }
+
+      _onCloseDialog() {
+        this.email = undefined;
+        this.password = undefined;
+      }
+
+      _canAutoValidate(value) {
+        return !!value;
+      }
+
+      login() {
+        if (!this.$.form.validate()) {
+          return;
+        }
+
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch((error) => {
+          this.fire('toast', {
+            text: this.localize(error),
+          });
+        });
+      }
+
+      localize(error) {
+        switch(error.code) {
+          case 'auth/wrong-password':
+            return 'A senha é inválida ou o usuário não possui uma senha.';
+          case 'auth/invalid-email':
+            return 'O endereço de e-mail está mal formatado.';
+          default:
+            return error.message;
+        }
+      }
+
+      fire(name, detail) {
+        this.dispatchEvent(new CustomEvent(name, {
+          composed: true,
+          bubbles: true,
+          detail: detail,
+        }));
+      }
     }
 
     window.customElements.define(CerLogin.is, CerLogin);
