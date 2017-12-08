@@ -130,4 +130,8 @@ export const CrudPage = (superClass) => class extends superClass {
   _formatDate(date) {
     return date.toLocaleDateString();
   }
+
+  _print() {
+    window.print();
+  }
 }

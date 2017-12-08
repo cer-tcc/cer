@@ -20,6 +20,8 @@
           </paper-input>
           <template><paper-item>[[item.label]]</paper-item></template>
         </vaadin-combo-box-light>
+
+        <paper-icon-button icon="print" on-tap="_print"></paper-icon-button>
       </div>
 
       <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">

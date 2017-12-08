@@ -137,6 +137,12 @@
       .card-header > .card-filter > paper-input {
         text-align: right;
       }
+
+      @media print {
+        .card-header > *:not(.card-title) {
+          display: none;
+        }
+      }
     </style>
   </template>
 </dom-module>

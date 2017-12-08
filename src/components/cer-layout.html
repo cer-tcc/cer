@@ -50,6 +50,23 @@
       app-drawer {
         border-right: 1px solid #e4e4e4;
       }
+
+      @media print {
+        app-header {
+          display: none;
+        }
+
+        app-drawer {
+          display: none;
+        }
+
+        iron-pages {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+        }
+      }
     </style>
 
     <app-header-layout fullbleed has-scrolling-region>
