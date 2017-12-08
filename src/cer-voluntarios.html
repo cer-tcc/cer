@@ -144,10 +144,7 @@
           super();
 
           this.collection = firebase.firestore().collection('voluntarios');
-          this.fuse = new Fuse([], {
-            keys: ['nome', 'sobrenome', 'email', 'cidade'],
-            threshold: 0.1,
-          });
+          this.searchKeys = ['nome', 'sobrenome', 'email', 'cidade'];
         }
 
         ready() {

@@ -15,6 +15,12 @@ export const CrudPage = (superClass) => class extends superClass {
   ready() {
     super.ready();
 
+    this.fuse = new Fuse([], {
+      keys: this.searchKeys,
+      threshold: 0.1,
+      tokenize: true,
+    });
+
     // Listen for Firestore collection snapshots
     this.collection.orderBy('dtCriado').onSnapshot((snapshot) => {
       // Update internal documents list
