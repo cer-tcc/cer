@@ -61,7 +61,6 @@
         }
 
         var start = this.$.input.$.nativeInput.selectionStart;
-
         var previousCharADotOrDash = value.charAt(start - 1) === '.' || value.charAt(start - 1) === '-';
 
         // Remove any already-applied formatting.
@@ -105,8 +104,6 @@
       }
 
       _isValidCPF(value) {
-        console.warn('_isValidCPF');
-        console.log('value', value);
         value = value.toString().replace(/[^0-9]+/g, '');
 
         var soma = [];
@@ -126,7 +123,6 @@
           return false;
         }
 
-        console.log('CPF true');
         return true;
       }
 
@@ -142,7 +138,6 @@
         }
 
         if (!this._isValidCPF(this.value)) {
-          console.log('invalid cpf');
           this.errorMessage = 'O CPF informado é inválido!';
           return false;
         }
