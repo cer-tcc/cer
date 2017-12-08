@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/vaadin-material-theme/vaadin-grid.html">
+<link rel="import" href="../bower_components/vaadin-material-theme/vaadin-text-field.html">
 <link rel="import" href="../bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
@@ -19,6 +20,14 @@
 <dom-module id="cer-vaadin-overlay-theme" theme-for="vaadin-overlay">
   <template>
     <style include="iron-flex iron-flex-alignment">
+      :host {
+        /* Make nice gaps inside viewport */
+        top: 8px;
+        right: 8px;
+        left: 8px;
+        bottom: 8px;
+      }
+
       [part="overlay"] {
         background: transparent;
         box-shadow: 0;
@@ -51,6 +60,17 @@
 
       paper-button.disabled {
         color: white;
+      }
+    </style>
+  </template>
+</dom-module>
+
+<dom-module id="cer-vaadin-combo-box-overlay-theme" theme-for="vaadin-combo-box-overlay">
+  <template>
+    <style>
+      [part="overlay"] {
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
     </style>
   </template>
@@ -114,14 +134,8 @@
         margin: 0 24px;
       }
 
-      .card-header > .card-filter {
-        --paper-dropdown-menu-input: {
-          text-align: right;
-        };
-
-        --paper-dropdown-menu-ripple: {
-          display: none;
-        }
+      .card-header > .card-filter > paper-input {
+        text-align: right;
       }
     </style>
   </template>

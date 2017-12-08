@@ -36,7 +36,8 @@
     "paper-dropdown-menu": "^2.0.0",
     "paper-avatar": "Abe90/paper-avatar#^1.0.4",
     "neon-animation": "^2.0.2",
-    "web-animations-js": "^2.3.1"
+    "web-animations-js": "^2.3.1",
+    "vaadin-combo-box": "^3.0.2"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"

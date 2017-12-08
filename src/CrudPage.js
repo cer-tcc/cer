@@ -1,14 +1,16 @@
-import { createTimelineRecord, getDocDataWithId, filterByPeriodo } from './utils.js';
+import { createTimelineRecord, getDocDataWithId } from './utils.js';
 
 export const CrudPage = (superClass) => class extends superClass {
   static get properties() {
     return {
-      documents: {
-        type: Array,
-        value: () => [],
-      },
+      documents: { type: Array, value: () => [] },
       pesquisa: String,
-      periodo: String,
+      periodo: { type: Number, value: 0 },
+      filters: { type: Array, value: () => [
+        { label: 'Últimos 7 dias', value: 7 },
+        { label: 'Últimos 30 dias', value: 30 },
+        { label: 'Desde o começo', value: 0 },
+      ]},
     }
   }
 
@@ -97,7 +99,11 @@ export const CrudPage = (superClass) => class extends superClass {
     let results = [...documents];
 
     if (periodo) {
-      results = filterByPeriodo(periodo)(documents);
+      const date = new Date();
+
+      date.setDate(date.getDate() - periodo);
+
+      results = results.filter((doc) => doc.dtCriado >= date);
     }
 
     if (pesquisa) {

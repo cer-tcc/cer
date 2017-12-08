@@ -13,6 +13,7 @@
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/vaadin-combo-box/vaadin-combo-box-light.html">
 <link rel="import" href="cer-styles.html">
 
 <dom-module id="cer-voluntarios">
@@ -29,13 +30,12 @@
           <iron-icon icon="search" slot="prefix"></iron-icon>
         </paper-input>
 
-        <paper-dropdown-menu class="card-filter" value="{{periodo}}" no-label-float>
-          <paper-listbox slot="dropdown-content" selected="0">
-            <paper-item>Últimos 7 dias</paper-item>
-            <paper-item>Últimos 30 dias</paper-item>
-            <paper-item>Desde o começo</paper-item>
-          </paper-listbox>
-        </paper-dropdown-menu>
+        <vaadin-combo-box-light class="card-filter" items="[[filters]]" value="{{periodo}}">
+          <paper-input no-label-float readonly>
+            <iron-icon icon="arrow-drop-down" slot="suffix" prefix></iron-icon>
+          </paper-input>
+          <template><paper-item>[[item.label]]</paper-item></template>
+        </vaadin-combo-box-light>
       </div>
 
       <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">
