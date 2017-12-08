@@ -3,6 +3,7 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
 <link rel="import" href="./components/cer-layout.html">
 <link rel="import" href="./components/cer-login.html">
 <link rel="import" href="./cer-styles.html">
@@ -27,7 +28,7 @@
     </style>
 
     <paper-spinner id="loading" active></paper-spinner>
-    
+
     <cer-login id="login"></cer-login>
 
     <app-location route="{{route}}"></app-location>
@@ -47,7 +48,7 @@
       </template>
     </dom-if>
 
-    <paper-toast id="toast"></paper-toast>    
+    <paper-toast id="toast"></paper-toast>
   </template>
 
   <script>
@@ -94,7 +95,7 @@
         // Load page import on demand. Show 404 page if fails
         const resolvedPageUrl = this.resolveUrl('cer-' + this.page + '.html');
 
-        Polymer.importHref(resolvedPageUrl, null, () => this.page = '404', true);        
+        Polymer.importHref(resolvedPageUrl, null, () => this.page = '404', true);
       }
     }
 
