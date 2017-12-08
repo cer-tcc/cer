@@ -1,0 +1,157 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="br-cpf-input">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <paper-input
+      id="input"
+      auto-validate="{{autoValidate}}"
+      label="{{label}}"
+      value="{{value}}"
+      pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+      prevent-invalid-input
+      error-message="{{errorMessage}}"
+      required$="{{required}}">
+    </paper-input>
+
+  </template>
+
+  <script>
+    class BrCpfInput extends Polymer.Element {
+      static get is() {
+        return 'br-cpf-input';
+      }
+
+      static get properties() {
+        return {
+          label: {
+            type: String,
+            value: "CPF"
+          },
+
+          value: {
+            type: String,
+            notify: true,
+          },
+
+          autoValidate: Boolean,
+          errorMessage: {
+            type: String,
+          },
+          required: Boolean,
+        };
+      }
+
+      static get observers() {
+        return [
+          '_computeValue(value)',
+        ];
+      }
+
+      _computeValue(value) {
+        if (!value) {
+          return;
+        }
+
+        var start = this.$.input.$.nativeInput.selectionStart;
+
+        var previousCharADotOrDash = value.charAt(start - 1) === '.' || value.charAt(start - 1) === '-';
+
+        // Remove any already-applied formatting.
+        value = value.replace(/[-.]/g, '');
+
+        // Add a dot after the 3rd character
+        if (value.length > 3) {
+          value = value.substr(0,3) + '.' + value.substr(3);
+        }
+
+        // Add a dot after the 7th character
+        if (value.length > 7) {
+          value = value.substr(0,7) + '.' + value.substr(7);
+        }
+
+        // Add a dash after the 11th character
+        if (value.length > 11) {
+          value = value.substr(0,11) + '-' + value.substr(11);
+        }
+
+        // Remove trailing numbers
+        if (value.length > 14) {
+          value = value.substr(0,14);
+        }
+
+        // Update value with the computer
+        this.$.input.updateValueAndPreserveCaret(value.trim());
+
+        // If the character right before the selection is a newly inserted
+        // dot or dash, we need to advance the selection to maintain the caret position.
+        if (!previousCharADotOrDash && (value.charAt(start - 1) === '-' || value.charAt(start - 1) === '.')) {
+          this.$.input.selectionStart = start + 1;
+          this.$.input.selectionEnd = start + 1;
+        }
+
+        return value;
+      }
+
+      _reduceSum(previousValue, currentValue) {
+        return previousValue + currentValue;
+      }
+
+      _isValidCPF(value) {
+        console.warn('_isValidCPF');
+        console.log('value', value);
+        value = value.toString().replace(/[^0-9]+/g, '');
+
+        var soma = [];
+        var soma2 = [];
+
+        for (var i = 0; i < 10; i++) {
+          if (value == i.toString().repeat(11) || value == '12345678909') return false;
+          if (i < 9) soma.push(parseInt(value[i]) * (10 - i));
+          soma2.push(parseInt(value[i]) * (11 - i));
+        }
+
+        if (((soma.reduce(this._reduceSum) % 11) < 2 ? 0 : 11 - (soma.reduce(this._reduceSum) % 11)) != value[9]) {
+          return false;
+        }
+
+        if (((soma2.reduce(this._reduceSum) % 11) < 2 ? 0 : 11 - (soma2.reduce(this._reduceSum) % 11)) != value[10]) {
+          return false;
+        }
+
+        console.log('CPF true');
+        return true;
+      }
+
+      validate() {
+        if (this.required && !this.value) {
+          this.errorMessage = 'Campo obrigatório!';
+          return false;
+        }
+
+        if (!this.$.input.validate()) {
+          this.errorMessage = 'É necessário estar no formato de 14 dígitos (nnn.nnn.nnn-nn)';
+          return false;
+        }
+
+        if (!this._isValidCPF(this.value)) {
+          console.log('invalid cpf');
+          this.errorMessage = 'O CPF informado é inválido!';
+          return false;
+        }
+
+        return true;
+      }
+
+    }
+
+    customElements.define(BrCpfInput.is, BrCpfInput);
+  </script>
+</dom-module>
