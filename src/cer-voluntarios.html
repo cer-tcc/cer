@@ -24,11 +24,12 @@
     <paper-card>
       <div class="card-header">
         <div class="card-title">Voluntários</div>
+
         <paper-input class="card-search" placeholder="Pesquise por nome, email ou cidade" value="{{pesquisa}}" no-label-float>
           <iron-icon icon="search" slot="prefix"></iron-icon>
         </paper-input>
 
-        <paper-dropdown-menu label="Dinosaurs" no-label-float>
+        <paper-dropdown-menu class="card-filter" value="{{periodo}}" no-label-float>
           <paper-listbox slot="dropdown-content" selected="0">
             <paper-item>Últimos 7 dias</paper-item>
             <paper-item>Últimos 30 dias</paper-item>
@@ -37,7 +38,7 @@
         </paper-dropdown-menu>
       </div>
 
-      <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa)]]" theme="borderless row-dividers">
+      <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
             <vaadin-grid-sorter path="nomeCompleto">Nome</vaadin-grid-sorter>
@@ -53,18 +54,23 @@
         </vaadin-grid-column>
 
         <vaadin-grid-column>
-          <template class="header">
-            <vaadin-grid-sorter path="telefone">Telefone</vaadin-grid-sorter>
-          </template>
+          <template class="header">Telefone</template>
           <template>[[item.telefone]]</template>
         </vaadin-grid-column>
 
         <vaadin-grid-column>
-            <template class="header">
-              <vaadin-grid-sorter path="cidade">Cidade</vaadin-grid-sorter>
-            </template>
-            <template>[[item.cidade]]</template>
-          </vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="cidade">Cidade</vaadin-grid-sorter>
+          </template>
+          <template>[[item.cidade]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="cidade">Data de inclusão</vaadin-grid-sorter>
+          </template>
+          <template>[[_formatDate(item.dtCriado)]]</template>
+        </vaadin-grid-column>
       </vaadin-grid>
     </paper-card>
 

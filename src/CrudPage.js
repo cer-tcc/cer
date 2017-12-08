@@ -1,16 +1,24 @@
-import { createTimelineRecord, getDocDataWithId } from './utils.js';
+import { createTimelineRecord, getDocDataWithId, filterByPeriodo } from './utils.js';
 
 export const CrudPage = (superClass) => class extends superClass {
+  static get properties() {
+    return {
+      documents: {
+        type: Array,
+        value: () => [],
+      },
+      pesquisa: String,
+      periodo: String,
+    }
+  }
+
   ready() {
     super.ready();
 
     // Listen for Firestore collection snapshots
-    this.collection.onSnapshot((snapshot) => {
+    this.collection.orderBy('dtCriado').onSnapshot((snapshot) => {
       // Update internal documents list
       this.documents = snapshot.docs.map(getDocDataWithId);
-
-      // Update fuse index
-      this.fuse.setCollection(this.documents);
     });
 
     // Open dialog when a document is selected
@@ -69,12 +77,30 @@ export const CrudPage = (superClass) => class extends superClass {
 
       this.dispatchEvent(new CustomEvent('document-updated', { detail: { id, data } }));
     } else {
+      data.dtCriado = new Date();
+
       this.collection.add(data);
 
       this.dispatchEvent(new CustomEvent('document-added', { detail: { data } }));
     }
 
     this._closeDialog();
+  }
+
+  _pesquisar(documents, pesquisa, periodo) {
+    let results = [...documents];
+
+    if (periodo) {
+      results = filterByPeriodo(periodo)(documents);
+    }
+
+    if (pesquisa) {
+      this.fuse.setCollection(results);
+
+      results = this.fuse.search(pesquisa);
+    }
+
+    return results;
   }
 
   _getForm() {
@@ -87,11 +113,7 @@ export const CrudPage = (superClass) => class extends superClass {
     createTimelineRecord('08 Novembro', text, 'por ' + firebase.auth().currentUser.displayName);
   }
 
-  _pesquisar(documents, pesquisa) {
-    if (! pesquisa) {
-      return this.documents;
-    }
-
-    return this.fuse.search(pesquisa);
+  _formatDate(date) {
+    return date.toLocaleDateString();
   }
 }
