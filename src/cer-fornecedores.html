@@ -1,15 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-column.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-sorter.html">
-<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
-<link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
-<link rel="import" href="../bower_components/iron-form/iron-form.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="cer-styles.html">
+<link rel="import" href="components/cer-crud-page-imports.html">
 
 <dom-module id="cer-fornecedores">
   <template>
@@ -17,8 +6,23 @@
 
     <paper-fab id="fab" icon="add" elevation="5"></paper-fab>
 
-    <paper-card heading="Fornecedores">
-      <vaadin-grid id="grid" theme="borderless row-dividers">
+    <paper-card>
+      <div class="card-header">
+        <div class="card-title">Fornecedores</div>
+
+        <paper-input class="card-search" placeholder="Pesquise por nome fantasia, razão social ou email" value="{{pesquisa}}" no-label-float>
+          <iron-icon icon="search" slot="prefix"></iron-icon>
+        </paper-input>
+
+        <vaadin-combo-box-light class="card-filter" items="[[filters]]" value="{{periodo}}">
+          <paper-input no-label-float readonly>
+            <iron-icon icon="arrow-drop-down" slot="suffix" prefix></iron-icon>
+          </paper-input>
+          <template><paper-item>[[item.label]]</paper-item></template>
+        </vaadin-combo-box-light>
+      </div>
+
+      <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
             <vaadin-grid-sorter path="nome">Nome fantasia</vaadin-grid-sorter>
@@ -51,10 +55,10 @@
                 <form>
                   <vaadin-form-layout>
                     <paper-input label="Nome Fantasia" value="{{document.nomeFantasia}}" required tabindex="1"></paper-input>
-                    <paper-input label="Razão Social" value="{{document.razaoSocial}}" required tabindex="2"></paper-input>                    
+                    <paper-input label="Razão Social" value="{{document.razaoSocial}}" required tabindex="2"></paper-input>
                     <paper-input label="CNPJ" value="{{document.cnpj}}" tabindex="3"></paper-input>
                     <paper-input label="Inscrição Estadual" value="{{document.inscricaoEstadual}}" tabindex="4"></paper-input>
-                    
+
                     <paper-input label="E-mail" value="{{document.email}}" type="email" auto-validate required tabindex="5"></paper-input>
                     <paper-input label="Telefone" value="{{document.telefone}}" tabindex="6"></paper-input>
                     <paper-input label="Celular" value="{{document.celular}}" tabindex="7"></paper-input>
@@ -96,8 +100,8 @@
       constructor() {
         super();
 
-        this.collection   = firebase.firestore().collection('fornecedores');
-        this.queryFactory = (params) => this.collection;
+        this.collection = firebase.firestore().collection('fornecedores');
+        this.searchKeys = ['nomeFantasia', 'razaoSocial', 'email'];
       }
 
       ready() {
