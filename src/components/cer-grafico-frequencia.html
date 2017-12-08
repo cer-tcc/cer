@@ -11,15 +11,19 @@
       :host {
         display: block;
       }
-      
+
       #chartdiv {
 	      width	: 100%;
 	      height	: 500px;
       }
-      
+
+      #chartdiv a {
+        display: none !important;
+      }
+
     </style>
 
-    <div id="chartdiv"></div>																					
+    <div id="chartdiv"></div>
   </template>
 
   <script>
@@ -59,7 +63,7 @@
         "valueField": "value",
         "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
     }],
-    "pathToImages": "http://cdn.amcharts.com/lib/3/images/",    
+    "pathToImages": "http://cdn.amcharts.com/lib/3/images/",
     "chartScrollbar": {
         "graph": "g1",
         "oppositeAxis":false,
