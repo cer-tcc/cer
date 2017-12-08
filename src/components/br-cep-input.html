@@ -1,0 +1,67 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="br-cep-input">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <paper-input
+      id="input"
+      auto-validate$="{{autoValidate}}"
+      label="{{label}}"
+      value="{{value}}"
+      pattern="\d{5}-\d{3}"
+      error-message$="{{errorMessage}}"
+      required$="{{required}}">
+    </paper-input>
+
+  </template>
+
+  <script>
+    class BrCepInput extends Polymer.Element {
+      static get is() {
+        return 'br-cep-input';
+      }
+
+      static get properties() {
+        return {
+          label: {
+            type: String,
+            value: "CEP"
+          },
+
+          value: {
+            type: String,
+            notify: true,
+          },
+
+          autoValidate: Boolean,
+          errorMessage: String,
+          required: Boolean,
+        };
+      }
+
+      validate() {
+        if (this.required && !this.value) {
+          this.errorMessage = 'Campo obrigatório!';
+          return false;
+        }
+
+        if (!this.$.input.validate()) {
+          this.errorMessage = 'É necessário estar no formato de 9 dígitos (00000-000)';
+          return false;
+        }
+
+        return true;
+      }
+
+    }
+
+    customElements.define(BrCepInput.is, BrCepInput);
+  </script>
+</dom-module>

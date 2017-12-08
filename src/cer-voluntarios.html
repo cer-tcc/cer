@@ -1,4 +1,5 @@
 <link rel="import" href="components/cer-crud-page-imports.html">
+<link rel="import" href="components/br-cep-input.html">
 
 <dom-module id="cer-voluntarios">
   <template>
@@ -88,15 +89,16 @@
                     <!-- Todo: Data do início do trabalho voluntário (datepicker) -->
 
                     <!-- Todo: CEP (mask + carregar endereço) -->
-                    <paper-input label="CEP" value="{{document.cep}}" tabindex="8"></paper-input>
-                    <paper-input label="Logradouro" value="{{document.logradouro}}" tabindex="9"></paper-input>
-                    <paper-input label="Número" value="{{document.numero}}" type="number" tabindex="10"></paper-input>
-                    <paper-input label="Complemento" value="{{document.complemento}}" tabindex="11"></paper-input>
-                    <paper-input label="Bairro" value="{{document.bairro}}" tabindex="12"></paper-input>
-                    <paper-input label="Estado" value="{{document.estado}}" tabindex="13"></paper-input>
-                    <paper-input label="Cidade" value="{{document.cidade}}" required tabindex="14"></paper-input>
+                    <!-- <paper-input label="CEP" value="{{document.cep}}" tabindex="8"></paper-input> -->
+                    <br-cep-input value="{{document.cep}}" auto-validate required tabindex="7"></br-cep-input>
+                    <paper-input label="Logradouro" value="{{document.logradouro}}" tabindex="8"></paper-input>
+                    <paper-input label="Número" value="{{document.numero}}" type="number" tabindex="9"></paper-input>
+                    <paper-input label="Complemento" value="{{document.complemento}}" tabindex="10"></paper-input>
+                    <paper-input label="Bairro" value="{{document.bairro}}" tabindex="11"></paper-input>
+                    <paper-input label="Estado" value="{{document.estado}}" tabindex="12"></paper-input>
+                    <paper-input label="Cidade" value="{{document.cidade}}" required tabindex="13"></paper-input>
 
-                    <paper-textarea label="Observações" value="{{document.observacoes}}" tabindex="15"></paper-textarea>
+                    <paper-textarea label="Observações" value="{{document.observacoes}}" tabindex="14"></paper-textarea>
                   </vaadin-form-layout>
                 </form>
               </iron-form>
