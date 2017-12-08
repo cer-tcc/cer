@@ -1,16 +1,4 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-column.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-sorter.html">
-<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
-<link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
-<link rel="import" href="../bower_components/iron-form/iron-form.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="cer-styles.html">
+<link rel="import" href="components/cer-crud-page-imports.html">
 
 <dom-module id="cer-funcionarios">
   <template>
@@ -18,8 +6,23 @@
 
     <paper-fab id="fab" icon="add" elevation="5"></paper-fab>
 
-    <paper-card heading="Funcionários">
-      <vaadin-grid id="grid" theme="borderless row-dividers">
+    <paper-card>
+      <div class="card-header">
+        <div class="card-title">Funcionários</div>
+
+        <paper-input class="card-search" placeholder="Pesquise por nome, função ou email" value="{{pesquisa}}" no-label-float>
+          <iron-icon icon="search" slot="prefix"></iron-icon>
+        </paper-input>
+
+        <vaadin-combo-box-light class="card-filter" items="[[filters]]" value="{{periodo}}">
+          <paper-input no-label-float readonly>
+            <iron-icon icon="arrow-drop-down" slot="suffix" prefix></iron-icon>
+          </paper-input>
+          <template><paper-item>[[item.label]]</paper-item></template>
+        </vaadin-combo-box-light>
+      </div>
+
+      <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
             <vaadin-grid-sorter path="nomeCompleto">Nome</vaadin-grid-sorter>
@@ -38,7 +41,7 @@
           <template class="header">
             <vaadin-grid-sorter path="dataAdmissao">Data de admissão</vaadin-grid-sorter>
           </template>
-          <template>[[item.dataAdmissao]]</template>
+          <template>[[_formatDate(item.dtCriado)]]</template>
         </vaadin-grid-column>
       </vaadin-grid>
     </paper-card>
@@ -56,6 +59,7 @@
                     <paper-input label="Função" value="{{document.funcao}}" required tabindex="3"></paper-input>
 
                     <!-- Todo: Data de admissão (datepicker) -->
+                    <!-- Todo: Data de admissão (escrever no campo dtCriado) -->
                     <paper-input label="Data de admissão" value="{{document.dataAdmissao}}" type="date" required tabindex="4"></paper-input>
 
                     <!-- Todo: Sexo (radio) -->
@@ -64,7 +68,7 @@
 
                     <!-- Todo: CPF (mask) -->
                     <paper-input label="CPF" value="{{document.cpf}}" tabindex="6"></paper-input>
-                    
+
                     <!-- Todo: Estado civil (select) -->
 
                     <paper-input label="E-mail" value="{{document.email}}" type="email" auto-validate required tabindex="7"></paper-input>
@@ -114,8 +118,8 @@
       constructor() {
         super();
 
-        this.collection   = firebase.firestore().collection('funcionarios');
-        this.queryFactory = (params) => this.collection;
+        this.collection = firebase.firestore().collection('funcionarios');
+        this.searchKeys = ['nome', 'funcao', 'email'];
       }
 
       ready() {
