@@ -41,7 +41,7 @@
       <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">
         <vaadin-grid-column>
           <template class="header">
-            <vaadin-grid-sorter path="nomeCompleto">Nome</vaadin-grid-sorter>
+            <vaadin-grid-sorter path="nome">Nome</vaadin-grid-sorter>
           </template>
           <template>[[item.nome]] [[item.sobrenome]]</template>
         </vaadin-grid-column>
