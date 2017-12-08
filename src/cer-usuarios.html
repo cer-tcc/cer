@@ -1,18 +1,5 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="components/cer-crud-page-imports.html">
 <link rel="import" href="../bower_components/paper-avatar/paper-avatar.html">
-<link rel="import" href="../bower_components/paper-card/paper-card.html">
-<link rel="import" href="../bower_components/vaadin-material-theme/vaadin-grid.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-column.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid-sorter.html">
-<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<link rel="import" href="cer-styles.html">
-<link rel="import" href="../bower_components/vaadin-dialog/vaadin-dialog.html">
-<link rel="import" href="../bower_components/vaadin-form-layout/vaadin-form-layout.html">
-<link rel="import" href="../bower_components/iron-form/iron-form.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-password-input/paper-password-input.html">
 <link rel="import" href="../bower_components/paper-password-input/match-passwords-validator.html">
 
@@ -23,9 +10,23 @@
 
     <paper-fab id="fab" icon="add" elevation="5"></paper-fab>
 
-    <paper-card heading="Usuários">
-      <vaadin-grid id="grid" theme="borderless row-dividers">
+    <paper-card>
+      <div class="card-header">
+        <div class="card-title">Usuários</div>
 
+        <paper-input class="card-search" placeholder="Pesquise por nome ou email" value="{{pesquisa}}" no-label-float>
+          <iron-icon icon="search" slot="prefix"></iron-icon>
+        </paper-input>
+
+        <vaadin-combo-box-light class="card-filter" items="[[filters]]" value="{{periodo}}">
+          <paper-input no-label-float readonly>
+            <iron-icon icon="arrow-drop-down" slot="suffix" prefix></iron-icon>
+          </paper-input>
+          <template><paper-item>[[item.label]]</paper-item></template>
+        </vaadin-combo-box-light>
+      </div>
+
+      <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">
         <vaadin-grid-column width="64px" flex-grow="0">
           <template class="header">
             <div aria-label="Avatar"></div>
@@ -34,7 +35,6 @@
             <paper-avatar label="[[_nomeCompleto(item.nome, item.sobrenome)]]" src="[[item.avatar]]" two-chars></paper-avatar>
           </template>
         </vaadin-grid-column>
-
 
         <vaadin-grid-column>
           <template class="header">
@@ -105,8 +105,8 @@
       constructor() {
         super();
 
-        this.collection   = firebase.firestore().collection('usuarios');
-        this.queryFactory = (params) => this.collection;
+        this.collection = firebase.firestore().collection('usuarios');
+        this.searchKeys = ['nome', 'sobrenome', 'email'];
       }
 
       ready() {
