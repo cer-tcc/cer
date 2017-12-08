@@ -1,5 +1,7 @@
 <link rel="import" href="components/cer-crud-page-imports.html">
 
+<link rel="import" href="components/br-cep-input.html">
+
 <dom-module id="cer-fornecedores">
   <template>
     <style include="cer-page-styles"></style>
@@ -65,7 +67,7 @@
                     <paper-input label="Telefone" value="{{document.telefone}}" tabindex="6"></paper-input>
                     <paper-input label="Celular" value="{{document.celular}}" tabindex="7"></paper-input>
 
-                    <paper-input label="CEP" value="{{document.cep}}" tabindex="8"></paper-input>
+                    <br-cep-input label="CEP" value="{{document.cep}}" tabindex="8"></br-cep-input>
                     <paper-input label="Logradouro" value="{{document.logradouro}}" tabindex="9"></paper-input>
                     <paper-input label="Número" value="{{document.numero}}" type="number" tabindex="10"></paper-input>
                     <paper-input label="Complemento" value="{{document.complemento}}" tabindex="11"></paper-input>
