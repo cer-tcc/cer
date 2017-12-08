@@ -104,6 +104,10 @@
       }
 
       _isValidCPF(value) {
+        if (!value) {
+          return false;
+        }
+
         value = value.toString().replace(/[^0-9]+/g, '');
 
         var soma = [];
