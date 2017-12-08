@@ -1,0 +1,160 @@
+<link rel="import" href="components/cer-crud-page-imports.html">
+
+<dom-module id="cer-participantes-triagem">
+  <template>
+    <style include="cer-page-styles"></style>
+
+    <paper-card>
+      <div class="card-header">
+        <div class="card-title">Fila de espera</div>
+
+        <paper-input class="card-search" placeholder="Pesquise pelo nome do candidato ou responsável" value="{{pesquisa}}" no-label-float>
+          <iron-icon icon="search" slot="prefix"></iron-icon>
+        </paper-input>
+
+        <vaadin-combo-box-light class="card-filter" items="[[filters]]" value="{{periodo}}">
+          <paper-input no-label-float readonly>
+            <iron-icon icon="arrow-drop-down" slot="suffix" prefix></iron-icon>
+          </paper-input>
+          <template><paper-item>[[item.label]]</paper-item></template>
+        </vaadin-combo-box-light>
+      </div>
+
+      <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">
+        <vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="nome">Candidato</vaadin-grid-sorter>
+          </template>
+          <template>[[item.nome]] [[item.sobrenome]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="nomeResponsavel">Responsável</vaadin-grid-sorter>
+          </template>
+          <template>[[item.nomeResponsavel]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">
+              <vaadin-grid-sorter path="status">Situação</vaadin-grid-sorter>
+          </template>
+          <template>[[item.status]]</template>
+        </vaadin-grid-column>
+      </vaadin-grid>
+    </paper-card>
+
+    <vaadin-dialog id="dialog" opened="{{dialogOpened}}">
+      <template>
+        <paper-card heading="Ficha de triagem">
+          <dom-if if="{{dialogOpened}}" restamp>
+            <template>
+              <iron-form id="form" class="card-content">
+                <form>
+                  <vaadin-form-layout>
+                    <paper-input colspan="2" label="Nome completo do responsável" value="{{document.nomeResponsavel}}" tabindex="1" required></paper-input>
+                    <paper-input label="Nome" value="{{document.nome}}" tabindex="2" required></paper-input>
+                    <paper-input label="Sobrenome" value="{{document.sobrenome}}" tabindex="3" required></paper-input>
+                    <paper-input label="Data de Nascimento" type="date" value="{{document.dataDeNascimento}}" tabindex="4" required></paper-input>
+                    <paper-input label="Escola" value="{{document.escola}}" tabindex="5" required></paper-input>
+                    <paper-input label="Rua" value="{{document.rua}}" tabindex="6"></paper-input>
+                    <paper-input type="number" label="Número" value="{{document.numero}}" tabindex="7"></paper-input>
+                    <paper-input label="Complemento" value="{{document.complemento}}" tabindex="8"></paper-input>
+                    <paper-input label="Bairro" value="{{document.bairro}}" tabindex="9"></paper-input>
+                    <paper-input label="Cidade" value="{{document.cidade}}" tabindex="10"></paper-input>
+                    <paper-input label="Estado" value="{{document.estado}}" tabindex="11"></paper-input>
+                    <paper-input label="Telefone" value="{{document.telefone}}" tabindex="12"></paper-input>
+                    <paper-input label="Celular" value="{{document.celular}}" tabindex="13"></paper-input>
+                    <paper-textarea colspan="2" label="Observações" value="{{document.observacoes}}" tabindex="15"></paper-textarea>
+                  </vaadin-form-layout>
+                </form>
+              </iron-form>
+            </template>
+          </dom-if>
+
+          <div class="card-actions layout horizontal justified">
+            <span>
+              <span hidden="[[!_isEmAnalise(document)]]">
+                <paper-button class="green" on-tap="_aprovar">Aprovar</paper-button>
+                <paper-button class="red" on-tap="_excluir">Reprovar</paper-button>
+              </span>
+
+              <span hidden="[[!_isAguardandoMatricula(document)]]">
+                <paper-button class="green" on-tap="_matricular">Matricular</paper-button>
+              </span>
+            </span>
+
+            <span>
+              <paper-button on-tap="_closeDialog">Cancelar</paper-button>
+              <paper-button class="primary" autofocus raised on-tap="_salvar">Salvar</paper-button>
+            </span>
+          </div>
+        </paper-card>
+      </template>
+    </vaadin-dialog>
+  </template>
+
+  <script type="module">
+    import { CrudPage } from './CrudPage.js';
+
+    class CerParticipantesTriagemPage extends CrudPage(Polymer.Element) {
+      static get is() { return 'cer-participantes-triagem'; }
+
+      static get properties() {
+        return {
+          periodos: { type: Array, value: () => ['Manhã', 'Tarde'] },
+        };
+      }
+
+      constructor() {
+        super();
+
+        this.collection = firebase.firestore().collection('fichasDeTriagem');
+        this.searchKeys = ['nome', 'sobrenome', 'nomeResponsavel'];
+      }
+
+      ready() {
+        super.ready();
+
+        const getNome = (e) => `${e.detail.data.nome} ${e.detail.data.sobrenome}`;
+
+        this.addEventListener('document-added', e => this._log(`Ficha de triagem de ${getNome(e)} adicionada na lista de espera`));
+        this.addEventListener('document-updated', e => this._log(`Ficha de triagem de ${getNome(e)} atualizada`));
+        this.addEventListener('document-deleted', e => this._log(`Ficha de triagem de ${getNome(e)} recusada`));
+      }
+
+      _isEmAnalise(fichaDeTriagem) {
+        return fichaDeTriagem && fichaDeTriagem.status == 'Em análise';
+      }
+
+      _isAguardandoMatricula(fichaDeTriagem) {
+        return fichaDeTriagem && fichaDeTriagem.status == 'Aguardando matrícula';
+      }
+
+      _salvar() {
+        this.document.status = this.document.status || 'Em análise';
+
+        super._salvar();
+      }
+
+      _aprovar() {
+        this.document.status = 'Aguardando matrícula';
+
+        this._salvar();
+      }
+
+      _matricular() {
+        // Clonar ficha de triagem
+        const participante = Object.assign({}, this.document);
+        participante.idFichaDeTriagem = participante.id;
+        delete participante.id;
+
+        this.dispatchEvent(new CustomEvent('matricular', { detail: { participante } }));
+
+        super._closeDialog();
+      }
+    }
+
+    window.customElements.define(CerParticipantesTriagemPage.is, CerParticipantesTriagemPage);
+  </script>
+</dom-module>

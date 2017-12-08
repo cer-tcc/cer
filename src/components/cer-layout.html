@@ -6,6 +6,7 @@
 <link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../cer-styles.html">
 <link rel="import" href="./cer-menu.html">
@@ -19,7 +20,7 @@
         --app-accent-color: var(--paper-blue-grey-600);
 
         display: block;
-        height: 100vh; 
+        height: 100vh;
       }
 
       app-drawer-layout, iron-pages {
@@ -27,10 +28,17 @@
       }
 
       app-header {
-        color: #fff;
         background-color: var(--app-primary-color);
 
         --paper-icon-button-ink-color: white;
+      }
+
+      app-header iron-icon {
+        padding: 8px;
+      }
+
+      app-header paper-icon-button, iron-icon {
+        color: #fff;
       }
 
       .logo {
@@ -53,6 +61,8 @@
         <img class="logo" src="/images/logo2.png" alt="CER">
         </div>
 
+        <iron-icon id="cloudIcon" icon="cloud-done"></iron-icon>
+        <paper-icon-button icon="refresh" on-tap="_refresh"></paper-icon-button>
         <paper-icon-button icon="exit-to-app" on-tap="logout"></paper-icon-button>
       </app-toolbar>
       </app-header>
@@ -80,8 +90,24 @@
         return { page: String };
       }
 
+      ready() {
+        super.ready();
+
+        window.addEventListener('online', () => {
+          this.$.cloudIcon.icon = 'cloud-done';
+        });
+
+        window.addEventListener('offline', () => {
+          this.$.cloudIcon.icon = 'cloud-off';
+        });
+      }
+
       logout() {
         firebase.auth().signOut();
+      }
+
+      _refresh() {
+        location.reload();
       }
     }
 

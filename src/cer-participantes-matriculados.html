@@ -1,0 +1,137 @@
+<link rel="import" href="components/cer-crud-page-imports.html">
+
+<dom-module id="cer-participantes-matriculados">
+  <template>
+    <style include="cer-page-styles"></style>
+
+    <paper-card>
+      <div class="card-header">
+        <div class="card-title">Participantes matriculados</div>
+
+        <paper-input class="card-search" placeholder="Pesquise pelo nome do participante ou responsável" value="{{pesquisa}}" no-label-float>
+          <iron-icon icon="search" slot="prefix"></iron-icon>
+        </paper-input>
+
+        <vaadin-combo-box-light class="card-filter" items="[[filters]]" value="{{periodo}}">
+          <paper-input no-label-float readonly>
+            <iron-icon icon="arrow-drop-down" slot="suffix" prefix></iron-icon>
+          </paper-input>
+          <template><paper-item>[[item.label]]</paper-item></template>
+        </vaadin-combo-box-light>
+      </div>
+
+      <vaadin-grid id="grid" items="[[_pesquisar(documents, pesquisa, periodo)]]" theme="borderless row-dividers">
+        <vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="nome">Participante</vaadin-grid-sorter>
+          </template>
+          <template>[[item.nome]] [[item.sobrenome]]</template>
+        </vaadin-grid-column>
+
+        <vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="nomeResponsavel">Responsável</vaadin-grid-sorter>
+          </template>
+          <template>[[item.nomeResponsavel]]</template>
+        </vaadin-grid-column>
+
+        <!-- <vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="periodo">Período</vaadin-grid-sorter>
+          </template>
+          <template>[[item.periodo]]</template>
+        </vaadin-grid-column> -->
+
+        <vaadin-grid-column>
+          <template class="header">
+            <vaadin-grid-sorter path="dataAgendamento">Data da matrícula</vaadin-grid-sorter>
+          </template>
+          <template>[[_formatDate(item.dtCriado)]]</template>
+        </vaadin-grid-column>
+      </vaadin-grid>
+    </paper-card>
+
+    <vaadin-dialog id="dialog" opened="{{dialogOpened}}">
+      <template>
+        <paper-card heading="Matrícula">
+          <dom-if if="{{dialogOpened}}" restamp>
+            <template>
+              <iron-form id="form" class="card-content">
+                <form>
+                  <vaadin-form-layout>
+                    <paper-input colspan="2" label="Nome completo do responsável" value="{{document.nomeResponsavel}}" tabindex="1" required></paper-input>
+                    <paper-input label="Nome" value="{{document.nome}}" tabindex="2" required></paper-input>
+                    <paper-input label="Sobrenome" value="{{document.sobrenome}}" tabindex="3" required></paper-input>
+                    <paper-input label="Data de Nascimento" type="date" value="{{document.dataDeNascimento}}" tabindex="4" required></paper-input>
+                    <paper-input label="Escola" value="{{document.escola}}" tabindex="5" required></paper-input>
+                    <paper-input label="Rua" value="{{document.rua}}" tabindex="6"></paper-input>
+                    <paper-input type="number" label="Número" value="{{document.numero}}" tabindex="7"></paper-input>
+                    <paper-input label="Complemento" value="{{document.complemento}}" tabindex="8"></paper-input>
+                    <paper-input label="Bairro" value="{{document.bairro}}" tabindex="9"></paper-input>
+                    <paper-input label="Cidade" value="{{document.cidade}}" tabindex="10"></paper-input>
+                    <paper-input label="Estado" value="{{document.estado}}" tabindex="11"></paper-input>
+                    <paper-input label="Telefone" value="{{document.telefone}}" tabindex="12"></paper-input>
+                    <paper-input label="Celular" value="{{document.celular}}" tabindex="13"></paper-input>
+                    <paper-textarea label="Observações" value="{{document.observacoes}}" tabindex="15"></paper-textarea>
+                  </vaadin-form-layout>
+                </form>
+              </iron-form>
+            </template>
+          </dom-if>
+
+          <div class="card-actions layout horizontal justified">
+            <span><!-- Botões esquerda --></span>
+
+            <span>
+              <paper-button on-tap="_closeDialog">Cancelar</paper-button>
+              <paper-button class="primary" autofocus raised on-tap="_salvar">Salvar</paper-button>
+            </span>
+          </div>
+        </paper-card>
+      </template>
+    </vaadin-dialog>
+  </template>
+
+  <script type="module">
+    import { CrudPage } from './CrudPage.js';
+
+    class CerParticipantesMatriculadosPage extends CrudPage(Polymer.Element) {
+      static get is() { return 'cer-participantes-matriculados'; }
+
+      static get properties() {
+        return {
+          periodos: { type: Array, value: () => ['Manhã', 'Tarde'] },
+        };
+      }
+
+      constructor() {
+        super();
+
+        this.collection = firebase.firestore().collection('participantes');
+        this.searchKeys = ['nome', 'sobrenome', 'nomeResponsavel'];
+      }
+
+      ready() {
+        super.ready();
+
+        const getNome = (e) => `${e.detail.data.nome} ${e.detail.data.sobrenome}`;
+
+        this.addEventListener('document-added', e => this._log(`Participante ${getNome(e)} matriculado`));
+        this.addEventListener('document-updated', e => this._log(`Matrícula do participante ${getNome(e)} atualizada`));
+      }
+
+      _salvar() {
+        // Remover ficha de triagem
+        if (this.document.idFichaDeTriagem) {
+          firebase.firestore().collection('fichasDeTriagem').doc(this.document.idFichaDeTriagem).delete();
+
+          delete this.document.idFichaDeTriagem;
+        }
+
+        super._salvar();
+      }
+    }
+
+    window.customElements.define(CerParticipantesMatriculadosPage.is, CerParticipantesMatriculadosPage);
+  </script>
+</dom-module>

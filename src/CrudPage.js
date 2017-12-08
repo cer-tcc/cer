@@ -24,7 +24,7 @@ export const CrudPage = (superClass) => class extends superClass {
     });
 
     // Listen for Firestore collection snapshots
-    this.collection.orderBy('dtCriado').onSnapshot((snapshot) => {
+    this.collection.orderBy('dtCriado', 'desc').onSnapshot((snapshot) => {
       // Update internal documents list
       this.documents = snapshot.docs.map(getDocDataWithId);
     });
@@ -38,8 +38,10 @@ export const CrudPage = (superClass) => class extends superClass {
       this._openDialog(e.detail.value);
     });
 
-    // Open dialog when clicking to add document
+    // Open empty dialog when clicking on FAB (if it exists)
+    if (this.$.fab) {
     this.$.fab.addEventListener('tap', (e) => this._openDialog({}));
+    }
 
     // Reset dialog state properly if closed by pressing esc or clicking outside
     this.$.dialog.addEventListener('opened-changed', (e) => {
@@ -96,7 +98,7 @@ export const CrudPage = (superClass) => class extends superClass {
   }
 
   _pesquisar(documents, pesquisa, periodo) {
-    let results = [...documents];
+    let results = documents.slice();
 
     if (periodo) {
       const date = new Date();
