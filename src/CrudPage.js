@@ -122,7 +122,7 @@ export const CrudPage = (superClass) => class extends superClass {
   _log(text) {
     this.dispatchEvent(new CustomEvent('toast', { bubbles: true, composed: true, detail: { text } }));
 
-    createTimelineRecord('08 Novembro', text, 'por ' + firebase.auth().currentUser.displayName);
+    createTimelineRecord(text, 'por ' + firebase.auth().currentUser.displayName);
   }
 
   _formatDate(date) {

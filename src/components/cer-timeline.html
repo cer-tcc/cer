@@ -23,7 +23,7 @@
       }
 
       .history-tl-container ul.tl {
-        margin:20px 0;
+        margin-top: 20px;
         padding:0;
         display:inline-block;
       }
@@ -74,7 +74,7 @@
         left: -50%;
         text-align: right;
         font-size: 12px;
-      }        
+      }
     </style>
 
     <h2>Linha do tempo</h2>
@@ -85,35 +85,13 @@
           <template>
             <li class="tl-item">
               <div class="timestamp">
-                [[item.date]]
+                [[_formatDate(item.datetime)]]
               </div>
               <div class="item-title">[[item.title]]</div>
               <div class="item-detail">[[item.description]]</div>
             </li>
           </template>
         </dom-repeat>
-
-        <li class="tl-item">
-          <div class="timestamp">
-            07 de Novembro<br> 19:13
-          </div>
-          <div class="item-title">Participante Patricia Pereira matriculado</div>
-          <div class="item-detail">Por Daniel Gimenes</div>
-        </li>
-        <li class="tl-item">
-          <div class="timestamp">
-            07 de Novembro<br> 19:06
-          </div>
-          <div class="item-title">Funcionário José Rodrigues admitido</div>
-          <div class="item-detail">Por Gabriel Coradelli</div>
-        </li>
-        <li class="tl-item">
-          <div class="timestamp">
-            06 de Novembro<br> 18:57
-          </div>
-          <div class="item-title">Usuário Daniel Gimenes adicionado</div>
-          <div class="item-detail">Por Administrador</div>
-        </li>
       </ul>
     </div>
   </template>
@@ -130,6 +108,12 @@
         firebase.firestore().collection('timeline').orderBy('datetime', 'desc').onSnapshot((snapshot) => {
           this.records = snapshot.docs.map(getDocDataWithId);
         });
+
+        console.log(this.records);
+      }
+
+      _formatDate(date) {
+        return date.toLocaleString();
       }
     }
 
