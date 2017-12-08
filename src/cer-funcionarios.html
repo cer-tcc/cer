@@ -1,5 +1,8 @@
 <link rel="import" href="components/cer-crud-page-imports.html">
 
+<link rel="import" href="components/br-cep-input.html">
+<link rel="import" href="components/br-cpf-input.html">
+
 <dom-module id="cer-funcionarios">
   <template>
     <style include="cer-page-styles"></style>
@@ -68,8 +71,7 @@
 
                     <paper-input label="Data de Nascimento" value="{{document.dataNascimento}}" type="date" tabindex="5"></paper-input>
 
-                    <!-- Todo: CPF (mask) -->
-                    <paper-input label="CPF" value="{{document.cpf}}" tabindex="6"></paper-input>
+                    <br-cpf-input label="CPF" value="{{document.cpf}}" tabindex="6"></br-cpf-input>
 
                     <!-- Todo: Estado civil (select) -->
 
@@ -81,7 +83,7 @@
                     <paper-input label="Formação" value="{{document.formacao}}" tabindex="9"></paper-input>
 
                     <!-- Todo: CEP (mask + carregar endereço) -->
-                    <paper-input label="CEP" value="{{document.cep}}" tabindex="10"></paper-input>
+                    <br-cep-input label="CEP" value="{{document.cep}}" tabindex="10"></br-cep-input>
                     <paper-input label="Logradouro" value="{{document.logradouro}}" tabindex="11"></paper-input>
                     <paper-input label="Número" value="{{document.numero}}" type="number" tabindex="12"></paper-input>
                     <paper-input label="Complemento" value="{{document.complemento}}" tabindex="13"></paper-input>
