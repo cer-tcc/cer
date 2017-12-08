@@ -64,7 +64,7 @@ export const syncUserAuthentication = builder.onWrite((event) => firestore().run
   }
 
   return transaction.update(ref, {
-    senha: firestore.FieldValue.delete(),
+    password: firestore.FieldValue.delete(),
     sincronizado: true,
     uid: authUser.uid,
   });
