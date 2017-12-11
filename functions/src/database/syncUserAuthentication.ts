@@ -30,8 +30,12 @@ export const syncUserAuthentication = builder.onWrite((event) => firestore().run
   const authData: auth.UpdateRequest = {
     displayName: `${usuario.nome} ${usuario.sobrenome}`,
     email: usuario.email,
-    password: usuario.senha,
   };
+
+  // Trunca senha somente se uma nova foi fornecida
+  if (usuario.senha) {
+    authData.password = usuario.senha;
+  }
 
   // Atualizar usuário existente
   if (usuario.uid) {
