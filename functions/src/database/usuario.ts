@@ -5,6 +5,6 @@ export interface Usuario {
   sobrenome: string;
 
   email: string;
-  senha?: string;
+  password?: string;
   sincronizado: boolean;
 }
